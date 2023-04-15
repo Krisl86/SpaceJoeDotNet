@@ -1,17 +1,29 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonogameCustomLibrary;
+
 namespace SpaceJoeDotNet.GameObject;
 
-class Player
+class Player : BaseWorldObject
 {
-    readonly int _movementSpeed = 180,
-        _width = 64,
-        _height = 96,
-        _defaultMaxHp = 3,
-        _inventorySize = 3;
-
     int _score,
         _totalScore,
         _credits,
         _hp,
         _shield;
-    
+
+    public Player(Vector2 position) : base(position)
+    {
+        Speed = 240;
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Draw(SpriteBatch spriteBatch, bool beginAndEndSpriteBatch = false)
+    {
+        throw new System.NotImplementedException();
+    }
 }

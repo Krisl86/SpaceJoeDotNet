@@ -1,21 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MonogameCustom
+namespace MonogameCustomLibrary
 {
     public abstract class BaseGameClass : Game
     {
-        protected SpriteBatch spriteBatch;
+        protected SpriteBatch _spriteBatch;
 
         protected BaseGameClass()
         {
             Instance = this;
-            Graphics = new GraphicsDeviceManager(this);
+            Graphics = new(this);
             Content.RootDirectory = "Content";
         }
 

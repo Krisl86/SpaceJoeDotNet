@@ -1,26 +1,29 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace MonogameCustom
+namespace MonogameCustomLibrary
 {
     public abstract class BaseWorldObject
     {
         protected BaseWorldObject(Vector2 position)
         {
-            (this.position) = (position);
+            _position = position;
         }
 
-        protected Vector2 position;
+        protected Vector2 _position;
         public Vector2 Position
         {
-            get => position;
-            set => position = value;
+            get => _position;
+            set => _position = value;
         }
 
-        public float X { get => position.X; set => position.X = value; }
-        public float Y { get => position.Y; set => position.Y = value; }
+        public float X { get => _position.X; set => _position.X = value; }
+        public float Y { get => _position.Y; set => _position.Y = value; }
 
         public int Speed { get; set; }
 
         public abstract void Update(GameTime gameTime);
+
+        public abstract void Draw(SpriteBatch spriteBatch, bool beginAndEndSpriteBatch = false);
     }
 }

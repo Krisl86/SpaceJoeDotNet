@@ -1,19 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonogameCustomLibrary;
 
 namespace SpaceJoeDotNet;
 
-public class SpaceJoeGame : Game
+public class SpaceJoeGame : BaseGameClass
 {
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
-
-    SpriteFont _gameFont;
+    SpriteFont _gameFont = null!;
     
     public SpaceJoeGame()
     {
-        _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true; 
     }
@@ -26,7 +23,7 @@ public class SpaceJoeGame : Game
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        _spriteBatch = new(GraphicsDevice);
 
         _gameFont = Content.Load<SpriteFont>("gamefont");
     }
