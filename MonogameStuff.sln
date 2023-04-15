@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceJoeDotNet", "SpaceJoeDotNet\SpaceJoeDotNet.csproj", "{5E626A3B-0856-4489-8A0B-7CECE0A0CB07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonogameCustomLibrary", "MonogameCustomLibrary\MonogameCustomLibrary.csproj", "{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5E626A3B-0856-4489-8A0B-7CECE0A0CB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E626A3B-0856-4489-8A0B-7CECE0A0CB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E626A3B-0856-4489-8A0B-7CECE0A0CB07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

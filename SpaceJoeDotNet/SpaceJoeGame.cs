@@ -9,7 +9,7 @@ public class SpaceJoeGame : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    SpriteFont gameFont;
+    SpriteFont _gameFont;
     
     public SpaceJoeGame()
     {
@@ -28,7 +28,7 @@ public class SpaceJoeGame : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        gameFont = Content.Load<SpriteFont>("gamefont");
+        _gameFont = Content.Load<SpriteFont>("gamefont");
     }
 
     protected override void Update(GameTime gameTime)
