@@ -21,21 +21,46 @@ class Projectile : BaseWorldObject
 
     public static void AddProjectile(ProjectileType type, Vector2 position)
     {
-        Texture2D texture = type switch
-        {
-            ProjectileType.Default => Textures["projectileDefault"],
-            ProjectileType.Slow => Textures["projectileSlow"],
-            ProjectileType.Fast => Textures["projectileFast"],
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Projectile Texture was not found!")
-        };
+        Texture2D texture;
+        int speed;
 
-        Projectiles.Add(new Projectile(texture, position) {Speed = 200});
+        switch (type)
+        {
+            case ProjectileType.Default:
+                texture = Textures["projectileDefault"];
+                speed = 500;
+                break;
+            case ProjectileType.Slow:
+                texture = Textures["projectileSlow"];
+                speed = 350;
+                break;
+            case ProjectileType.Fast:
+                texture = Textures["projectileFast"];
+                speed = 700;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+        
+        Projectiles.Add(new Projectile(texture, position) {Speed = speed});
     }
     public static void DrawProjectiles(SpriteBatch spriteBatch)
         => Projectiles.ForEach(p => p.Draw(spriteBatch));
 
     public static void UpdateProjectiles(GameTime gameTime)
-        => Projectiles.ForEach(p => p.Update(gameTime));
+    {
+        for (var i = 0; i < Projectiles.Count; i++)
+        {
+            if (Projectiles.Count > 30) // remove off-screen projectiles every once in a while
+            {
+                if (Projectiles[i].Y < 0)
+                    Projectiles.RemoveAt(i);
+                return;
+            }
+            else
+                Projectiles[i].Update(gameTime);
+        }
+    }
 
     public override void Update(GameTime gameTime)
     {
