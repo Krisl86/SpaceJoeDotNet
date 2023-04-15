@@ -5,8 +5,6 @@ namespace MonogameCustomLibrary
 {
     public abstract class BaseGameClass : Game
     {
-        protected SpriteBatch _spriteBatch;
-
         protected BaseGameClass()
         {
             Instance = this;
@@ -15,7 +13,8 @@ namespace MonogameCustomLibrary
         }
 
         public GraphicsDeviceManager Graphics { get; }
-        public static Game Instance { get; private set; }
+        public static Game? Instance { get; private set; }
 
+        protected SpriteBatch? SpriteBatch { get; set; }
     }
 }

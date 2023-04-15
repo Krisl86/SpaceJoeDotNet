@@ -10,7 +10,12 @@ namespace MonogameCustomLibrary
             _position = position;
         }
 
-        protected Vector2 _position;
+        public Texture2D? Texture { get; init; }
+
+        public int Width { get; set; }
+        public int Height { get; set; }
+        
+        Vector2 _position;
         public Vector2 Position
         {
             get => _position;
@@ -24,6 +29,6 @@ namespace MonogameCustomLibrary
 
         public abstract void Update(GameTime gameTime);
 
-        public abstract void Draw(SpriteBatch spriteBatch, bool beginAndEndSpriteBatch = false);
+        public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

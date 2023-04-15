@@ -8,9 +8,10 @@ abstract class Item
     protected string Description { get; set; }
     protected int Price { get; set; }
 
-    protected Item(string name, string description, int price)
+    protected Item(string name, string shortName, string description, int price)
     {
         Name = name;
+        ShortName = shortName;
         Description = description;
         Price = price;
     }

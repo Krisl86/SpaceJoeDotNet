@@ -22,7 +22,7 @@ class Player : BaseWorldObject
         throw new System.NotImplementedException();
     }
 
-    public override void Draw(SpriteBatch spriteBatch, bool beginAndEndSpriteBatch = false)
+    public override void Draw(SpriteBatch spriteBatch)
     {
         throw new System.NotImplementedException();
     }
