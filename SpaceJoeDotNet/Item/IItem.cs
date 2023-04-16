@@ -2,7 +2,7 @@ namespace SpaceJoeDotNet.Item;
 
 abstract class Item
 {
-    protected string Name { get; set; }
+    public string Name { get; set; }
     
     protected string ShortName { get; set; }
     protected string Description { get; set; }

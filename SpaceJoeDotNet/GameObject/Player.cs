@@ -1,17 +1,22 @@
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonogameCustomLibrary;
+using SpaceJoeDotNet.Item;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.GameObject;
 
 class Player : BaseWorldObject
 {
     KeyboardState _previousKstate;
+    Weapon _currentWeapon;
     
     public Player(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Speed = 240;
+        _currentWeapon = ItemManager.Weapons.First(w => w.Name == "Old Rusty Laser");
     }
 
     public override void Update(GameTime gameTime)
@@ -30,8 +35,7 @@ class Player : BaseWorldObject
             Y -= Speed * dt;
         
         if (kstate.IsKeyDown(Keys.Space) && _previousKstate.IsKeyUp(Keys.Space))
-            Projectile.Manager.AddProjectile(ProjectileType.Default, 
-                new Vector2(X, Y - Texture.Height / 2));
+            _currentWeapon.Shoot(new Vector2(X, Y - Texture.Height / 2));
 
         _previousKstate = kstate;
     }

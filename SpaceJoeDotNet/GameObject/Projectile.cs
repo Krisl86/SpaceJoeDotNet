@@ -17,7 +17,7 @@ interface IProjectileManager
 {
     List<Projectile> Projectiles { get; }
     Dictionary<string, Texture2D> Textures { get; }
-    void AddProjectile(ProjectileType type, Vector2 position);
+    void AddProjectile(ProjectileType type, Vector2 position, int damage);
     void DrawProjectiles(SpriteBatch spriteBatch);
     void UpdateProjectiles(GameTime gameTime);
 }
@@ -29,7 +29,7 @@ class Projectile : BaseWorldObject
         public List<Projectile> Projectiles { get; } = new();
         public Dictionary<string, Texture2D> Textures { get; } = new();
     
-        public void AddProjectile(ProjectileType type, Vector2 position)
+        public void AddProjectile(ProjectileType type, Vector2 position, int damage)
         {
             Texture2D texture;
             int speed;
@@ -52,7 +52,7 @@ class Projectile : BaseWorldObject
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
             
-            Projectiles.Add(new Projectile(texture, position) {Speed = speed});
+            Projectiles.Add(new Projectile(texture, position, damage) {Speed = speed});
         }
     
         public void DrawProjectiles(SpriteBatch spriteBatch)
@@ -75,9 +75,12 @@ class Projectile : BaseWorldObject
     }
     
     public static IProjectileManager Manager = new ProjectileManager();
+
+    int _damage;
     
-    Projectile(Texture2D texture, Vector2 position) : base(texture, position)
+    Projectile(Texture2D texture, Vector2 position, int damage) : base(texture, position)
     {
+        _damage = damage;
     }
 
     public override void Update(GameTime gameTime)
