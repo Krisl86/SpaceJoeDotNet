@@ -2,26 +2,32 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject;
 
 namespace SpaceJoeDotNet;
 
-public class SpaceJoeGame : BaseGameClass
+public class SpaceJoeGame : Game
 {
-    SpriteFont _gameFont = null!;
+    SpriteBatch _spriteBatch;
+    
+    SpriteFont _gameFont;
 
-    Texture2D _projectileDefaultSprite = null!,
-        _playerSprite = null!;
+    Texture2D _projectileDefaultSprite,
+        _playerSprite;
 
-    Player _player = null!;
+    Player _player;
 
     public SpaceJoeGame()
     {
+        Instance = this;
+        Graphics = new(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true; 
     }
 
+    public GraphicsDeviceManager Graphics { get; }
+    public static SpaceJoeGame Instance { get; private set; }
+    
     protected override void Initialize()
     {
         Graphics.PreferredBackBufferWidth = 480;
@@ -33,13 +39,13 @@ public class SpaceJoeGame : BaseGameClass
 
     protected override void LoadContent()
     {
-        SpriteBatch = new(GraphicsDevice);
+        _spriteBatch = new(GraphicsDevice);
 
         _gameFont = Content.Load<SpriteFont>("gamefont");
         _projectileDefaultSprite = Content.Load<Texture2D>("projectile-default");
         _playerSprite = Content.Load<Texture2D>("ship");
         
-        Projectile.Textures.Add("projectileDefault", _projectileDefaultSprite);
+        Projectile.Manager.Textures.Add("projectileDefault", _projectileDefaultSprite);
 
         _player = new(_playerSprite, new Vector2(Graphics.PreferredBackBufferWidth / 2,
             Graphics.PreferredBackBufferHeight - 60));
@@ -52,26 +58,25 @@ public class SpaceJoeGame : BaseGameClass
             Exit();
 
         _player.Update(gameTime);
-        Projectile.UpdateProjectiles(gameTime);
+        Projectile.Manager.UpdateProjectiles(gameTime);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        if (SpriteBatch is null) 
+        if (_spriteBatch is null) 
             throw new NullReferenceException("SpriteBatch is null!");
         
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        SpriteBatch.Begin();
+        _spriteBatch.Begin();
 
-        _player.Draw(SpriteBatch);
-        Projectile.DrawProjectiles(SpriteBatch);
+        _player.Draw(_spriteBatch);
+        Projectile.Manager.DrawProjectiles(_spriteBatch);
 
-        SpriteBatch.End();
+        _spriteBatch.End();
 
         base.Draw(gameTime);
-
     }
 }

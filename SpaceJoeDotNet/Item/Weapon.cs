@@ -18,5 +18,5 @@ class Weapon : Item
         _projectileType = projectileType;
     }
 
-    public void Shoot(Vector2 startPosition) => Projectile.AddProjectile(_projectileType, startPosition);
+    public void Shoot(Vector2 startPosition) => Projectile.Manager.AddProjectile(_projectileType, startPosition);
 }

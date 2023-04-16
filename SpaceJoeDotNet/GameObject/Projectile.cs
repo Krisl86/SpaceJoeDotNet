@@ -13,53 +13,71 @@ enum ProjectileType
     Fast
 }
 
+interface IProjectileManager
+{
+    List<Projectile> Projectiles { get; }
+    Dictionary<string, Texture2D> Textures { get; }
+    void AddProjectile(ProjectileType type, Vector2 position);
+    void DrawProjectiles(SpriteBatch spriteBatch);
+    void UpdateProjectiles(GameTime gameTime);
+}
+
 class Projectile : BaseWorldObject
 {
-    public static List<Projectile> Projectiles { get; } = new();
-
-    public static Dictionary<string, Texture2D> Textures { get; } = new();
-
-    public static void AddProjectile(ProjectileType type, Vector2 position)
+    class ProjectileManager : IProjectileManager
     {
-        Texture2D texture;
-        int speed;
-
-        switch (type)
+        public List<Projectile> Projectiles { get; } = new();
+        public Dictionary<string, Texture2D> Textures { get; } = new();
+    
+        public void AddProjectile(ProjectileType type, Vector2 position)
         {
-            case ProjectileType.Default:
-                texture = Textures["projectileDefault"];
-                speed = 500;
-                break;
-            case ProjectileType.Slow:
-                texture = Textures["projectileSlow"];
-                speed = 350;
-                break;
-            case ProjectileType.Fast:
-                texture = Textures["projectileFast"];
-                speed = 700;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type), type, null);
-        }
-        
-        Projectiles.Add(new Projectile(texture, position) {Speed = speed});
-    }
-    public static void DrawProjectiles(SpriteBatch spriteBatch)
-        => Projectiles.ForEach(p => p.Draw(spriteBatch));
-
-    public static void UpdateProjectiles(GameTime gameTime)
-    {
-        for (var i = 0; i < Projectiles.Count; i++)
-        {
-            if (Projectiles.Count > 30) // remove off-screen projectiles every once in a while
+            Texture2D texture;
+            int speed;
+    
+            switch (type)
             {
-                if (Projectiles[i].Y < 0)
-                    Projectiles.RemoveAt(i);
-                return;
+                case ProjectileType.Default:
+                    texture = Textures["projectileDefault"];
+                    speed = 500;
+                    break;
+                case ProjectileType.Slow:
+                    texture = Textures["projectileSlow"];
+                    speed = 350;
+                    break;
+                case ProjectileType.Fast:
+                    texture = Textures["projectileFast"];
+                    speed = 700;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
-            else
-                Projectiles[i].Update(gameTime);
+            
+            Projectiles.Add(new Projectile(texture, position) {Speed = speed});
         }
+    
+        public void DrawProjectiles(SpriteBatch spriteBatch)
+            => Projectiles.ForEach(p => p.Draw(spriteBatch));
+    
+        public void UpdateProjectiles(GameTime gameTime)
+        {
+            for (var i = 0; i < Projectiles.Count; i++)
+            {
+                if (Projectiles.Count > 30) // remove off-screen projectiles every once in a while
+                {
+                    if (Projectiles[i].Y < 0)
+                        Projectiles.RemoveAt(i);
+                    return;
+                }
+                else
+                    Projectiles[i].Update(gameTime);
+            }
+        }
+    }
+    
+    public static IProjectileManager Manager = new ProjectileManager();
+    
+    Projectile(Texture2D texture, Vector2 position) : base(texture, position)
+    {
     }
 
     public override void Update(GameTime gameTime)
@@ -67,15 +85,7 @@ class Projectile : BaseWorldObject
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         Y -= Speed * dt;
     }
-
-    public Projectile(Texture2D texture, Vector2 position) : base(position)
-    {
-        Texture = texture;
-    }
-
+    
     public override void Draw(SpriteBatch spriteBatch)
-    {
-        if (Texture is not null)
-            spriteBatch.DrawCentered(Texture, Position);
-    }
+        => spriteBatch.DrawCentered(Texture, Position);
 }

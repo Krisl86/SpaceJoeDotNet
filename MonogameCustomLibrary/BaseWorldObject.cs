@@ -5,12 +5,13 @@ namespace MonogameCustomLibrary
 {
     public abstract class BaseWorldObject
     {
-        protected BaseWorldObject(Vector2 position)
+        protected BaseWorldObject(Texture2D texture, Vector2 position)
         {
+            Texture = texture;
             _position = position;
         }
 
-        public Texture2D? Texture { get; init; }
+        public Texture2D Texture { get; init; }
 
         public int Width { get; set; }
         public int Height { get; set; }
