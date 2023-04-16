@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
@@ -68,6 +69,7 @@ public class SpaceJoeGame : Game
         _background.Update(gameTime);
         
         _player.Update(gameTime);
+        _player.CurrentWeapon.Update(gameTime);
         Projectile.Manager.UpdateProjectiles(gameTime);
 
         base.Update(gameTime);
@@ -87,8 +89,27 @@ public class SpaceJoeGame : Game
         _player.Draw(_spriteBatch);
         Projectile.Manager.DrawProjectiles(_spriteBatch);
 
+        DrawHud(_spriteBatch);
+        
         _spriteBatch.End();
 
         base.Draw(gameTime);
+    }
+    
+    void DrawHud(SpriteBatch spriteBatch)
+    {
+        int margin = 20;
+
+        spriteBatch.DrawString(_gameFont, "[ HEAT ]",
+            new Vector2(margin, 20), Color.White);
+        for (int i = 0; i < _player.CurrentWeapon.CurrentHeat; i++)
+        {
+            spriteBatch.DrawStringCentered(false, _gameFont, "*",
+                new Vector2(margin + i * 15, 40), Color.White);
+        }
+        
+        if (_player.CurrentWeapon.CurrentHeat == _player.CurrentWeapon.HeatLimit)
+            spriteBatch.DrawStringCentered(false, _gameFont, "[ WEAPON OVERHEATING ]",
+                new Vector2(Graphics.PreferredBackBufferWidth / 2, 200), Color.Red);
     }
 }

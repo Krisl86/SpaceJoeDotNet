@@ -11,14 +11,15 @@ namespace SpaceJoeDotNet.GameObject;
 class Player : BaseWorldObject
 {
     KeyboardState _previousKstate;
-    Weapon _currentWeapon;
-    
+
     public Player(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Speed = 240;
-        _currentWeapon = ItemManager.Weapons.First(w => w.Name == "Old Rusty Laser");
+        CurrentWeapon = ItemManager.Weapons.First(w => w.Name == "Old Rusty Laser");
     }
 
+    public Weapon CurrentWeapon { get; }
+    
     public override void Update(GameTime gameTime)
     {
         var kstate = Keyboard.GetState();
@@ -35,7 +36,7 @@ class Player : BaseWorldObject
             Y -= Speed * dt;
         
         if (kstate.IsKeyDown(Keys.Space) && _previousKstate.IsKeyUp(Keys.Space))
-            _currentWeapon.Shoot(new Vector2(X, Y - Texture.Height / 2));
+            CurrentWeapon.Shoot(new Vector2(X, Y - Texture.Height / 2));
 
         _previousKstate = kstate;
     }

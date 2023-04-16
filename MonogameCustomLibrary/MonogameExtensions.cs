@@ -32,5 +32,9 @@ namespace MonogameCustomLibrary
 
         public static Vector2 Centered(this Texture2D texture, Vector2 position)
             => new(position.X - texture.Width / 2, position.Y - texture.Height / 2);
+
+
+        public static float DeltaTime(this GameTime gameTime)
+            => (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 }
