@@ -14,9 +14,12 @@ public class SpaceJoeGame : Game
     SpriteFont _gameFont;
 
     Texture2D _projectileDefaultSprite,
-        _playerSprite;
+        _playerSprite,
+        _bgFrontSprite,
+        _bgBackSprite;
 
     Player _player;
+    Background _background;
 
     public SpaceJoeGame()
     {
@@ -45,11 +48,15 @@ public class SpaceJoeGame : Game
         _gameFont = Content.Load<SpriteFont>("gamefont");
         _projectileDefaultSprite = Content.Load<Texture2D>("projectile-default");
         _playerSprite = Content.Load<Texture2D>("ship");
+        _bgFrontSprite = Content.Load<Texture2D>("bg-front");
+        _bgBackSprite = Content.Load<Texture2D>("bg-back");
         
         Projectile.Manager.Textures.Add("projectileDefault", _projectileDefaultSprite);
 
         _player = new(_playerSprite, new Vector2(Graphics.PreferredBackBufferWidth / 2,
             Graphics.PreferredBackBufferHeight - 60));
+
+        _background = new(_bgBackSprite, _bgFrontSprite);
     }
 
     protected override void Update(GameTime gameTime)
@@ -58,6 +65,8 @@ public class SpaceJoeGame : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
+        _background.Update(gameTime);
+        
         _player.Update(gameTime);
         Projectile.Manager.UpdateProjectiles(gameTime);
 
@@ -72,7 +81,9 @@ public class SpaceJoeGame : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
-
+        
+        _background.Draw(_spriteBatch);
+        
         _player.Draw(_spriteBatch);
         Projectile.Manager.DrawProjectiles(_spriteBatch);
 
