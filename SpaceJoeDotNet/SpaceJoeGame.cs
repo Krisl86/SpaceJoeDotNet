@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject;
+using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet;
@@ -46,7 +50,9 @@ public class SpaceJoeGame : Game
     {
         _spriteBatch = new(GraphicsDevice);
 
-        _gameFont = Content.Load<SpriteFont>("gamefont");
+        _gameFont = FontExists("Ethnocentric Rg") ?
+            Content.Load<SpriteFont>("gamefont") : Content.Load<SpriteFont>("defaultFont");
+        
         _projectileDefaultSprite = Content.Load<Texture2D>("projectile-default");
         _playerSprite = Content.Load<Texture2D>("ship");
         _bgFrontSprite = Content.Load<Texture2D>("bg-front");
@@ -111,5 +117,12 @@ public class SpaceJoeGame : Game
         if (_player.CurrentWeapon.CurrentHeat == _player.CurrentWeapon.HeatLimit)
             spriteBatch.DrawStringCentered(false, _gameFont, "[ WEAPON OVERHEATING ]",
                 new Vector2(Graphics.PreferredBackBufferWidth / 2, 200), Color.Red);
+    }
+
+    // from https://stackoverflow.com/questions/106712/how-to-make-sure-a-font-exists-before-using-it-with-net
+    bool FontExists(string fontName)
+    {
+        var fontFamilies = new InstalledFontCollection().Families;
+        return fontFamilies.Any(f => f.Name == fontName);
     }
 }

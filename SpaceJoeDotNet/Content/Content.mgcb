@@ -49,6 +49,13 @@
 /processorParam:TextureFormat=Color
 /build:bg-front.png
 
+#begin defaultFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:defaultFont.spritefont
+
 #begin explosion-end.png
 /importer:TextureImporter
 /processor:TextureProcessor
