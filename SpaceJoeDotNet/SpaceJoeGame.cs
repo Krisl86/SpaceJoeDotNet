@@ -95,28 +95,11 @@ public class SpaceJoeGame : Game
         _player.Draw(_spriteBatch);
         Projectile.Manager.DrawProjectiles(_spriteBatch);
 
-        DrawHud(_spriteBatch);
+        HudDrawer.DrawHud(_spriteBatch, _gameFont, _player);
         
         _spriteBatch.End();
 
         base.Draw(gameTime);
-    }
-    
-    void DrawHud(SpriteBatch spriteBatch)
-    {
-        int margin = 20;
-
-        spriteBatch.DrawString(_gameFont, "[ HEAT ]",
-            new Vector2(margin, 20), Color.White);
-        for (int i = 0; i < _player.CurrentWeapon.CurrentHeat; i++)
-        {
-            spriteBatch.DrawStringCentered(false, _gameFont, "*",
-                new Vector2(margin + i * 15, 40), Color.White);
-        }
-        
-        if (_player.CurrentWeapon.CurrentHeat == _player.CurrentWeapon.HeatLimit)
-            spriteBatch.DrawStringCentered(false, _gameFont, "[ WEAPON OVERHEATING ]",
-                new Vector2(Graphics.PreferredBackBufferWidth / 2, 200), Color.Red);
     }
 
     // from https://stackoverflow.com/questions/106712/how-to-make-sure-a-font-exists-before-using-it-with-net
