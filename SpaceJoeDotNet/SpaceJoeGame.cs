@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.Utils;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
@@ -19,6 +20,8 @@ public class SpaceJoeGame : Game
     SpriteFont _gameFont;
 
     Texture2D _projectileDefaultSprite,
+        _projectileSlowSprite,
+        _projectileFastSprite,
         _playerSprite,
         _bgFrontSprite,
         _bgBackSprite;
@@ -54,11 +57,15 @@ public class SpaceJoeGame : Game
             Content.Load<SpriteFont>("gamefont") : Content.Load<SpriteFont>("defaultFont");
         
         _projectileDefaultSprite = Content.Load<Texture2D>("projectile-default");
+        _projectileSlowSprite = Content.Load<Texture2D>("projectile-slow");
+        _projectileFastSprite = Content.Load<Texture2D>("projectile-fast");
         _playerSprite = Content.Load<Texture2D>("ship");
         _bgFrontSprite = Content.Load<Texture2D>("bg-front");
         _bgBackSprite = Content.Load<Texture2D>("bg-back");
         
         Projectile.Manager.Textures.Add("projectileDefault", _projectileDefaultSprite);
+        Projectile.Manager.Textures.Add("projectileSlow", _projectileSlowSprite);
+        Projectile.Manager.Textures.Add("projectileFast", _projectileFastSprite);
 
         _player = new(_playerSprite, new Vector2(Graphics.PreferredBackBufferWidth / 2,
             Graphics.PreferredBackBufferHeight - 60));
@@ -103,7 +110,7 @@ public class SpaceJoeGame : Game
     }
 
     // from https://stackoverflow.com/questions/106712/how-to-make-sure-a-font-exists-before-using-it-with-net
-    bool FontExists(string fontName)
+    static bool FontExists(string fontName)
     {
         var fontFamilies = new InstalledFontCollection().Families;
         return fontFamilies.Any(f => f.Name == fontName);

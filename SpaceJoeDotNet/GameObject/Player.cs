@@ -15,10 +15,13 @@ class Player : BaseWorldObject
     public Player(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Speed = 240;
-        CurrentWeapon = ItemManager.Weapons.First(w => w.Name == "Old Rusty Laser");
+        CurrentWeapon = ItemManager.Weapons.First(w => w.ShortName == "Slow Laser");
     }
 
     public Weapon CurrentWeapon { get; }
+    public int HullPoints { get; set; }
+    public int ShieldPoints { get; set; }
+    public int Score { get; set; }
     
     public override void Update(GameTime gameTime)
     {

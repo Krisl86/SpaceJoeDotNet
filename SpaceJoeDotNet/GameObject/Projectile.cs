@@ -46,7 +46,7 @@ class Projectile : BaseWorldObject
                     break;
                 case ProjectileType.Fast:
                     texture = Textures["projectileFast"];
-                    speed = 700;
+                    speed = 750;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

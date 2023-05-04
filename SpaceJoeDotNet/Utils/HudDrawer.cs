@@ -4,13 +4,14 @@ using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject;
 using Color = Microsoft.Xna.Framework.Color;
 
-namespace SpaceJoeDotNet;
+namespace SpaceJoeDotNet.Utils;
 
 static class HudDrawer
 {
     const int XMargin = 20;
     const int YMargin = 20;
     static readonly Color DefaultHudColor = Color.White;
+    static readonly Color AlertHudColor = Color.Red;
 
     public static void DrawHud(SpriteBatch spriteBatch, SpriteFont font, Player player)
     {
@@ -35,21 +36,38 @@ static class HudDrawer
         
         if (player.CurrentWeapon.CurrentHeat == player.CurrentWeapon.HeatLimit)
             spriteBatch.DrawStringCentered(false, font, "[ WEAPON OVERHEATING ]",
-                new Vector2(windowWidth / 2, 200), Color.Red);
+                new Vector2(windowWidth / 2, 200), AlertHudColor);
     }
 
     static void DrawScoreHpShield(SpriteBatch spriteBatch, SpriteFont font, Player player)
     {
         int windowWidth = SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth;
-        
-        spriteBatch.DrawString(font, "[ SCR ]", new Vector2(XMargin, YMargin), DefaultHudColor);   
+
+        string score = "[ SCR ]";
+        var size = font.MeasureString(score);
+        spriteBatch.DrawString(font, score, new Vector2(XMargin, YMargin), DefaultHudColor);   
+        spriteBatch.DrawStringCentered(false, font, player.Score.ToString(), 
+            new Vector2(XMargin + size.X / 2, YMargin + 20), DefaultHudColor);
         
         spriteBatch.DrawStringCentered(false, font, "[ HLL ]", 
             new Vector2(windowWidth / 2, YMargin), DefaultHudColor);
+        spriteBatch.DrawStringCentered(false, font, player.HullPoints.ToString(),
+            new Vector2(windowWidth / 2, YMargin + 20), DefaultHudColor);
 
         string shield = "[ SLD ]";
-        var size = font.MeasureString(shield);
-        spriteBatch.DrawString(font, shield, new Vector2(windowWidth - size.X - XMargin, YMargin), DefaultHudColor);
+        size = font.MeasureString(shield);
+        spriteBatch.DrawString(font, shield, new Vector2(windowWidth - size.X - XMargin, YMargin), 
+            DefaultHudColor);
+        spriteBatch.DrawStringCentered(false, font, player.ShieldPoints.ToString(),
+            new Vector2(windowWidth - size.X / 2 - XMargin, YMargin + 20), DefaultHudColor);
 
+        
+        if (player.HullPoints < 30)
+            spriteBatch.DrawStringCentered(false, font, "[ SEVERE DAMAGE ]",
+                new Vector2(windowWidth / 2, 250), AlertHudColor);
+        
+        if (player.ShieldPoints == 0)
+            spriteBatch.DrawStringCentered(false, font, "[ SHIELDS DOWN ]",
+                new Vector2(windowWidth / 2, 300), AlertHudColor);
     }
 }

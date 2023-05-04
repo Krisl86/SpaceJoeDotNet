@@ -1,5 +1,3 @@
-using System;
-using System.Numerics;
 using Microsoft.Xna.Framework;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject;
