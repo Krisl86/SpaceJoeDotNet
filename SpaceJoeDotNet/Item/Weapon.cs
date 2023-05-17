@@ -5,32 +5,29 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.Item;
 
-class Weapon : Item
+class Weapon
 {
-    readonly float _cooldownTime;
-    readonly ProjectileType _projectileType;
-    readonly int _damage;
-
     float _timeSinceCooldown;
     
-    public Weapon(string name, string shortName, string description, int price, int heatLimit, float cooldownTime,
-        ProjectileType projectileType, int damage)
-        : base(name, shortName, description, price)
+    public Weapon(ProjectileType projectileType, int damage, float cooldownTime, int heatLimit)
     {
+        ProjectileType = projectileType;
+        Damage = damage;
+        CooldownTime = cooldownTime;
         HeatLimit = heatLimit;
-        _cooldownTime = cooldownTime;
-        _projectileType = projectileType;
-        _damage = damage;
     }
 
     public int CurrentHeat { get; private set; }
     public int HeatLimit { get; }
-    
+    public float CooldownTime { get; set; }
+    public int Damage { get; set; }
+    internal ProjectileType ProjectileType { get; set; }
+
     public void Shoot(Vector2 startPosition)
     {
         if (CurrentHeat < HeatLimit)
         {
-            Projectile.Manager.AddProjectile(_projectileType, startPosition, _damage);
+            Projectile.Manager.AddProjectile(ProjectileType, startPosition, Damage);
             CurrentHeat++;
         }
     }
@@ -40,7 +37,7 @@ class Weapon : Item
         if (CurrentHeat > 0)
         {
             _timeSinceCooldown += gameTime.DeltaTime();
-            if (_timeSinceCooldown >= _cooldownTime)
+            if (_timeSinceCooldown >= CooldownTime)
             {
                 CurrentHeat--;
                 _timeSinceCooldown = 0;

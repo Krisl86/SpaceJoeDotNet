@@ -26,7 +26,7 @@ static class HudDrawer
         spriteBatch.DrawStringCentered(false, font, "[ HEAT ]",
             new Vector2(windowWidth / 2, 75), DefaultHudColor);
         
-        for (int i = 0; i < player.CurrentWeapon.CurrentHeat; i++)
+        for (int i = 0; i < player.Weapon.CurrentHeat; i++)
         {
             spriteBatch.DrawString(font, "*",
                 new Vector2(windowWidth / 2 + i * 15, 95), DefaultHudColor);
@@ -34,7 +34,7 @@ static class HudDrawer
                 new Vector2(windowWidth / 2 - i * 15, 95), DefaultHudColor);
         }
         
-        if (player.CurrentWeapon.CurrentHeat == player.CurrentWeapon.HeatLimit)
+        if (player.Weapon.CurrentHeat == player.Weapon.HeatLimit)
             spriteBatch.DrawStringCentered(false, font, "[ WEAPON OVERHEATING ]",
                 new Vector2(windowWidth / 2, 200), AlertHudColor);
     }

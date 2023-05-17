@@ -12,17 +12,20 @@ namespace SpaceJoeDotNet.GameObject;
 
 class Player : GameObjectBase
 {
+    const int DefaultHullPoints = 250;
+    const int DefaultShieldPoints = 50;
+
     KeyboardState _previousKstate;
 
     public Player(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Speed = 240;
-        CurrentWeapon = ItemManager.Weapons.First(w => w.ShortName == "Old Rusty");
+        Weapon = new(ProjectileType.Default, 150, 4, 10);
     }
 
-    public Weapon CurrentWeapon { get; }
-    public int HullPoints { get; set; } = 250;
-    public int ShieldPoints { get; set; } = 50;
+    public Weapon Weapon { get; }
+    public int HullPoints { get; set; } = DefaultHullPoints;
+    public int ShieldPoints { get; set; } = DefaultShieldPoints;
     public int Score { get; set; }
     
     public bool Collided { get; set; }
@@ -44,7 +47,7 @@ class Player : GameObjectBase
             Y -= Speed * dt;
         
         if (kstate.IsKeyDown(Keys.Space) && _previousKstate.IsKeyUp(Keys.Space))
-            CurrentWeapon.Shoot(new Vector2(X, Y - Texture.Height / 2));
+            Weapon.Shoot(new Vector2(X, Y - Texture.Height / 2));
 
         _previousKstate = kstate;
     }
@@ -60,5 +63,13 @@ class Player : GameObjectBase
             HullPoints += ShieldPoints;
             ShieldPoints = 0;
         }
+    }
+
+    public void Reset()
+    {
+        Score = 0;
+        HullPoints = DefaultHullPoints;
+        ShieldPoints = DefaultShieldPoints;
+        Weapon.CurrentHeat = 0;
     }
 }

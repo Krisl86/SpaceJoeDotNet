@@ -16,6 +16,7 @@ enum GameState
     Menu,
     InGame,
     Paused,
+    GameOver,
     Shop
 }
 
@@ -63,11 +64,14 @@ public partial class SpaceJoeGame : Game
 
             _background.Update(gameTime);
             _player.Update(gameTime);
-            _player.CurrentWeapon.Update(gameTime);
+            _player.Weapon.Update(gameTime);
             Projectile.Manager.UpdateProjectiles(gameTime);
             Asteroid.Manager.UpdateAsteroids(gameTime);
 
             CollisionManager.Collide(_player);
+
+            if (_player.HullPoints <= 0)
+                _gameState = GameState.GameOver;
 
             _scoreCounter += 0.01f;
             if (_scoreCounter >= 1)
@@ -85,6 +89,19 @@ public partial class SpaceJoeGame : Game
             else if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
         }
+        else if (_gameState == GameState.GameOver)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                _player.Reset();
+                _gameState = GameState.InGame;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                _gameState = GameState.Shop;
+            else if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                Exit();
+        }
+
 
 
 
@@ -111,11 +128,11 @@ public partial class SpaceJoeGame : Game
                 HudDrawer.DrawHud(_spriteBatch, _gameFont, _player);
             }
             else if (_gameState == GameState.Menu)
-            {
                 MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont);
-            }
+            else if (_gameState == GameState.GameOver)
+                MenuDrawer.DrawGameOverMenu(_spriteBatch, _gameFont);
 
-            _spriteBatch.End();
+        _spriteBatch.End();
 
             base.Draw(gameTime);
     }
