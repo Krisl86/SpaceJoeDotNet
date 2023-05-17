@@ -11,6 +11,14 @@ using Color = Microsoft.Xna.Framework.Color;
 
 namespace SpaceJoeDotNet;
 
+enum GameState
+{
+    Menu,
+    InGame,
+    Paused,
+    Shop
+}
+
 public partial class SpaceJoeGame : Game
 {
     SpriteBatch _spriteBatch;
@@ -21,6 +29,11 @@ public partial class SpaceJoeGame : Game
     Background _background;
 
     float _scoreCounter;
+    GameState _gameState = GameState.Menu;
+
+    bool _redraw = true;
+    bool _menuDrawn;
+
 
     public SpaceJoeGame()
     {
@@ -44,26 +57,36 @@ public partial class SpaceJoeGame : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-            Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
-
-        Asteroid.Manager.RandomlyGenerateAsteroid();
-
-        _background.Update(gameTime);
-        _player.Update(gameTime);
-        _player.CurrentWeapon.Update(gameTime);
-        Projectile.Manager.UpdateProjectiles(gameTime);
-        Asteroid.Manager.UpdateAsteroids(gameTime);
-
-        CollisionManager.Collide(_player);
-
-        _scoreCounter += 0.01f;
-        if (_scoreCounter >= 1)
+        if (_gameState == GameState.InGame)
         {
-            _player.Score += 1;
-            _scoreCounter = 0;
+            Asteroid.Manager.RandomlyGenerateAsteroid();
+
+            _background.Update(gameTime);
+            _player.Update(gameTime);
+            _player.CurrentWeapon.Update(gameTime);
+            Projectile.Manager.UpdateProjectiles(gameTime);
+            Asteroid.Manager.UpdateAsteroids(gameTime);
+
+            CollisionManager.Collide(_player);
+
+            _scoreCounter += 0.01f;
+            if (_scoreCounter >= 1)
+            {
+                _player.Score += 1;
+                _scoreCounter = 0;
+            }
         }
+        else if (_gameState == GameState.Menu)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.N))
+                _gameState = GameState.InGame;
+            else if (Keyboard.GetState().IsKeyDown(Keys.L))
+                _gameState = GameState.InGame;
+            else if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                Exit();
+        }
+
+
 
         base.Update(gameTime);
     }
@@ -72,21 +95,28 @@ public partial class SpaceJoeGame : Game
     {
         if (_spriteBatch is null) 
             throw new NullReferenceException("SpriteBatch is null!");
-        
-        GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        _spriteBatch.Begin();
-        
-        _background.Draw(_spriteBatch);
-        
-        _player.Draw(_spriteBatch);
-        Projectile.Manager.DrawProjectiles(_spriteBatch);
-        Asteroid.Manager.DrawAsteroids(_spriteBatch);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        HudDrawer.DrawHud(_spriteBatch, _gameFont, _player);
-        
-        _spriteBatch.End();
+            _spriteBatch.Begin();
 
-        base.Draw(gameTime);
+            if (_gameState == GameState.InGame)
+            {
+                _background.Draw(_spriteBatch);
+
+                _player.Draw(_spriteBatch);
+                Projectile.Manager.DrawProjectiles(_spriteBatch);
+                Asteroid.Manager.DrawAsteroids(_spriteBatch);
+
+                HudDrawer.DrawHud(_spriteBatch, _gameFont, _player);
+            }
+            else if (_gameState == GameState.Menu)
+            {
+                MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont);
+            }
+
+            _spriteBatch.End();
+
+            base.Draw(gameTime);
     }
 }
