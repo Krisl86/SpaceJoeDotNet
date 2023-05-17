@@ -19,8 +19,8 @@ class Player : BaseWorldObject
     }
 
     public Weapon CurrentWeapon { get; }
-    public int HullPoints { get; set; }
-    public int ShieldPoints { get; set; }
+    public int HullPoints { get; set; } = 250;
+    public int ShieldPoints { get; set; } = 50;
     public int Score { get; set; }
     
     public override void Update(GameTime gameTime)
@@ -46,4 +46,14 @@ class Player : BaseWorldObject
 
     public override void Draw(SpriteBatch spriteBatch)
         => spriteBatch.DrawCentered(Texture, Position);
+
+    public void CollidedWith(Asteroid asteroid)
+    {
+        ShieldPoints -= asteroid.Damage;
+        if (ShieldPoints < 0)
+        {
+            HullPoints += ShieldPoints;
+            ShieldPoints = 0;
+        }
+    }
 }

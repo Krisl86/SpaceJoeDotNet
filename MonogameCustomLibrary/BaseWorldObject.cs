@@ -9,12 +9,14 @@ namespace MonogameCustomLibrary
         {
             Texture = texture;
             _position = position;
+            Width = texture.Width;
+            Height = texture.Height;
         }
 
         public Texture2D Texture { get; init; }
 
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public int Width { get; }
+        public int Height { get; }
         
         Vector2 _position;
         public Vector2 Position
@@ -27,6 +29,8 @@ namespace MonogameCustomLibrary
         public float Y { get => _position.Y; set => _position.Y = value; }
 
         public int Speed { get; set; }
+
+        public bool Collided { get; set; }
 
         public abstract void Update(GameTime gameTime);
 

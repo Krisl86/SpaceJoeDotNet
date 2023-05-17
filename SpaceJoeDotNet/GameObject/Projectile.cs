@@ -62,25 +62,23 @@ class Projectile : BaseWorldObject
         {
             for (var i = 0; i < Projectiles.Count; i++)
             {
-                if (Projectiles.Count > 30) // remove off-screen projectiles every once in a while
+                if (Projectiles.Count > 30 && Projectiles[i].Y < 0) // remove off-screen projectiles every once in a while
                 {
-                    if (Projectiles[i].Y < 0)
-                        Projectiles.RemoveAt(i);
+                    Projectiles.RemoveAt(i);
                     return;
                 }
-                else
-                    Projectiles[i].Update(gameTime);
+                Projectiles[i].Update(gameTime);
             }
         }
     }
     
-    public static IProjectileManager Manager = new ProjectileManager();
+    public static IProjectileManager Manager { get; } = new ProjectileManager();
 
-    int _damage;
+    public int Damage { get; }
     
     Projectile(Texture2D texture, Vector2 position, int damage) : base(texture, position)
     {
-        _damage = damage;
+        Damage = damage;
     }
 
     public override void Update(GameTime gameTime)
