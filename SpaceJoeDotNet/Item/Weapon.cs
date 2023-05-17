@@ -11,7 +11,6 @@ class Weapon : Item
     readonly ProjectileType _projectileType;
     readonly int _damage;
 
-    float _totalCooldownTime;
     float _timeSinceCooldown;
     
     public Weapon(string name, string shortName, string description, int price, int heatLimit, float cooldownTime,
@@ -32,7 +31,6 @@ class Weapon : Item
         if (CurrentHeat < HeatLimit)
         {
             Projectile.Manager.AddProjectile(_projectileType, startPosition, _damage);
-            _totalCooldownTime += _cooldownTime;
             CurrentHeat++;
         }
     }

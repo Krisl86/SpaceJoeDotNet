@@ -3,19 +3,21 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonogameCustomLibrary;
+using SpaceJoeDotNet.Collision;
+using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Item;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.GameObject;
 
-class Player : BaseWorldObject
+class Player : GameObjectBase
 {
     KeyboardState _previousKstate;
 
     public Player(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Speed = 240;
-        CurrentWeapon = ItemManager.Weapons.First(w => w.ShortName == "Slow Laser");
+        CurrentWeapon = ItemManager.Weapons.First(w => w.ShortName == "Old Rusty");
     }
 
     public Weapon CurrentWeapon { get; }
@@ -23,6 +25,9 @@ class Player : BaseWorldObject
     public int ShieldPoints { get; set; } = 50;
     public int Score { get; set; }
     
+    public bool Collided { get; set; }
+    public int Damage => 0;
+
     public override void Update(GameTime gameTime)
     {
         var kstate = Keyboard.GetState();
@@ -47,9 +52,9 @@ class Player : BaseWorldObject
     public override void Draw(SpriteBatch spriteBatch)
         => spriteBatch.DrawCentered(Texture, Position);
 
-    public void CollidedWith(Asteroid asteroid)
+    public void CollidedWith(Asteroid other)
     {
-        ShieldPoints -= asteroid.Damage;
+        ShieldPoints -= other.Damage;
         if (ShieldPoints < 0)
         {
             HullPoints += ShieldPoints;

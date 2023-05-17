@@ -1,11 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonogameCustomLibrary;
+using SpaceJoeDotNet.Collision;
+using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceJoeDotNet.GameObject
 {
@@ -25,7 +24,7 @@ namespace SpaceJoeDotNet.GameObject
         void UpdateAsteroids(GameTime gameTime);
     }
 
-    internal class Asteroid : BaseWorldObject
+    internal class Asteroid : GameObjectBase
     {
         class AsteroidManager : IAsteroidManager
         {
@@ -103,6 +102,7 @@ namespace SpaceJoeDotNet.GameObject
         public static IAsteroidManager Manager { get; } = new AsteroidManager();
 
         public int Damage { get; }
+        public bool Collided { get; set; }
 
         public Asteroid(Texture2D texture, Vector2 position, int damage) : base(texture, position)
         {

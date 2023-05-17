@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonogameCustomLibrary;
+using SpaceJoeDotNet.Collision;
+using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 
 namespace SpaceJoeDotNet.GameObject;
 
@@ -22,7 +24,7 @@ interface IProjectileManager
     void UpdateProjectiles(GameTime gameTime);
 }
 
-class Projectile : BaseWorldObject
+class Projectile : GameObjectBase
 {
     class ProjectileManager : IProjectileManager
     {
@@ -62,7 +64,8 @@ class Projectile : BaseWorldObject
         {
             for (var i = 0; i < Projectiles.Count; i++)
             {
-                if (Projectiles.Count > 30 && Projectiles[i].Y < 0) // remove off-screen projectiles every once in a while
+                if ((Projectiles.Count > 30 && Projectiles[i].Y < 0)
+                    || Projectiles[i].Collided) // remove off-screen projectiles every once in a while
                 {
                     Projectiles.RemoveAt(i);
                     return;
@@ -75,7 +78,8 @@ class Projectile : BaseWorldObject
     public static IProjectileManager Manager { get; } = new ProjectileManager();
 
     public int Damage { get; }
-    
+    public bool Collided { get; set; }
+
     Projectile(Texture2D texture, Vector2 position, int damage) : base(texture, position)
     {
         Damage = damage;

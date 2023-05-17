@@ -1,15 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
+﻿#nullable disable
+
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonogameCustomLibrary;
+using SpaceJoeDotNet.Collision;
 using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Utils;
 using Color = Microsoft.Xna.Framework.Color;
-using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet;
 
@@ -21,6 +19,8 @@ public partial class SpaceJoeGame : Game
 
     Player _player;
     Background _background;
+
+    float _scoreCounter;
 
     public SpaceJoeGame()
     {
@@ -57,6 +57,13 @@ public partial class SpaceJoeGame : Game
         Asteroid.Manager.UpdateAsteroids(gameTime);
 
         CollisionManager.Collide(_player);
+
+        _scoreCounter += 0.01f;
+        if (_scoreCounter >= 1)
+        {
+            _player.Score += 1;
+            _scoreCounter = 0;
+        }
 
         base.Update(gameTime);
     }
