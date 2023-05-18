@@ -58,7 +58,7 @@ namespace SpaceJoeDotNet
             Asteroid.Manager.Textures.Add("asteroidMedium", _asteroidMediumSprite);
             Asteroid.Manager.Textures.Add("asteroidLarge", _asteroidLargeSprite);
 
-            MenuDrawer.MainMenuBackground = _mainMenuSprite;
+            MenuDrawer.DefaultMenuBackground = _mainMenuSprite;
             MenuDrawer.GameOverMenuBackground = _gameOverSprite;
         }
     }

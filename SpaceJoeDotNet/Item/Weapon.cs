@@ -17,7 +17,7 @@ class Weapon
         HeatLimit = heatLimit;
     }
 
-    public int CurrentHeat { get; private set; }
+    public int CurrentHeat { get; set; }
     public int HeatLimit { get; }
     public float CooldownTime { get; set; }
     public int Damage { get; set; }

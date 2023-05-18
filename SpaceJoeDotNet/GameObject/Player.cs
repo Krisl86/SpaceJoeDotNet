@@ -12,7 +12,7 @@ namespace SpaceJoeDotNet.GameObject;
 
 class Player : GameObjectBase
 {
-    const int DefaultHullPoints = 250;
+    const int DefaultHitPoints = 250;
     const int DefaultShieldPoints = 50;
 
     KeyboardState _previousKstate;
@@ -20,17 +20,16 @@ class Player : GameObjectBase
     public Player(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Speed = 240;
-        Weapon = new(ProjectileType.Default, 150, 4, 10);
+        Weapon = new(ProjectileType.Default, 100, 4, 10);
+        Damage = 50;
+        HitPoints = DefaultHitPoints;
     }
 
     public Weapon Weapon { get; }
-    public int HullPoints { get; set; } = DefaultHullPoints;
     public int ShieldPoints { get; set; } = DefaultShieldPoints;
     public int Score { get; set; }
+    public int TotalScore { get; set; }
     
-    public bool Collided { get; set; }
-    public int Damage => 0;
-
     public override void Update(GameTime gameTime)
     {
         var kstate = Keyboard.GetState();
@@ -55,21 +54,21 @@ class Player : GameObjectBase
     public override void Draw(SpriteBatch spriteBatch)
         => spriteBatch.DrawCentered(Texture, Position);
 
-    public void CollidedWith(Asteroid other)
-    {
-        ShieldPoints -= other.Damage;
-        if (ShieldPoints < 0)
-        {
-            HullPoints += ShieldPoints;
-            ShieldPoints = 0;
-        }
-    }
-
     public void Reset()
     {
         Score = 0;
-        HullPoints = DefaultHullPoints;
+        HitPoints = DefaultHitPoints;
         ShieldPoints = DefaultShieldPoints;
         Weapon.CurrentHeat = 0;
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        ShieldPoints -= damage;
+        if (ShieldPoints < 0)
+        {
+            HitPoints += ShieldPoints;
+            ShieldPoints = 0;
+        }
     }
 }

@@ -12,8 +12,8 @@ namespace SpaceJoeDotNet.Collision
             {
                 if (CheckCollisions(player, asteroid))
                 {
-                    asteroid.Collided = true;
-                    player.CollidedWith(asteroid);
+                    player.TakeDamage(asteroid.Damage);
+                    asteroid.TakeDamage(player.Damage);
                 }
             }
 
@@ -23,8 +23,8 @@ namespace SpaceJoeDotNet.Collision
                 {
                     if (CheckCollisions(projectile, asteroid))
                     {
-                        projectile.Collided = true;
-                        asteroid.Collided = true;
+                        asteroid.TakeDamage(projectile.Damage);
+                        projectile.TakeDamage(asteroid.Damage);
                     }
                 }
             }

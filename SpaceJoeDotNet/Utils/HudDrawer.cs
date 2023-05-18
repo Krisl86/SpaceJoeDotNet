@@ -51,7 +51,7 @@ static class HudDrawer
         
         spriteBatch.DrawStringCentered(false, font, "[ HLL ]", 
             new Vector2(windowWidth / 2, YMargin), DefaultHudColor);
-        spriteBatch.DrawStringCentered(false, font, player.HullPoints.ToString(),
+        spriteBatch.DrawStringCentered(false, font, player.HitPoints.ToString(),
             new Vector2(windowWidth / 2, YMargin + 20), DefaultHudColor);
 
         string shield = "[ SLD ]";
@@ -62,7 +62,7 @@ static class HudDrawer
             new Vector2(windowWidth - size.X / 2 - XMargin, YMargin + 20), DefaultHudColor);
 
         
-        if (player.HullPoints < 30)
+        if (player.HitPoints < 30)
             spriteBatch.DrawStringCentered(false, font, "[ SEVERE DAMAGE ]",
                 new Vector2(windowWidth / 2, 250), AlertHudColor);
         

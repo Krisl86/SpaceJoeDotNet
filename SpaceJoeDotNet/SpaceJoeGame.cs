@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SpaceJoeDotNet.Collision;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.Bg;
 using SpaceJoeDotNet.Utils;
 using Color = Microsoft.Xna.Framework.Color;
 
@@ -31,9 +32,6 @@ public partial class SpaceJoeGame : Game
 
     float _scoreCounter;
     GameState _gameState = GameState.Menu;
-
-    bool _redraw = true;
-    bool _menuDrawn;
 
 
     public SpaceJoeGame()
@@ -70,7 +68,7 @@ public partial class SpaceJoeGame : Game
 
             CollisionManager.Collide(_player);
 
-            if (_player.HullPoints <= 0)
+            if (_player.HitPoints <= 0)
                 _gameState = GameState.GameOver;
 
             _scoreCounter += 0.01f;
@@ -96,8 +94,11 @@ public partial class SpaceJoeGame : Game
                 _player.Reset();
                 _gameState = GameState.InGame;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+            else if (Keyboard.GetState().IsKeyDown(Keys.U))
+            {
+                _player.Reset();
                 _gameState = GameState.Shop;
+            }
             else if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
         }
@@ -117,20 +118,22 @@ public partial class SpaceJoeGame : Game
 
             _spriteBatch.Begin();
 
-            if (_gameState == GameState.InGame)
-            {
-                _background.Draw(_spriteBatch);
+        if (_gameState == GameState.InGame)
+        {
+            _background.Draw(_spriteBatch);
 
-                _player.Draw(_spriteBatch);
-                Projectile.Manager.DrawProjectiles(_spriteBatch);
-                Asteroid.Manager.DrawAsteroids(_spriteBatch);
+            _player.Draw(_spriteBatch);
+            Projectile.Manager.DrawProjectiles(_spriteBatch);
+            Asteroid.Manager.DrawAsteroids(_spriteBatch);
 
-                HudDrawer.DrawHud(_spriteBatch, _gameFont, _player);
-            }
-            else if (_gameState == GameState.Menu)
-                MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont);
-            else if (_gameState == GameState.GameOver)
-                MenuDrawer.DrawGameOverMenu(_spriteBatch, _gameFont);
+            HudDrawer.DrawHud(_spriteBatch, _gameFont, _player);
+        }
+        else if (_gameState == GameState.Menu)
+            MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont);
+        else if (_gameState == GameState.GameOver)
+            MenuDrawer.DrawGameOverMenu(_spriteBatch, _gameFont);
+        else if (_gameState == GameState.Shop)
+            MenuDrawer.DrawShopMenu(_spriteBatch, _gameFont, _player);
 
         _spriteBatch.End();
 

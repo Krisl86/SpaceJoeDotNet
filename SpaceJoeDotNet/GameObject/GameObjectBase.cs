@@ -31,9 +31,12 @@
             public float Y { get => _position.Y; set => _position.Y = value; }
 
             public int Speed { get; set; }
+            public int Damage { get; protected set; }
+            public int HitPoints { get; set; }
+
+            public virtual void TakeDamage(int damage) => HitPoints -= damage;
 
             public abstract void Update(GameTime gameTime);
-
             public abstract void Draw(SpriteBatch spriteBatch);
         }
     }

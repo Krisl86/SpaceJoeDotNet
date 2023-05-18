@@ -54,7 +54,7 @@ class Projectile : GameObjectBase
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
             
-            Projectiles.Add(new Projectile(texture, position, damage) {Speed = speed});
+            Projectiles.Add(new Projectile(texture, position, damage, speed));
         }
     
         public void DrawProjectiles(SpriteBatch spriteBatch)
@@ -65,7 +65,7 @@ class Projectile : GameObjectBase
             for (var i = 0; i < Projectiles.Count; i++)
             {
                 if ((Projectiles.Count > 30 && Projectiles[i].Y < 0)
-                    || Projectiles[i].Collided) // remove off-screen projectiles every once in a while
+                    || Projectiles[i].HitPoints <= 0) // remove off-screen projectiles every once in a while
                 {
                     Projectiles.RemoveAt(i);
                     return;
@@ -77,12 +77,12 @@ class Projectile : GameObjectBase
     
     public static IProjectileManager Manager { get; } = new ProjectileManager();
 
-    public int Damage { get; }
-    public bool Collided { get; set; }
-
-    Projectile(Texture2D texture, Vector2 position, int damage) : base(texture, position)
+    Projectile(Texture2D texture, Vector2 position, int damage, int speed) 
+        : base(texture, position)
     {
         Damage = damage;
+        Speed = speed;
+        HitPoints = 1;
     }
 
     public override void Update(GameTime gameTime)

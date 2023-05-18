@@ -41,8 +41,7 @@ namespace SpaceJoeDotNet.GameObject
             {
                 int x = _rnd.Next(0, SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth);
                 Texture2D texture;
-                int speed;
-                int damage;
+                int speed, damage, hitPoints;
 
                 switch (asteroidType)
                 {
@@ -50,22 +49,25 @@ namespace SpaceJoeDotNet.GameObject
                         texture = Textures["asteroidSmall"];
                         speed = 600;
                         damage = 100;
+                        hitPoints = 100;
                         break;
                     case AsteroidType.Medium:
                         texture = Textures["asteroidMedium"];
                         speed = 450;
                         damage = 175;
+                        hitPoints = 150;
                         break;
                     case AsteroidType.Large:
                         texture = Textures["asteroidLarge"];
                         speed = 350;
                         damage = 260;
+                        hitPoints = 200;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(asteroidType), asteroidType, null);
                 }
 
-                Asteroids.Add(new Asteroid(texture, new Vector2(x, -100), damage) { Speed = speed });
+                Asteroids.Add(new Asteroid(texture, new Vector2(x, -100), damage, hitPoints, speed));
             }
 
             public void DrawAsteroids(SpriteBatch spriteBatch)
@@ -77,7 +79,7 @@ namespace SpaceJoeDotNet.GameObject
                 {
                     if ((Asteroids.Count > 30
                         && Asteroids[i].Y > SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight + 100)
-                        || Asteroids[i].Collided) 
+                        || Asteroids[i].HitPoints <= 0) 
                     {
                         Asteroids.RemoveAt(i);
                         return;
@@ -101,12 +103,12 @@ namespace SpaceJoeDotNet.GameObject
 
         public static IAsteroidManager Manager { get; } = new AsteroidManager();
 
-        public int Damage { get; }
-        public bool Collided { get; set; }
-
-        public Asteroid(Texture2D texture, Vector2 position, int damage) : base(texture, position)
+        public Asteroid(Texture2D texture, Vector2 position, int damage, int hitPoints, int speed)
+            : base(texture, position)
         {
-            Damage = damage;   
+            Damage = damage;
+            HitPoints = hitPoints;
+            Speed = speed;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
