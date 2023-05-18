@@ -22,15 +22,18 @@ namespace SpaceJoeDotNet.GameObject
         void GenerateAsteroid(AsteroidType asteroidType);
         void DrawAsteroids(SpriteBatch spriteBatch);
         void UpdateAsteroids(GameTime gameTime);
+        void Reset();
     }
 
     internal class Asteroid : GameObjectBase
     {
         class AsteroidManager : IAsteroidManager
         {
-            int _maxRnd = 1000;
-            int _rndLimit = 990;
-            int _minRndLimit = 900;
+            const int MaxRnd = 1000;
+            const int MinRndLimit = 900;
+            const int DefaultRndLimit = 990;
+
+            int _rndLimit = DefaultRndLimit;
             Random _rnd = new();
 
             public List<Asteroid> Asteroids { get; } = new();
@@ -92,12 +95,18 @@ namespace SpaceJoeDotNet.GameObject
             public void RandomlyGenerateAsteroid()
             {
                 var asteroidType = (AsteroidType)_rnd.Next(0, 3);
-                if (_rnd.Next(0, _maxRnd) > _rndLimit)
+                if (_rnd.Next(0, MaxRnd) > _rndLimit)
                 {
                     GenerateAsteroid(asteroidType);
-                    if (_rndLimit > _minRndLimit)
+                    if (_rndLimit > MinRndLimit)
                         _rndLimit--;
                 }
+            }
+
+            public void Reset()
+            {
+                Asteroids.Clear();
+                _rndLimit = DefaultRndLimit;
             }
         }
 

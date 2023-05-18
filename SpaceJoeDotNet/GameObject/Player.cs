@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,9 +16,12 @@ class Player : GameObjectBase
     const int DefaultHitPoints = 250;
     const int DefaultShieldPoints = 50;
 
+    static readonly Vector2 defaultPosition = new Vector2(SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth / 2,
+        SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight - 60);
+
     KeyboardState _previousKstate;
 
-    public Player(Texture2D texture, Vector2 position) : base(texture, position)
+    public Player(Texture2D texture) : base(texture, defaultPosition)
     {
         Speed = 240;
         Weapon = new(ProjectileType.Default, 100, 4, 10);
@@ -60,6 +64,7 @@ class Player : GameObjectBase
         HitPoints = DefaultHitPoints;
         ShieldPoints = DefaultShieldPoints;
         Weapon.CurrentHeat = 0;
+        Position = defaultPosition;
     }
 
     public override void TakeDamage(int damage)

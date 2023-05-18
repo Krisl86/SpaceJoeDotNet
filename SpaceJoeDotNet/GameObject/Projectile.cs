@@ -22,6 +22,7 @@ interface IProjectileManager
     void AddProjectile(ProjectileType type, Vector2 position, int damage);
     void DrawProjectiles(SpriteBatch spriteBatch);
     void UpdateProjectiles(GameTime gameTime);
+    void Reset();
 }
 
 class Projectile : GameObjectBase
@@ -72,6 +73,11 @@ class Projectile : GameObjectBase
                 }
                 Projectiles[i].Update(gameTime);
             }
+        }
+
+        public void Reset()
+        {
+            Projectiles.Clear();
         }
     }
     

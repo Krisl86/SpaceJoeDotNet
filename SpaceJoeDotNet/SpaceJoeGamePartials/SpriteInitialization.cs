@@ -43,8 +43,7 @@ namespace SpaceJoeDotNet
             // they need to be initialized here
             InitTexturesForOthers();
 
-            _player = new(_playerSprite, new Vector2(Graphics.PreferredBackBufferWidth / 2,
-            Graphics.PreferredBackBufferHeight - 60));
+            _player = new(_playerSprite);
             _background = new(_bgBackSprite, _bgFrontSprite);
         }
 

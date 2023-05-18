@@ -91,16 +91,24 @@ public partial class SpaceJoeGame : Game
         {
             if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
-                _player.Reset();
+                ResetGame();
                 _gameState = GameState.InGame;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.U))
             {
-                _player.Reset();
+                ResetGame();
                 _gameState = GameState.Shop;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
+        }
+        else if (_gameState == GameState.Shop)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.B))
+            {
+                ResetGame();
+                _gameState = GameState.InGame;
+            }
         }
 
 
@@ -138,5 +146,12 @@ public partial class SpaceJoeGame : Game
         _spriteBatch.End();
 
             base.Draw(gameTime);
+    }
+
+    void ResetGame()
+    {
+        _player.Reset();
+        Projectile.Manager.Reset();
+        Asteroid.Manager.Reset();
     }
 }
