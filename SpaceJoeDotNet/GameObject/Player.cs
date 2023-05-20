@@ -21,7 +21,7 @@ class Player : GameObjectBase
 
     KeyboardState _previousKstate;
 
-    public Player(ProjectileManager projectileManager) : base(defaultPosition)
+    public Player(IProjectileManager projectileManager) : base(defaultPosition)
     {
         Speed = 280;
         Weapon = new(projectileManager, ProjectileType.Default, 100, 4, 10);

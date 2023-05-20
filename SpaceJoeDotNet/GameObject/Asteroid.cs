@@ -19,7 +19,7 @@ namespace SpaceJoeDotNet.GameObject
         {
             Texture = texture;
             AsteroidType = asteroidType;
-            AssignPropertiesByType(AsteroidType);
+            InitPropertiesByType(AsteroidType);
         }
 
         public AsteroidType AsteroidType { get; }
@@ -33,7 +33,7 @@ namespace SpaceJoeDotNet.GameObject
             Y += Speed * dt;
         }
 
-        void AssignPropertiesByType(AsteroidType type)
+        void InitPropertiesByType(AsteroidType type)
         {
             switch (type)
             {

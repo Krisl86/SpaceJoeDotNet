@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SpaceJoeDotNet.GameManager;
 
 namespace SpaceJoeDotNet
 {
@@ -15,8 +11,9 @@ namespace SpaceJoeDotNet
             Graphics.PreferredBackBufferHeight = 720;
             Graphics.ApplyChanges();
 
-            _asteroidManager = new();
-            _projectileManager = new();
+            _asteroidManager = new AsteroidManager();
+            _projectileManager = new ProjectileManager();
+            _collisionManager = new CollisionManager();
 
             _player = new(_projectileManager);
 

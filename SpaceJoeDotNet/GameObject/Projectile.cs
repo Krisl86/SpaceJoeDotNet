@@ -21,7 +21,7 @@ class Projectile : GameObjectBase
         ProjectileType = projectileType;
         HitPoints = 1;
         Damage = damage;
-        AssignPropertiesByType(projectileType);
+        InitPropertiesByType(projectileType);
     }
 
     public ProjectileType ProjectileType { get; }
@@ -35,7 +35,7 @@ class Projectile : GameObjectBase
     public override void Draw(SpriteBatch spriteBatch)
         => spriteBatch.DrawCentered(Texture, Position);
 
-    void AssignPropertiesByType(ProjectileType type)
+    void InitPropertiesByType(ProjectileType type)
     {
         switch (type)
         {

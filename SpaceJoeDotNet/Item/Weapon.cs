@@ -9,9 +9,9 @@ namespace SpaceJoeDotNet.Item;
 class Weapon
 {
     float _timeSinceCooldown;
-    ProjectileManager _manager;
+    IProjectileManager _manager;
     
-    public Weapon(ProjectileManager projectileManager, ProjectileType projectileType, 
+    public Weapon(IProjectileManager projectileManager, ProjectileType projectileType, 
         int damage, float cooldownTime, int heatLimit)
     {
         ProjectileType = projectileType;

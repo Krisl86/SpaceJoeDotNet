@@ -28,8 +28,9 @@ public partial class SpaceJoeGame : Game
 
     Player _player;
     Background _background;
-    AsteroidManager _asteroidManager;
-    ProjectileManager _projectileManager;
+    IAsteroidManager _asteroidManager;
+    IProjectileManager _projectileManager;
+    ICollisionManager _collisionManager;
 
     float _scoreCounter;
 

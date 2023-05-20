@@ -6,7 +6,18 @@ using System.Collections.Generic;
 
 namespace SpaceJoeDotNet.GameManager
 {
-    class ProjectileManager
+    interface IProjectileManager
+    {
+        List<Projectile> Projectiles { get; }
+        Dictionary<string, Texture2D> Textures { get; }
+
+        void AddProjectile(ProjectileType projectileType, Vector2 position, int damage);
+        void DrawProjectiles(SpriteBatch spriteBatch);
+        void Reset();
+        void UpdateProjectiles(GameTime gameTime);
+    }
+
+    class ProjectileManager : IProjectileManager
     {
         public List<Projectile> Projectiles { get; } = new();
         public Dictionary<string, Texture2D> Textures { get; } = new();

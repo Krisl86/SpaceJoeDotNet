@@ -6,7 +6,19 @@ using System.Collections.Generic;
 
 namespace SpaceJoeDotNet.GameManager
 {
-    class AsteroidManager
+    interface IAsteroidManager
+    {
+        List<Asteroid> Asteroids { get; }
+        Dictionary<string, Texture2D> Textures { get; }
+
+        void AddAsteroid(AsteroidType asteroidType, Vector2 position);
+        void DrawAsteroids(SpriteBatch spriteBatch);
+        void RandomlyGenerateAsteroid();
+        void Reset();
+        void UpdateAsteroids(GameTime gameTime);
+    }
+
+    class AsteroidManager : IAsteroidManager
     {
         const int MaxRnd = 1000;
         const int MinRndLimit = 900;

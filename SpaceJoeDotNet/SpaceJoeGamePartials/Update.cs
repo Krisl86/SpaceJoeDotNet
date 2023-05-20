@@ -1,12 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using SpaceJoeDotNet.GameManager;
-using SpaceJoeDotNet.GameObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceJoeDotNet
 {
@@ -25,10 +18,7 @@ namespace SpaceJoeDotNet
                 _projectileManager.UpdateProjectiles(gameTime);
                 _asteroidManager.UpdateAsteroids(gameTime);
 
-                CollisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
-
-                if (_player.HitPoints <= 0)
-                    _gameState = GameState.GameOver;
+                _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
 
                 _scoreCounter += 0.01f;
                 if (_scoreCounter >= 1)
@@ -36,6 +26,9 @@ namespace SpaceJoeDotNet
                     _player.Score += 1;
                     _scoreCounter = 0;
                 }
+
+                if (_player.HitPoints <= 0)
+                    _gameState = GameState.GameOver;
             }
             else if (_gameState == GameState.Menu)
             {
