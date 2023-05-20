@@ -45,6 +45,7 @@ namespace SpaceJoeDotNet.GameObject
                 int x = _rnd.Next(0, SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth);
                 Texture2D texture;
                 int speed, damage, hitPoints;
+                AsteroidType type;
 
                 switch (asteroidType)
                 {
@@ -53,24 +54,27 @@ namespace SpaceJoeDotNet.GameObject
                         speed = 600;
                         damage = 100;
                         hitPoints = 100;
+                        type = AsteroidType.Small;
                         break;
                     case AsteroidType.Medium:
                         texture = Textures["asteroidMedium"];
                         speed = 450;
                         damage = 175;
                         hitPoints = 150;
+                        type = AsteroidType.Medium;
                         break;
                     case AsteroidType.Large:
                         texture = Textures["asteroidLarge"];
                         speed = 350;
                         damage = 260;
                         hitPoints = 200;
+                        type = AsteroidType.Large;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(asteroidType), asteroidType, null);
                 }
 
-                Asteroids.Add(new Asteroid(texture, new Vector2(x, -100), damage, hitPoints, speed));
+                Asteroids.Add(new Asteroid(texture, new Vector2(x, -100), damage, hitPoints, speed, type));
             }
 
             public void DrawAsteroids(SpriteBatch spriteBatch)
@@ -111,13 +115,15 @@ namespace SpaceJoeDotNet.GameObject
         }
 
         public static IAsteroidManager Manager { get; } = new AsteroidManager();
+        public AsteroidType AsteroidType { get; }
 
-        public Asteroid(Texture2D texture, Vector2 position, int damage, int hitPoints, int speed)
-            : base(texture, position)
+        public Asteroid(Texture2D texture, Vector2 position, int damage, int hitPoints, 
+            int speed, AsteroidType asteroidType) : base(texture, position)
         {
             Damage = damage;
             HitPoints = hitPoints;
             Speed = speed;
+            AsteroidType = asteroidType;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

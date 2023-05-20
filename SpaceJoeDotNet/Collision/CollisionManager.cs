@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.Utils;
 
 namespace SpaceJoeDotNet.Collision
 {
@@ -24,6 +25,8 @@ namespace SpaceJoeDotNet.Collision
                     if (CheckCollisions(projectile, asteroid))
                     {
                         asteroid.TakeDamage(projectile.Damage);
+                        if (asteroid.HitPoints <= 0)
+                            ScoreCounter.CountScoreFor(player, asteroid);
                         projectile.TakeDamage(asteroid.Damage);
                     }
                 }

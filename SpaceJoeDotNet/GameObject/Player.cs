@@ -23,7 +23,7 @@ class Player : GameObjectBase
 
     public Player(Texture2D texture) : base(texture, defaultPosition)
     {
-        Speed = 240;
+        Speed = 280;
         Weapon = new(ProjectileType.Default, 100, 4, 10);
         Damage = 50;
         HitPoints = DefaultHitPoints;

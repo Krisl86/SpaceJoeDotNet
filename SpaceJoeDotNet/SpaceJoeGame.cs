@@ -111,9 +111,6 @@ public partial class SpaceJoeGame : Game
             }
         }
 
-
-
-
         base.Update(gameTime);
     }
 
