@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using MonogameCustomLibrary;
+using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
@@ -8,13 +9,16 @@ namespace SpaceJoeDotNet.Item;
 class Weapon
 {
     float _timeSinceCooldown;
+    ProjectileManager _manager;
     
-    public Weapon(ProjectileType projectileType, int damage, float cooldownTime, int heatLimit)
+    public Weapon(ProjectileManager projectileManager, ProjectileType projectileType, 
+        int damage, float cooldownTime, int heatLimit)
     {
         ProjectileType = projectileType;
         Damage = damage;
         CooldownTime = cooldownTime;
         HeatLimit = heatLimit;
+        _manager = projectileManager;
     }
 
     public int CurrentHeat { get; set; }
@@ -27,7 +31,7 @@ class Weapon
     {
         if (CurrentHeat < HeatLimit)
         {
-            Projectile.Manager.AddProjectile(ProjectileType, startPosition, Damage);
+            _manager.AddProjectile(ProjectileType, startPosition, Damage);
             CurrentHeat++;
         }
     }

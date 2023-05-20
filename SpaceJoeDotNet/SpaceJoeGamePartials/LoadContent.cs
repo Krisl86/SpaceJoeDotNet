@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Utils;
 
 namespace SpaceJoeDotNet
@@ -38,24 +37,21 @@ namespace SpaceJoeDotNet
             _mainMenuSprite = Content.Load<Texture2D>("shop");
             _gameOverSprite = Content.Load<Texture2D>("game-over");
 
+            InitTexturesForManagers();
 
-            // because game items are dependent on their texture (and 'LoadContent' is called after 'Initialize'),
-            // they need to be initialized here
-            InitTexturesForOthers();
-
-            _player = new(_playerSprite);
+            _player.Texture = _playerSprite;
             _background = new(_bgBackSprite, _bgFrontSprite);
         }
 
-        void InitTexturesForOthers()
+        void InitTexturesForManagers()
         {
-            Projectile.Manager.Textures.Add("projectileDefault", _projectileDefaultSprite);
-            Projectile.Manager.Textures.Add("projectileSlow", _projectileSlowSprite);
-            Projectile.Manager.Textures.Add("projectileFast", _projectileFastSprite);
+            _projectileManager.Textures.Add("projectileDefault", _projectileDefaultSprite);
+            _projectileManager.Textures.Add("projectileSlow", _projectileSlowSprite);
+            _projectileManager.Textures.Add("projectileFast", _projectileFastSprite);
 
-            Asteroid.Manager.Textures.Add("asteroidSmall", _asteroidSmallSprite);
-            Asteroid.Manager.Textures.Add("asteroidMedium", _asteroidMediumSprite);
-            Asteroid.Manager.Textures.Add("asteroidLarge", _asteroidLargeSprite);
+            _asteroidManager.Textures.Add("asteroidSmall", _asteroidSmallSprite);
+            _asteroidManager.Textures.Add("asteroidMedium", _asteroidMediumSprite);
+            _asteroidManager.Textures.Add("asteroidLarge", _asteroidLargeSprite);
 
             MenuDrawer.DefaultMenuBackground = _mainMenuSprite;
             MenuDrawer.GameOverMenuBackground = _gameOverSprite;

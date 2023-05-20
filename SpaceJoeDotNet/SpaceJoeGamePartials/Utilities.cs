@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SpaceJoeDotNet.GameObject;
 using System.Drawing.Text;
 using System.Linq;
 
@@ -11,6 +12,13 @@ namespace SpaceJoeDotNet
         {
             var fontFamilies = new InstalledFontCollection().Families;
             return fontFamilies.Any(f => f.Name == fontName);
+        }
+
+        void ResetGame()
+        {
+            _player.Reset();
+            _asteroidManager.Reset();
+            _projectileManager.Reset();
         }
     }
 }

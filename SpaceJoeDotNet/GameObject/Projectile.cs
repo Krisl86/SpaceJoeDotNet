@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonogameCustomLibrary;
-using SpaceJoeDotNet.Collision;
 using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using System;
 
 namespace SpaceJoeDotNet.GameObject;
 
@@ -15,81 +13,18 @@ enum ProjectileType
     Fast
 }
 
-interface IProjectileManager
-{
-    List<Projectile> Projectiles { get; }
-    Dictionary<string, Texture2D> Textures { get; }
-    void AddProjectile(ProjectileType type, Vector2 position, int damage);
-    void DrawProjectiles(SpriteBatch spriteBatch);
-    void UpdateProjectiles(GameTime gameTime);
-    void Reset();
-}
-
 class Projectile : GameObjectBase
 {
-    class ProjectileManager : IProjectileManager
+    public Projectile(Texture2D texture, ProjectileType projectileType, Vector2 position, int damage) : base(position)
     {
-        public List<Projectile> Projectiles { get; } = new();
-        public Dictionary<string, Texture2D> Textures { get; } = new();
-    
-        public void AddProjectile(ProjectileType type, Vector2 position, int damage)
-        {
-            Texture2D texture;
-            int speed;
-    
-            switch (type)
-            {
-                case ProjectileType.Default:
-                    texture = Textures["projectileDefault"];
-                    speed = 500;
-                    break;
-                case ProjectileType.Slow:
-                    texture = Textures["projectileSlow"];
-                    speed = 350;
-                    break;
-                case ProjectileType.Fast:
-                    texture = Textures["projectileFast"];
-                    speed = 750;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
-            
-            Projectiles.Add(new Projectile(texture, position, damage, speed));
-        }
-    
-        public void DrawProjectiles(SpriteBatch spriteBatch)
-            => Projectiles.ForEach(p => p.Draw(spriteBatch));
-    
-        public void UpdateProjectiles(GameTime gameTime)
-        {
-            for (var i = 0; i < Projectiles.Count; i++)
-            {
-                if ((Projectiles.Count > 30 && Projectiles[i].Y < 0)
-                    || Projectiles[i].HitPoints <= 0) // remove off-screen projectiles every once in a while
-                {
-                    Projectiles.RemoveAt(i);
-                    return;
-                }
-                Projectiles[i].Update(gameTime);
-            }
-        }
-
-        public void Reset()
-        {
-            Projectiles.Clear();
-        }
-    }
-    
-    public static IProjectileManager Manager { get; } = new ProjectileManager();
-
-    Projectile(Texture2D texture, Vector2 position, int damage, int speed) 
-        : base(texture, position)
-    {
-        Damage = damage;
-        Speed = speed;
+        Texture = texture;
+        ProjectileType = projectileType;
         HitPoints = 1;
+        Damage = damage;
+        AssignPropertiesByType(projectileType);
     }
+
+    public ProjectileType ProjectileType { get; }
 
     public override void Update(GameTime gameTime)
     {
@@ -99,4 +34,22 @@ class Projectile : GameObjectBase
     
     public override void Draw(SpriteBatch spriteBatch)
         => spriteBatch.DrawCentered(Texture, Position);
+
+    void AssignPropertiesByType(ProjectileType type)
+    {
+        switch (type)
+        {
+            case ProjectileType.Default:
+                Speed = 500;
+                break;
+            case ProjectileType.Slow:
+                Speed = 350;
+                break;
+            case ProjectileType.Fast:
+                Speed = 750;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
 }

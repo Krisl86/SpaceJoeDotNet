@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonogameCustomLibrary;
-using SpaceJoeDotNet.Collision;
+using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Item;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
@@ -16,15 +16,15 @@ class Player : GameObjectBase
     const int DefaultHitPoints = 250;
     const int DefaultShieldPoints = 50;
 
-    static readonly Vector2 defaultPosition = new Vector2(SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth / 2,
+    static readonly Vector2 defaultPosition = new(SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth / 2,
         SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight - 60);
 
     KeyboardState _previousKstate;
 
-    public Player(Texture2D texture) : base(texture, defaultPosition)
+    public Player(ProjectileManager projectileManager) : base(defaultPosition)
     {
         Speed = 280;
-        Weapon = new(ProjectileType.Default, 100, 4, 10);
+        Weapon = new(projectileManager, ProjectileType.Default, 100, 4, 10);
         Damage = 50;
         HitPoints = DefaultHitPoints;
     }

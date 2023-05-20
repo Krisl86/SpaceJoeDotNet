@@ -7,18 +7,12 @@
     {
         public abstract class GameObjectBase
         {
-            protected GameObjectBase(Texture2D texture, Vector2 position)
+            protected GameObjectBase(Vector2 position)
             {
-                Texture = texture;
                 _position = position;
-                Width = texture.Width;
-                Height = texture.Height;
             }
 
-            public Texture2D Texture { get; init; }
-
-            public int Width { get; }
-            public int Height { get; }
+            public Texture2D Texture { get; set; }
 
             Vector2 _position;
             public Vector2 Position
