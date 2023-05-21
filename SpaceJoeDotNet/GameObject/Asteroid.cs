@@ -24,7 +24,10 @@ namespace SpaceJoeDotNet.GameObject
         public AsteroidType AsteroidType { get; }
 
         public override void Draw(SpriteBatch spriteBatch)
-            => spriteBatch.DrawCentered(Texture, Position);
+        {
+            if (Texture is not null)
+                spriteBatch.DrawCentered(Texture, Position);
+        }
 
         public override void Update(GameTime gameTime)
         {

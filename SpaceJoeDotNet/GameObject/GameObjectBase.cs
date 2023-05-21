@@ -12,7 +12,20 @@
                 _position = position;
             }
 
-            public Texture2D Texture { get; set; } = null!;
+            Texture2D? texture;
+            public Texture2D? Texture
+            {
+                get => texture;
+                set
+                {
+                    if (value is not null)
+                    {
+                        texture = value;
+                        Width = texture.Width;
+                        Height = texture.Height;
+                    }
+                }
+            }
 
             Vector2 _position;
             public Vector2 Position
@@ -23,6 +36,9 @@
 
             public float X { get => _position.X; set => _position.X = value; }
             public float Y { get => _position.Y; set => _position.Y = value; }
+
+            public int Width { get; private set; } = 1;
+            public int Height { get; private set; } = 1;
 
             public int Speed { get; set; }
             public int Damage { get; protected set; }

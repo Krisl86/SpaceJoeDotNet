@@ -30,9 +30,12 @@ class Projectile : GameObjectBase
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         Y -= Speed * dt;
     }
-    
+
     public override void Draw(SpriteBatch spriteBatch)
-        => spriteBatch.DrawCentered(Texture, Position);
+    { 
+        if (Texture is not null)
+            spriteBatch.DrawCentered(Texture, Position);
+    }
 
     void InitPropertiesByType(ProjectileType type)
     {

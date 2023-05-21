@@ -39,18 +39,18 @@ class Player : GameObjectBase
         var kstate = Keyboard.GetState();
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (kstate.IsKeyDown(Keys.Left) && X > Texture.Width / 2)
+        if (kstate.IsKeyDown(Keys.Left) && X > Width / 2)
             X -= Speed * dt;
         if (kstate.IsKeyDown(Keys.Right)
-            && X < windowWidth - Texture.Width / 2)
+            && X < windowWidth - Width / 2)
             X += Speed * dt;
-        if (kstate.IsKeyDown(Keys.Down) && Y < windowHeight - Texture.Height / 2)
+        if (kstate.IsKeyDown(Keys.Down) && Y < windowHeight - Height / 2)
             Y += Speed * dt;
-        if (kstate.IsKeyDown(Keys.Up) && Y > Texture.Height / 2) 
+        if (kstate.IsKeyDown(Keys.Up) && Y > Height / 2) 
             Y -= Speed * dt;
         
         if (kstate.IsKeyDown(Keys.Space) && _previousKstate.IsKeyUp(Keys.Space))
-            Weapon.Shoot(new Vector2(X, Y - Texture.Height / 2));
+            Weapon.Shoot(new Vector2(X, Y - Height / 2));
 
         _previousKstate = kstate;
 
@@ -63,7 +63,10 @@ class Player : GameObjectBase
     }
 
     public override void Draw(SpriteBatch spriteBatch)
-        => spriteBatch.DrawCentered(Texture, Position);
+    { 
+        if (Texture is not null)
+            spriteBatch.DrawCentered(Texture, Position);
+    }
 
     public void Reset()
     {

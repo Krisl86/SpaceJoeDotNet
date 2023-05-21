@@ -45,7 +45,7 @@ namespace SpaceJoeDotNet.GameManager
 
         bool CheckCollisions(GameObjectBase obj1, GameObjectBase obj2)
         {
-            int radius = obj1.Texture.Width / 2 + obj2.Texture.Width / 2;
+            int radius = obj1.Width / 2 + obj2.Width / 2;
             return Vector2.Distance(obj1.Position, obj2.Position) < radius;
         }
     }
