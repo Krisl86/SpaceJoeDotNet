@@ -1,13 +1,9 @@
 ﻿#nullable disable
 
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Bg;
-using SpaceJoeDotNet.Utils;
-using Color = Microsoft.Xna.Framework.Color;
 using SpaceJoeDotNet.GameManager;
 
 namespace SpaceJoeDotNet;
@@ -36,12 +32,12 @@ public partial class SpaceJoeGame : Game
 
     public SpaceJoeGame()
     {
-        Instance = this;
         Graphics = new(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true; 
     }
 
     public GraphicsDeviceManager Graphics { get; }
-    public static SpaceJoeGame Instance { get; private set; }
+    public int Width => Graphics.PreferredBackBufferWidth;
+    public int Height => Graphics.PreferredBackBufferHeight;
 }

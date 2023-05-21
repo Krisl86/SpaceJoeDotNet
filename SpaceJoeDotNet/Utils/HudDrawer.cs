@@ -13,16 +13,14 @@ static class HudDrawer
     static readonly Color DefaultHudColor = Color.White;
     static readonly Color AlertHudColor = Color.Red;
 
-    public static void DrawHud(SpriteBatch spriteBatch, SpriteFont font, Player player)
+    public static void DrawHud(SpriteBatch spriteBatch, SpriteFont font, Player player, int windowWidth)
     {
-        DrawWeaponHeatInfo(spriteBatch, font, player);
-        DrawScoreHpShield(spriteBatch, font, player);
+        DrawWeaponHeatInfo(spriteBatch, font, player, windowWidth);
+        DrawScoreHpShield(spriteBatch, font, player, windowWidth);
     }
 
-    static void DrawWeaponHeatInfo(SpriteBatch spriteBatch, SpriteFont font, Player player)
+    static void DrawWeaponHeatInfo(SpriteBatch spriteBatch, SpriteFont font, Player player, int windowWidth)
     {
-        int windowWidth = SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth;
-        
         spriteBatch.DrawStringCentered(false, font, "[ HEAT ]",
             new Vector2(windowWidth / 2, 75), DefaultHudColor);
         
@@ -39,10 +37,8 @@ static class HudDrawer
                 new Vector2(windowWidth / 2, 200), AlertHudColor);
     }
 
-    static void DrawScoreHpShield(SpriteBatch spriteBatch, SpriteFont font, Player player)
+    static void DrawScoreHpShield(SpriteBatch spriteBatch, SpriteFont font, Player player, int windowWidth)
     {
-        int windowWidth = SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth;
-
         string score = "[ SCR ]";
         var size = font.MeasureString(score);
         spriteBatch.DrawString(font, score, new Vector2(XMargin, YMargin), DefaultHudColor);   

@@ -32,7 +32,7 @@ namespace SpaceJoeDotNet.GameManager
                 _ => throw new ArgumentOutOfRangeException(nameof(projectileType), projectileType, null),
             };
 
-            Projectiles.Add(new Projectile(texture, projectileType, position, damage));
+            Projectiles.Add(new Projectile(projectileType, position, damage) { Texture = texture });
         }
 
         public void DrawProjectiles(SpriteBatch spriteBatch)

@@ -23,19 +23,19 @@ namespace SpaceJoeDotNet
                 _projectileManager.DrawProjectiles(_spriteBatch);
                 _asteroidManager.DrawAsteroids(_spriteBatch);
 
-                HudDrawer.DrawHud(_spriteBatch, _gameFont, _player);
+                HudDrawer.DrawHud(_spriteBatch, _gameFont, _player, Width);
             }
             else if (_gameState == GameState.Menu)
             {
-                MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont);
+                MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont, Width, Height);
             }
             else if (_gameState == GameState.GameOver)
             {
-                MenuDrawer.DrawGameOverMenu(_spriteBatch, _gameFont);
+                MenuDrawer.DrawGameOverMenu(_spriteBatch, _gameFont, Width, Height);
             }
             else if (_gameState == GameState.Shop)
             {
-                MenuDrawer.DrawShopMenu(_spriteBatch, _gameFont, _player);
+                MenuDrawer.DrawShopMenu(_spriteBatch, _gameFont, _player, Width, Height);
             }
 
             _spriteBatch.End();

@@ -16,26 +16,25 @@ class Player : GameObjectBase
     const int DefaultHitPoints = 250;
     const int DefaultShieldPoints = 50;
 
-    static readonly Vector2 defaultPosition = new(SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth / 2,
-        SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight - 60);
-
     float _scoreCounter;
     KeyboardState _previousKstate;
 
-    public Player(IProjectileManager projectileManager) : base(defaultPosition)
+    public Player(IProjectileManager projectileManager, Vector2 defaultPosition) : base(defaultPosition)
     {
         Speed = 280;
         Weapon = new(projectileManager, ProjectileType.Default, 100, 4, 10);
         Damage = 50;
         HitPoints = DefaultHitPoints;
+        DefaultPosition = defaultPosition;
     }
 
+    public Vector2 DefaultPosition { get; set; }
     public Weapon Weapon { get; }
     public int ShieldPoints { get; set; } = DefaultShieldPoints;
     public int Score { get; set; }
     public int TotalScore { get; set; }
     
-    public override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime, int windowWidth, int windowHeight)
     {
         var kstate = Keyboard.GetState();
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -43,9 +42,9 @@ class Player : GameObjectBase
         if (kstate.IsKeyDown(Keys.Left) && X > Texture.Width / 2)
             X -= Speed * dt;
         if (kstate.IsKeyDown(Keys.Right)
-            && X < SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth - Texture.Width / 2)
+            && X < windowWidth - Texture.Width / 2)
             X += Speed * dt;
-        if (kstate.IsKeyDown(Keys.Down) && Y < SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight - Texture.Height / 2)
+        if (kstate.IsKeyDown(Keys.Down) && Y < windowHeight - Texture.Height / 2)
             Y += Speed * dt;
         if (kstate.IsKeyDown(Keys.Up) && Y > Texture.Height / 2) 
             Y -= Speed * dt;
@@ -72,7 +71,7 @@ class Player : GameObjectBase
         HitPoints = DefaultHitPoints;
         ShieldPoints = DefaultShieldPoints;
         Weapon.CurrentHeat = 0;
-        Position = defaultPosition;
+        Position = DefaultPosition;
     }
 
     public override void TakeDamage(int damage)
@@ -84,4 +83,6 @@ class Player : GameObjectBase
             ShieldPoints = 0;
         }
     }
+
+    public override void Update(GameTime gameTime) => Update(gameTime, 0, 0);
 }

@@ -40,7 +40,7 @@ namespace SpaceJoeDotNet
             InitTexturesForManagers();
 
             _player.Texture = _playerSprite;
-            _background = new(_bgBackSprite, _bgFrontSprite);
+            _background = new(_bgBackSprite, _bgFrontSprite, Height);
         }
 
         void InitTexturesForManagers()

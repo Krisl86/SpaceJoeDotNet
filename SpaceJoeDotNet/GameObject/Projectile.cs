@@ -15,9 +15,8 @@ enum ProjectileType
 
 class Projectile : GameObjectBase
 {
-    public Projectile(Texture2D texture, ProjectileType projectileType, Vector2 position, int damage) : base(position)
+    public Projectile(ProjectileType projectileType, Vector2 position, int damage) : base(position)
     {
-        Texture = texture;
         ProjectileType = projectileType;
         HitPoints = 1;
         Damage = damage;

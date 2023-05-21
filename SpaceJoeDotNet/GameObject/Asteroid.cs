@@ -15,9 +15,8 @@ namespace SpaceJoeDotNet.GameObject
 
     internal class Asteroid : GameObjectBase
     {
-        public Asteroid(Texture2D texture, AsteroidType asteroidType, Vector2 position) : base(position)
+        public Asteroid(AsteroidType asteroidType, Vector2 position) : base(position)
         {
-            Texture = texture;
             AsteroidType = asteroidType;
             InitPropertiesByType(AsteroidType);
         }

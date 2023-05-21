@@ -9,14 +9,14 @@ namespace SpaceJoeDotNet
         {
             if (_gameState == GameState.InGame)
             {
-                _asteroidManager.RandomlyGenerateAsteroid();
+                _asteroidManager.RandomlyGenerateAsteroid(Width);
 
                 _background.Update(gameTime);
-                _player.Update(gameTime);
+                _player.Update(gameTime, Width, Height);
                 _player.Weapon.Update(gameTime);
 
                 _projectileManager.UpdateProjectiles(gameTime);
-                _asteroidManager.UpdateAsteroids(gameTime);
+                _asteroidManager.UpdateAsteroids(gameTime, Height);
 
                 _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
 

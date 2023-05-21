@@ -7,13 +7,12 @@ namespace SpaceJoeDotNet.Utils
 {
     static class MenuDrawer
     {
-        static readonly int windowWidth = SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth;
-        static readonly int windowHeight = SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight;
         static readonly Color defaultColor = Color.White;
         public static Texture2D? DefaultMenuBackground { get; set; }
         public static Texture2D? GameOverMenuBackground { get; set; }
 
-        public static void DrawMainMenu(SpriteBatch spriteBatch, SpriteFont font)
+        public static void DrawMainMenu(SpriteBatch spriteBatch, SpriteFont font,
+            int windowWidth, int windowHeight)
         {
             if (DefaultMenuBackground != null)
                 spriteBatch.Draw(DefaultMenuBackground, new Vector2(0, 0), Color.White);
@@ -28,7 +27,8 @@ namespace SpaceJoeDotNet.Utils
                 new Vector2(windowWidth / 2, windowHeight / 2 + 60), defaultColor);
         }
 
-        public static void DrawGameOverMenu(SpriteBatch spriteBatch, SpriteFont font)
+        public static void DrawGameOverMenu(SpriteBatch spriteBatch, SpriteFont font,
+            int windowWidth, int windowHeight)
         {
             if (DefaultMenuBackground != null)
                 spriteBatch.Draw(GameOverMenuBackground, new Vector2(0, 0), Color.White);
@@ -46,7 +46,8 @@ namespace SpaceJoeDotNet.Utils
                 new Vector2(windowWidth / 2, windowHeight / 2 + 60), defaultColor);
         }
 
-        public static void DrawShopMenu(SpriteBatch spriteBatch, SpriteFont font, Player player)
+        public static void DrawShopMenu(SpriteBatch spriteBatch, SpriteFont font, Player player, 
+            int windowWidth, int windowHeight)
         {
             if (DefaultMenuBackground != null)
                 spriteBatch.Draw(DefaultMenuBackground, new Vector2(0, 0), Color.White);

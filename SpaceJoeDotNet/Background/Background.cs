@@ -17,12 +17,12 @@ class Background
     readonly int _backStartY;
     readonly int _frontStartY;
 
-    public Background(Texture2D backSprite, Texture2D frontSprite)
+    public Background(Texture2D backSprite, Texture2D frontSprite, int windowHeight)
     {
         _backSprite = backSprite;
         _frontSprite = frontSprite;
-        _backStartY = -backSprite.Height + SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight;
-        _frontStartY = -frontSprite.Height + SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight;
+        _backStartY = -backSprite.Height + windowHeight;
+        _frontStartY = -frontSprite.Height + windowHeight;
         _backY = _backStartY;
         _frontY = _frontStartY;
     }

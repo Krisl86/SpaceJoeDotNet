@@ -15,7 +15,7 @@ namespace SpaceJoeDotNet
             _projectileManager = new ProjectileManager();
             _collisionManager = new CollisionManager();
 
-            _player = new(_projectileManager);
+            _player = new(_projectileManager, new Vector2(Width / 2, Height - 60));
 
             base.Initialize();
         }

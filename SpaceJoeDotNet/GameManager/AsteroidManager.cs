@@ -13,9 +13,9 @@ namespace SpaceJoeDotNet.GameManager
 
         void AddAsteroid(AsteroidType asteroidType, Vector2 position);
         void DrawAsteroids(SpriteBatch spriteBatch);
-        void RandomlyGenerateAsteroid();
+        void RandomlyGenerateAsteroid(int windowWidth);
         void Reset();
-        void UpdateAsteroids(GameTime gameTime);
+        void UpdateAsteroids(GameTime gameTime, int windowHeight);
     }
 
     class AsteroidManager : IAsteroidManager
@@ -31,9 +31,9 @@ namespace SpaceJoeDotNet.GameManager
 
         public Dictionary<string, Texture2D> Textures { get; } = new();
 
-        public void RandomlyGenerateAsteroid()
+        public void RandomlyGenerateAsteroid(int windowWidth)
         {
-            int x = _rnd.Next(0, SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth);
+            int x = _rnd.Next(0, windowWidth);
             int y = -100;
             var asteroidType = (AsteroidType)_rnd.Next(0, 3);
 
@@ -55,18 +55,18 @@ namespace SpaceJoeDotNet.GameManager
                 _ => throw new ArgumentOutOfRangeException(nameof(asteroidType), asteroidType, null),
             };
 
-            Asteroids.Add(new Asteroid(texture, asteroidType, position));
+            Asteroids.Add(new Asteroid(asteroidType, position) { Texture = texture });
         }
 
         public void DrawAsteroids(SpriteBatch spriteBatch)
             => Asteroids.ForEach(a => a.Draw(spriteBatch));
 
-        public void UpdateAsteroids(GameTime gameTime)
+        public void UpdateAsteroids(GameTime gameTime, int windowHeight)
         {
             for (var i = 0; i < Asteroids.Count; i++)
             {
                 if ((Asteroids.Count > 30
-                    && Asteroids[i].Y > SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight + 100)
+                    && Asteroids[i].Y > windowHeight + 100)
                     || Asteroids[i].HitPoints <= 0)
                 {
                     Asteroids.RemoveAt(i);
