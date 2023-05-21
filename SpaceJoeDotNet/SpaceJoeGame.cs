@@ -1,11 +1,13 @@
 ﻿#nullable disable
 
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Bg;
 using SpaceJoeDotNet.GameManager;
 
+[assembly:InternalsVisibleTo("SpaceJoeDotNet.Tests")]
 namespace SpaceJoeDotNet;
 
 enum GameState

@@ -1,8 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceJoeDotNet", "SpaceJoeDotNet\SpaceJoeDotNet.csproj", "{5E626A3B-0856-4489-8A0B-7CECE0A0CB07}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceJoeDotNet", "SpaceJoeDotNet\SpaceJoeDotNet.csproj", "{5E626A3B-0856-4489-8A0B-7CECE0A0CB07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonogameCustomLibrary", "MonogameCustomLibrary\MonogameCustomLibrary.csproj", "{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonogameCustomLibrary", "MonogameCustomLibrary\MonogameCustomLibrary.csproj", "{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceJoeDotNet.Tests", "SpaceJoeDotNet.Tests\SpaceJoeDotNet.Tests.csproj", "{5DE30FD3-AEF1-4A98-809F-194CEA512302}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +23,15 @@ Global
 		{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C15CE94-2C95-4AE1-836F-12B5B1BF7FF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE30FD3-AEF1-4A98-809F-194CEA512302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE30FD3-AEF1-4A98-809F-194CEA512302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE30FD3-AEF1-4A98-809F-194CEA512302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE30FD3-AEF1-4A98-809F-194CEA512302}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F99F4E0-4300-4D7E-BB5A-F5A3C7A5683A}
 	EndGlobalSection
 EndGlobal
