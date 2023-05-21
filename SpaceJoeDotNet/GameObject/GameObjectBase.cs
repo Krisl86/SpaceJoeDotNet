@@ -37,8 +37,8 @@
             public float X { get => _position.X; set => _position.X = value; }
             public float Y { get => _position.Y; set => _position.Y = value; }
 
-            public int Width { get; private set; } = 1;
-            public int Height { get; private set; } = 1;
+            public int Width { get; set; } = 1;
+            public int Height { get; set; } = 1;
 
             public int Speed { get; set; }
             public int Damage { get; protected set; }

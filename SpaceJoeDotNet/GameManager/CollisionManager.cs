@@ -9,6 +9,7 @@ namespace SpaceJoeDotNet.GameManager
     interface ICollisionManager
     {
         void Collide(Player player, List<Asteroid> asteroids, List<Projectile> projectiles);
+        bool CheckCollisions(GameObjectBase obj1, GameObjectBase obj2);
     }
 
     class CollisionManager : ICollisionManager
@@ -43,7 +44,7 @@ namespace SpaceJoeDotNet.GameManager
             }
         }
 
-        bool CheckCollisions(GameObjectBase obj1, GameObjectBase obj2)
+        public bool CheckCollisions(GameObjectBase obj1, GameObjectBase obj2)
         {
             int radius = obj1.Width / 2 + obj2.Width / 2;
             return Vector2.Distance(obj1.Position, obj2.Position) < radius;
