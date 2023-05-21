@@ -32,8 +32,6 @@ public partial class SpaceJoeGame : Game
     IProjectileManager _projectileManager;
     ICollisionManager _collisionManager;
 
-    float _scoreCounter;
-
     GameState _gameState = GameState.Menu;
 
     public SpaceJoeGame()

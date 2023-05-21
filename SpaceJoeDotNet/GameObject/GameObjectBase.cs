@@ -12,7 +12,7 @@
                 _position = position;
             }
 
-            public Texture2D Texture { get; set; }
+            public Texture2D Texture { get; set; } = null!;
 
             Vector2 _position;
             public Vector2 Position

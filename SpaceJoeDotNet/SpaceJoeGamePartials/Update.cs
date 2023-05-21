@@ -20,13 +20,6 @@ namespace SpaceJoeDotNet
 
                 _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
 
-                _scoreCounter += 0.01f;
-                if (_scoreCounter >= 1)
-                {
-                    _player.Score += 1;
-                    _scoreCounter = 0;
-                }
-
                 if (_player.HitPoints <= 0)
                     _gameState = GameState.GameOver;
             }

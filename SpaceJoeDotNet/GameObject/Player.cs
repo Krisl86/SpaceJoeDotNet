@@ -19,6 +19,7 @@ class Player : GameObjectBase
     static readonly Vector2 defaultPosition = new(SpaceJoeGame.Instance.Graphics.PreferredBackBufferWidth / 2,
         SpaceJoeGame.Instance.Graphics.PreferredBackBufferHeight - 60);
 
+    float _scoreCounter;
     KeyboardState _previousKstate;
 
     public Player(IProjectileManager projectileManager) : base(defaultPosition)
@@ -53,6 +54,13 @@ class Player : GameObjectBase
             Weapon.Shoot(new Vector2(X, Y - Texture.Height / 2));
 
         _previousKstate = kstate;
+
+        _scoreCounter += 0.01f;
+        if (_scoreCounter >= 1)
+        {
+            Score += 1;
+            _scoreCounter = 0;
+        }
     }
 
     public override void Draw(SpriteBatch spriteBatch)
