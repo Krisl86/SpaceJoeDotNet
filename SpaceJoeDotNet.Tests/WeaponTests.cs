@@ -1,12 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Item;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace SpaceJoeDotNet.Tests

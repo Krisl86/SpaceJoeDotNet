@@ -40,16 +40,13 @@ namespace SpaceJoeDotNet.GameManager
 
         public void UpdateProjectiles(GameTime gameTime)
         {
-            for (var i = 0; i < Projectiles.Count; i++)
-            {
-                if ((Projectiles.Count > 30 && Projectiles[i].Y < 0)
-                    || Projectiles[i].HitPoints <= 0) // remove off-screen projectiles every once in a while
-                {
-                    Projectiles.RemoveAt(i);
-                    return;
-                }
-                Projectiles[i].Update(gameTime);
-            }
+            if (Projectiles.Count > 30)
+                Projectiles.RemoveAll(p => p.Y < 0);
+
+            Projectiles.RemoveAll(p => p.HitPoints <= 0);
+
+            foreach (var projectile in Projectiles)
+                projectile.Update(gameTime);
         }
 
         public void Reset()

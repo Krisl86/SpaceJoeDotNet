@@ -63,18 +63,13 @@ namespace SpaceJoeDotNet.GameManager
 
         public void UpdateAsteroids(GameTime gameTime, int windowHeight)
         {
-            for (var i = 0; i < Asteroids.Count; i++)
-            {
-                if ((Asteroids.Count > 30
-                    && Asteroids[i].Y > windowHeight + 100)
-                    || Asteroids[i].HitPoints <= 0)
-                {
-                    Asteroids.RemoveAt(i);
-                    return;
-                }
+            if (Asteroids.Count > 30)
+                Asteroids.RemoveAll(a => a.Y > windowHeight + 100);
 
-                Asteroids[i].Update(gameTime);
-            }
+            Asteroids.RemoveAll(a => a.HitPoints <= 0);
+
+            foreach (var asteroid in Asteroids)
+                asteroid.Update(gameTime);
         }
 
         public void Reset()
