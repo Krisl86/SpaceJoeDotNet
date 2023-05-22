@@ -14,7 +14,6 @@ namespace SpaceJoeDotNet.GameObject;
 class Player : GameObjectBase
 {
     const int DefaultHitPoints = 250;
-    const int DefaultShieldPoints = 50;
 
     float _scoreCounter;
     KeyboardState _previousKstate;
@@ -23,14 +22,15 @@ class Player : GameObjectBase
     {
         Speed = 280;
         Weapon = new(projectileManager, ProjectileType.Default, 100, 4, 10);
-        Damage = 50;
+        Shield = new(100, 5, 1);
+        Damage = 9999;
         HitPoints = DefaultHitPoints;
         DefaultPosition = defaultPosition;
     }
 
     public Vector2 DefaultPosition { get; set; }
     public Weapon Weapon { get; }
-    public int ShieldPoints { get; set; } = DefaultShieldPoints;
+    public Shield Shield { get; set; }
     public int Score { get; set; }
     public int TotalScore { get; set; }
     
@@ -60,6 +60,9 @@ class Player : GameObjectBase
             Score += 1;
             _scoreCounter = 0;
         }
+
+        Weapon.Update(gameTime);
+        Shield.Update(gameTime);
     }
 
     public override void Draw(SpriteBatch spriteBatch)
@@ -72,19 +75,15 @@ class Player : GameObjectBase
     {
         Score = 0;
         HitPoints = DefaultHitPoints;
-        ShieldPoints = DefaultShieldPoints;
-        Weapon.CurrentHeat = 0;
         Position = DefaultPosition;
+        Shield.Reset();
+        Weapon.Reset();
     }
 
     public override void TakeDamage(int damage)
     {
-        ShieldPoints -= damage;
-        if (ShieldPoints < 0)
-        {
-            HitPoints += ShieldPoints;
-            ShieldPoints = 0;
-        }
+        int remainingDamage = Shield.TakeDamage(damage);
+        HitPoints -= remainingDamage;
     }
 
     public override void Update(GameTime gameTime) => Update(gameTime, 0, 0);

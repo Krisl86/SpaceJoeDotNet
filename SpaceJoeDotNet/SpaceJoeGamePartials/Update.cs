@@ -12,13 +12,13 @@ namespace SpaceJoeDotNet
                 _asteroidManager.RandomlyGenerateAsteroid(Width);
 
                 _background.Update(gameTime);
-                _player.Update(gameTime, Width, Height);
-                _player.Weapon.Update(gameTime);
+
+                _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
 
                 _projectileManager.UpdateProjectiles(gameTime);
                 _asteroidManager.UpdateAsteroids(gameTime, Height);
 
-                _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
+                _player.Update(gameTime, Width, Height);
 
                 if (_player.HitPoints <= 0)
                     _gameState = GameState.GameOver;

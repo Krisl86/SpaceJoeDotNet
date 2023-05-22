@@ -48,4 +48,9 @@ class Weapon
             }
         }
     }
+
+    public void Reset()
+    {
+        CurrentHeat = 0;
+    }
 }
