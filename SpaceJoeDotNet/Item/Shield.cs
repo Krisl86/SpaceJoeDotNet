@@ -5,7 +5,6 @@ namespace SpaceJoeDotNet.Item
 {
     class Shield
     {
-        float _delayCounter;
         float _recoveryCounter;
 
         public Shield(int maxHitPoints, float recoveryDelay, float recoveryTime)
@@ -20,24 +19,23 @@ namespace SpaceJoeDotNet.Item
         public int HitPoints { get; private set; }
         public float RecoveryDelay { get; set; }
         public float RecoveryTime { get; set; }
+        public float DelayCounter { get; private set; }
 
         public void Update(GameTime gameTime)
         {
             if (HitPoints < MaxHitPoints)
             {
                 float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                _delayCounter += dt;
-                if (_delayCounter >= RecoveryDelay)
+                DelayCounter += dt;
+                if (DelayCounter >= RecoveryDelay)
                 {
                     _recoveryCounter += dt;
                     if (_recoveryCounter >= RecoveryTime)
                     {
                         HitPoints++;
+                        _recoveryCounter = 0;
                         if (HitPoints >= MaxHitPoints)
-                        {
-                            _recoveryCounter = 0;
-                            _delayCounter = 0;
-                        }
+                            DelayCounter = 0;
                     }
                 }
             }
@@ -47,6 +45,8 @@ namespace SpaceJoeDotNet.Item
         {
             int remainingDamage = 0;
             HitPoints -= damage;
+            DelayCounter = 0;
+
             if (HitPoints < 0)
             {
                 remainingDamage = Math.Abs(HitPoints);

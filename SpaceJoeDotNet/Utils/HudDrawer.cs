@@ -2,7 +2,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject;
+using System.Drawing;
+using System.Numerics;
 using Color = Microsoft.Xna.Framework.Color;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.Utils;
 
@@ -17,6 +20,8 @@ static class HudDrawer
     {
         DrawWeaponHeatInfo(spriteBatch, font, player, windowWidth);
         DrawScoreHpShield(spriteBatch, font, player, windowWidth);
+        //DrawShieldAndHullInfo(spriteBatch, font, player, windowWidth);
+        DrawLowShieldInfo(spriteBatch, font, player, windowWidth);
     }
 
     static void DrawWeaponHeatInfo(SpriteBatch spriteBatch, SpriteFont font, Player player, int windowWidth)
@@ -55,15 +60,35 @@ static class HudDrawer
         spriteBatch.DrawString(font, shield, new Vector2(windowWidth - size.X - XMargin, YMargin), 
             DefaultHudColor);
         spriteBatch.DrawStringCentered(false, font, player.Shield.HitPoints.ToString(),
-            new Vector2(windowWidth - size.X / 2 - XMargin, YMargin + 20), DefaultHudColor);
+            new Vector2(windowWidth - size.X / 2 - XMargin, YMargin + 20),
+            player.Shield.HitPoints < player.Shield.MaxHitPoints ? AlertHudColor : DefaultHudColor);
+    }
 
-        
+    static void DrawShieldAndHullInfo(SpriteBatch spriteBatch, SpriteFont font, Player player, int windowWidth)
+    {
         if (player.HitPoints < 30)
             spriteBatch.DrawStringCentered(false, font, "[ SEVERE DAMAGE ]",
                 new Vector2(windowWidth / 2, 250), AlertHudColor);
+
         
+    }
+
+    static void DrawLowShieldInfo(SpriteBatch spriteBatch, SpriteFont font, Player player, int windowWidth)
+    {
         if (player.Shield.HitPoints == 0)
+        {
             spriteBatch.DrawStringCentered(false, font, "[ SHIELDS DOWN ]",
                 new Vector2(windowWidth / 2, 300), AlertHudColor);
+
+            for (int i = (int)player.Shield.RecoveryDelay;
+            i >= player.Shield.RecoveryDelay - (int)player.Shield.DelayCounter;
+                i--)
+            {
+                spriteBatch.DrawString(font, "*",
+                    new Vector2(windowWidth / 2 + i * 10, 320), AlertHudColor);
+                spriteBatch.DrawString(font, "*",
+                    new Vector2(windowWidth / 2 - i * 10, 320), AlertHudColor);
+            }
+        }
     }
 }

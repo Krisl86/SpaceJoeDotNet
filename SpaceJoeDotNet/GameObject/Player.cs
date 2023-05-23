@@ -13,7 +13,7 @@ namespace SpaceJoeDotNet.GameObject;
 
 class Player : GameObjectBase
 {
-    const int DefaultHitPoints = 250;
+    const int DefaultHitPoints = 100;
 
     float _scoreCounter;
     KeyboardState _previousKstate;
@@ -22,7 +22,7 @@ class Player : GameObjectBase
     {
         Speed = 280;
         Weapon = new(projectileManager, ProjectileType.Default, 100, 4, 10);
-        Shield = new(100, 5, 1);
+        Shield = new(150, 10, 0.1f);
         Damage = 9999;
         HitPoints = DefaultHitPoints;
         DefaultPosition = defaultPosition;
@@ -73,6 +73,7 @@ class Player : GameObjectBase
 
     public void Reset()
     {
+        TotalScore += Score;
         Score = 0;
         HitPoints = DefaultHitPoints;
         Position = DefaultPosition;
