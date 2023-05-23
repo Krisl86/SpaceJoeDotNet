@@ -22,7 +22,7 @@ class Weapon
     }
 
     public int CurrentHeat { get; set; }
-    public int HeatLimit { get; }
+    public int HeatLimit { get; set; }
     public float CooldownTime { get; set; }
     public int Damage { get; set; }
     internal ProjectileType ProjectileType { get; set; }

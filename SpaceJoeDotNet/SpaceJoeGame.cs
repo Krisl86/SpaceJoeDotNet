@@ -29,8 +29,10 @@ public partial class SpaceJoeGame : Game
     IAsteroidManager _asteroidManager;
     IProjectileManager _projectileManager;
     ICollisionManager _collisionManager;
+    SaveLoadManager _saveLoadManager;
 
     GameState _gameState = GameState.Menu;
+    bool _gameSaved;
 
     public SpaceJoeGame()
     {

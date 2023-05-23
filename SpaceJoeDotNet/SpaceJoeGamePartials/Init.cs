@@ -14,6 +14,7 @@ namespace SpaceJoeDotNet
             _asteroidManager = new AsteroidManager();
             _projectileManager = new ProjectileManager();
             _collisionManager = new CollisionManager();
+            _saveLoadManager = new();
 
             _player = new(_projectileManager, new Vector2(Width / 2, Height - 60));
 
