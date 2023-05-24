@@ -27,7 +27,8 @@ namespace SpaceJoeDotNet
             }
             else if (_gameState == GameState.Menu)
             {
-                MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont, Width, Height, _saveLoadManager.SaveFileExists);
+                MenuDrawer.DrawMainMenu(_spriteBatch, _gameFont, Width, Height, _saveLoadManager.SaveFileExists,
+                    _loadError);
             }
             else if (_gameState == GameState.GameOver)
             {

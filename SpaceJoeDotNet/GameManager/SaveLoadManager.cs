@@ -10,19 +10,20 @@ namespace SpaceJoeDotNet.GameManager
 {
     class SaveLoadManager
     {
-        public bool SaveFileExists => File.Exists(Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "SpaceJoeGameSaves\\save.txt"));
+        public string SpaceJoeDir => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "SpaceJoeGameSaves");
+        public string SaveFilePath => Path.Combine(SpaceJoeDir, "savegame.txt");
+        public string HighScoreFilePath => Path.Combine(SpaceJoeDir, "highscore.txt");
+
+        public bool SaveFileExists => File.Exists(SaveFilePath);
+        public bool HighScoreFileExists => File.Exists(HighScoreFilePath);
 
         public void Save(Player player)
         {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
-                "SpaceJoeGameSaves");
+            if (!Directory.Exists(SpaceJoeDir))
+                Directory.CreateDirectory(SpaceJoeDir);
 
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-            using var sw = new StreamWriter(Path.Combine(path, "save.txt"));
+            using var sw = new StreamWriter(SaveFilePath);
             
             sw.WriteLine(player.TotalScore);
             sw.WriteLine(player.Weapon.Damage);
@@ -35,13 +36,10 @@ namespace SpaceJoeDotNet.GameManager
 
         public bool Load(ref Player player)
         {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-               "SpaceJoeGameSaves");
-
             if (!SaveFileExists)
                 return false;
 
-            using var sr = new StreamReader(Path.Combine(path, "save.txt"));
+            using var sr = new StreamReader(SaveFilePath);
             bool loadSuccessful = false;
 
 #nullable disable
@@ -49,11 +47,11 @@ namespace SpaceJoeDotNet.GameManager
             {
                 player.TotalScore = int.Parse(sr.ReadLine());
                 player.Weapon.Damage = int.Parse(sr.ReadLine());
-                player.Weapon.CooldownTime = int.Parse(sr.ReadLine());
+                player.Weapon.CooldownTime = float.Parse(sr.ReadLine());
                 player.Weapon.HeatLimit = int.Parse(sr.ReadLine());
                 player.Shield.MaxHitPoints = int.Parse(sr.ReadLine());
-                player.Shield.RecoveryTime = int.Parse(sr.ReadLine());
-                player.Shield.RecoveryDelay = int.Parse(sr.ReadLine());
+                player.Shield.RecoveryTime = float.Parse(sr.ReadLine());
+                player.Shield.RecoveryDelay = float.Parse(sr.ReadLine());
                 loadSuccessful = true;
             }
             catch { }
@@ -61,5 +59,15 @@ namespace SpaceJoeDotNet.GameManager
 
             return loadSuccessful;
         }
+
+        //public void SaveHighScore(int score, DateTime dateTime)
+        //{
+        //    using var sw = new StreamWriter
+        //}
+
+        //public bool LoadHighScore()
+        //{
+        //    return false;
+        //}
     }
 }

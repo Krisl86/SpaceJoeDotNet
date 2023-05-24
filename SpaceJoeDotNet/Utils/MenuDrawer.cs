@@ -12,7 +12,7 @@ namespace SpaceJoeDotNet.Utils
         public static Texture2D? GameOverMenuBackground { get; set; }
 
         public static void DrawMainMenu(SpriteBatch spriteBatch, SpriteFont font,
-            int windowWidth, int windowHeight, bool saveGameExists)
+            int windowWidth, int windowHeight, bool saveGameExists, bool loadError)
         {
             if (DefaultMenuBackground != null)
                 spriteBatch.Draw(DefaultMenuBackground, new Vector2(0, 0), Color.White);
@@ -26,6 +26,10 @@ namespace SpaceJoeDotNet.Utils
 
             spriteBatch.DrawStringCentered(false, font, "[Q]uit",
                 new Vector2(windowWidth / 2, windowHeight / 2 + 60), defaultColor);
+
+            if (loadError)
+                spriteBatch.DrawStringCentered(false, font, "Error with loading save file...",
+                new Vector2(windowWidth / 2, 680), defaultColor);
         }
 
         public static void DrawGameOverMenu(SpriteBatch spriteBatch, SpriteFont font,

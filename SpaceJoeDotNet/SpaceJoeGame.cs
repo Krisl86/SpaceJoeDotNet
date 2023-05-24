@@ -33,6 +33,7 @@ public partial class SpaceJoeGame : Game
 
     GameState _gameState = GameState.Menu;
     bool _gameSaved;
+    bool _loadError;
 
     public SpaceJoeGame()
     {
