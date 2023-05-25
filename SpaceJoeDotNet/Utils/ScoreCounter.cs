@@ -14,7 +14,7 @@ namespace SpaceJoeDotNet.Utils
             switch (asteroid.AsteroidType)
             {
                 case AsteroidType.Small: player.Score += 50; break;
-                case AsteroidType.Medium:player.Score += 100; break;
+                case AsteroidType.Medium: player.Score += 100; break;
                 case AsteroidType.Large: player.Score += 150; break;
             }
         }

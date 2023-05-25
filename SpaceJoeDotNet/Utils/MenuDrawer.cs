@@ -54,8 +54,11 @@ namespace SpaceJoeDotNet.Utils
             spriteBatch.DrawStringCentered(false, font, "[U]pgrades",
                 new Vector2(windowWidth / 2, windowHeight / 2 + 60), defaultColor);
 
-            spriteBatch.DrawStringCentered(false, font, "[Q]uit",
+            spriteBatch.DrawStringCentered(false, font, "[V]iew Highscores",
                 new Vector2(windowWidth / 2, windowHeight / 2 + 120), defaultColor);
+
+            spriteBatch.DrawStringCentered(false, font, "[Q]uit",
+                new Vector2(windowWidth / 2, windowHeight / 2 + 180), defaultColor);
         }
 
         public static void DrawShopMenu(SpriteBatch spriteBatch, SpriteFont font, Player player, 

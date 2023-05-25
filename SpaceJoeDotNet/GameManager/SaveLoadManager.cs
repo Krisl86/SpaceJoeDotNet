@@ -60,14 +60,39 @@ namespace SpaceJoeDotNet.GameManager
             return loadSuccessful;
         }
 
-        //public void SaveHighScore(int score, DateTime dateTime)
-        //{
-        //    using var sw = new StreamWriter
-        //}
+        public void SaveHighScore(Dictionary<int, string> highscores)
+        {
+            if (!Directory.Exists(SpaceJoeDir))
+                Directory.CreateDirectory(SpaceJoeDir);
 
-        //public bool LoadHighScore()
-        //{
-        //    return false;
-        //}
+            using var sw = new StreamWriter(HighScoreFilePath);
+            foreach (var kvp in highscores)
+            {
+                sw.WriteLine(kvp.Key);
+                sw.WriteLine(kvp.Value);
+            }
+        }
+
+        public bool LoadHighScore(ref Dictionary<int, DateTime> highscores)
+        {
+            if (!HighScoreFileExists)
+                return false;
+
+            bool loadSuccessful = false;
+            highscores.Clear();
+            string[] lines = File.ReadAllLines(HighScoreFilePath);
+
+            try
+            {
+                for (int i = 0; i < lines.Length - 1; i += 2)
+                {
+                    highscores.Add(int.Parse(lines[i]), DateTime.Parse(lines[i + 1]));
+                }
+                loadSuccessful = true;
+            }
+            catch { }
+
+            return loadSuccessful;
+        }
     }
 }
