@@ -36,7 +36,7 @@ namespace SpaceJoeDotNet
             }
             else if (_gameState == GameState.Shop)
             {
-                MenuDrawer.DrawShopMenu(_spriteBatch, _gameFont, _player, Width, Height);
+                MenuDrawer.DrawShopMenu(_spriteBatch, _gameFont, _player, Width, Height, _upgradesManager);
             }
 
             _spriteBatch.End();

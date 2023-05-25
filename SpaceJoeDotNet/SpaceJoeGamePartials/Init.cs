@@ -17,6 +17,7 @@ namespace SpaceJoeDotNet
             _saveLoadManager = new();
 
             _player = new(_projectileManager, new Vector2(Width / 2, Height - 60));
+            _upgradesManager = new(_player);
 
             base.Initialize();
         }

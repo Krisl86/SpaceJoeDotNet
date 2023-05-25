@@ -30,6 +30,7 @@ public partial class SpaceJoeGame : Game
     IProjectileManager _projectileManager;
     ICollisionManager _collisionManager;
     SaveLoadManager _saveLoadManager;
+    UpgradesManager _upgradesManager;
 
     GameState _gameState = GameState.Menu;
     bool _gameSaved;
