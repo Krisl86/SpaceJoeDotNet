@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
 using Xunit;
 

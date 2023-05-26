@@ -23,7 +23,7 @@ namespace MonogameCustomLibrary
         public void Update(GameTime gameTime)
         {
             _timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            
+
             if (_timeElapsed >= _timeToUpdate)
             {
                 _timeElapsed = 0;

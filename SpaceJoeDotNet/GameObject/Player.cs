@@ -1,5 +1,3 @@
-using System.Drawing;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -26,6 +24,7 @@ class Player : GameObjectBase
         Damage = 9999;
         HitPoints = DefaultHitPoints;
         DefaultPosition = defaultPosition;
+        TotalScore = 99999;
     }
 
     public Vector2 DefaultPosition { get; set; }
@@ -33,7 +32,7 @@ class Player : GameObjectBase
     public Shield Shield { get; set; }
     public int Score { get; set; }
     public int TotalScore { get; set; }
-    
+
     public void Update(GameTime gameTime, int windowWidth, int windowHeight)
     {
         var kstate = Keyboard.GetState();
@@ -46,9 +45,9 @@ class Player : GameObjectBase
             X += Speed * dt;
         if (kstate.IsKeyDown(Keys.Down) && Y < windowHeight - Height / 2)
             Y += Speed * dt;
-        if (kstate.IsKeyDown(Keys.Up) && Y > Height / 2) 
+        if (kstate.IsKeyDown(Keys.Up) && Y > Height / 2)
             Y -= Speed * dt;
-        
+
         if (kstate.IsKeyDown(Keys.Space) && _previousKstate.IsKeyUp(Keys.Space))
             Weapon.Shoot(new Vector2(X, Y - Height / 2));
 
@@ -66,7 +65,7 @@ class Player : GameObjectBase
     }
 
     public override void Draw(SpriteBatch spriteBatch)
-    { 
+    {
         if (Texture is not null)
             spriteBatch.DrawCentered(Texture, Position);
     }

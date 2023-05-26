@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using SpaceJoeDotNet.Bg;
-using SpaceJoeDotNet.GameObject;
-using System;
 
 namespace SpaceJoeDotNet
 {
@@ -87,17 +84,17 @@ namespace SpaceJoeDotNet
             if (Keyboard.GetState().IsKeyDown(Keys.B) && !_someKeyDown)
                 _gameState = GameState.GameOver;
             else if (Keyboard.GetState().IsKeyDown(Keys.D1) && !_someKeyDown)
-                _upgradesManager.UpgradeWeaponDamage();
+                _upgradesManager.PurchaseUpgrade(0);
             else if (Keyboard.GetState().IsKeyDown(Keys.D2) && !_someKeyDown)
-                _upgradesManager.UpgradeWeaponCooldownTime();
+                _upgradesManager.PurchaseUpgrade(1);
             else if (Keyboard.GetState().IsKeyDown(Keys.D3) && !_someKeyDown)
-                _upgradesManager.UpgradeWeaponHeatLimit();
+                _upgradesManager.PurchaseUpgrade(2);
             else if (Keyboard.GetState().IsKeyDown(Keys.D4) && !_someKeyDown)
-                _upgradesManager.UpgradeShieldCapacity();
+                _upgradesManager.PurchaseUpgrade(3);
             else if (Keyboard.GetState().IsKeyDown(Keys.D5) && !_someKeyDown)
-                _upgradesManager.UpgradeShieldRecoveryDelay();
+                _upgradesManager.PurchaseUpgrade(4);
             else if (Keyboard.GetState().IsKeyDown(Keys.D6) && !_someKeyDown)
-                _upgradesManager.UpgradeShieldRecoveryTime();
+                _upgradesManager.PurchaseUpgrade(5);
 
             _someKeyDown = Keyboard.GetState().GetPressedKeyCount() > 0;
         }

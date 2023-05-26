@@ -1,13 +1,13 @@
 ﻿#nullable disable
 
-using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Bg;
 using SpaceJoeDotNet.GameManager;
+using SpaceJoeDotNet.GameObject;
+using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("SpaceJoeDotNet.Tests")]
+[assembly: InternalsVisibleTo("SpaceJoeDotNet.Tests")]
 namespace SpaceJoeDotNet;
 
 enum GameState
@@ -40,7 +40,7 @@ public partial class SpaceJoeGame : Game
     {
         Graphics = new(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true; 
+        IsMouseVisible = true;
     }
 
     public GraphicsDeviceManager Graphics { get; }

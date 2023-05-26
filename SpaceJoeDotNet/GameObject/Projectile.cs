@@ -32,7 +32,7 @@ class Projectile : GameObjectBase
     }
 
     public override void Draw(SpriteBatch spriteBatch)
-    { 
+    {
         if (Texture is not null)
             spriteBatch.DrawCentered(Texture, Position);
     }

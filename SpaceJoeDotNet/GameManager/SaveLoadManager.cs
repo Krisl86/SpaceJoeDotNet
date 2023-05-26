@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceJoeDotNet.GameManager
 {
@@ -24,7 +21,7 @@ namespace SpaceJoeDotNet.GameManager
                 Directory.CreateDirectory(SpaceJoeDir);
 
             using var sw = new StreamWriter(SaveFilePath);
-            
+
             sw.WriteLine(player.TotalScore);
             sw.WriteLine(player.Weapon.Damage);
             sw.WriteLine(player.Weapon.CooldownTime);

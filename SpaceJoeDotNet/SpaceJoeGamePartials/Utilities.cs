@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using SpaceJoeDotNet.GameObject;
 using System.Drawing.Text;
 using System.Linq;
 
