@@ -20,6 +20,7 @@ namespace SpaceJoeDotNet
                 _background.Draw(_spriteBatch);
 
                 _player.Draw(_spriteBatch);
+                alien.Draw(_spriteBatch);
                 _projectileManager.DrawProjectiles(_spriteBatch);
                 _asteroidManager.DrawAsteroids(_spriteBatch);
 

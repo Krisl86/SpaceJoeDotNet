@@ -41,6 +41,7 @@ namespace SpaceJoeDotNet
 
             _player.Texture = _playerSprite;
             _background = new(_bgBackSprite, _bgFrontSprite, Height);
+            alien!.Texture = _playerSprite;
         }
 
         void InitTexturesForManagers()

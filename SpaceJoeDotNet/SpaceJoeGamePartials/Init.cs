@@ -1,10 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using SpaceJoeDotNet.GameManager;
+using SpaceJoeDotNet.GameObject;
 
 namespace SpaceJoeDotNet
 {
     public partial class SpaceJoeGame : Game
     {
+        Alien? alien;
+
+
         protected override void Initialize()
         {
             Graphics.PreferredBackBufferWidth = 480;
@@ -18,6 +22,7 @@ namespace SpaceJoeDotNet
 
             _player = new(_projectileManager, new Vector2(Width / 2, Height - 60));
             _upgradesManager = new(_player);
+            alien = new(_projectileManager, new Vector2(200, 0)) { Speed = 100 };
 
             base.Initialize();
         }

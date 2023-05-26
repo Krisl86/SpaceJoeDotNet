@@ -27,11 +27,11 @@ class Weapon
     public int Damage { get; set; }
     internal ProjectileType ProjectileType { get; set; }
 
-    public void Shoot(Vector2 startPosition)
+    public void Shoot(Vector2 startPosition, Vector2 direction)
     {
         if (CurrentHeat < HeatLimit)
         {
-            _manager.AddProjectile(ProjectileType, startPosition, Damage);
+            _manager.AddProjectile(ProjectileType, startPosition, direction, Damage);
             CurrentHeat++;
         }
     }

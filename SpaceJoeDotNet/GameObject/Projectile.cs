@@ -15,20 +15,24 @@ enum ProjectileType
 
 class Projectile : GameObjectBase
 {
-    public Projectile(ProjectileType projectileType, Vector2 position, int damage) : base(position)
+    public Projectile(ProjectileType projectileType, Vector2 position, Vector2 direction, int damage) : base(position)
     {
         ProjectileType = projectileType;
         HitPoints = 1;
         Damage = damage;
         InitPropertiesByType(projectileType);
+        direction.Normalize();
+        Direction = direction;
     }
 
     public ProjectileType ProjectileType { get; }
+    public Vector2 Direction { get; }
 
     public override void Update(GameTime gameTime)
     {
         float dt = gameTime.DeltaTime();
-        Y -= Speed * dt;
+        X += Speed * Direction.X * dt;
+        Y += Speed * Direction.Y * dt;
     }
 
     public override void Draw(SpriteBatch spriteBatch)

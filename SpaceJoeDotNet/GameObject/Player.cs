@@ -49,7 +49,7 @@ class Player : GameObjectBase
             Y -= Speed * dt;
 
         if (kstate.IsKeyDown(Keys.Space) && _previousKstate.IsKeyUp(Keys.Space))
-            Weapon.Shoot(new Vector2(X, Y - Height / 2));
+            Weapon.Shoot(new Vector2(X, Y - Height / 2), new Vector2(0, -1));
 
         _previousKstate = kstate;
 

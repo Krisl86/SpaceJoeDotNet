@@ -12,10 +12,10 @@ namespace SpaceJoeDotNet.Tests
         {
             var pm = new DummyProjectileManager();
             var w = new Weapon(pm, ProjectileType.Default, 10, 100, 2);
-            w.Shoot(new Vector2(0, 0));
-            w.Shoot(new Vector2(0, 0));
-            w.Shoot(new Vector2(0, 0));
-            w.Shoot(new Vector2(0, 0));
+            w.Shoot(new Vector2(0, 0), new Vector2(0, -1));
+            w.Shoot(new Vector2(0, 0), new Vector2(0, -1));
+            w.Shoot(new Vector2(0, 0), new Vector2(0, -1));
+            w.Shoot(new Vector2(0, 0), new Vector2(0, -1));
 
             Assert.Equal(2, pm.Projectiles.Count);
         }

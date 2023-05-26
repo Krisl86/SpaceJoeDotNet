@@ -11,9 +11,9 @@ namespace SpaceJoeDotNet.Tests
 
         public Dictionary<string, Texture2D> Textures => throw new NotImplementedException();
 
-        public void AddProjectile(ProjectileType projectileType, Vector2 position, int damage)
+        public void AddProjectile(ProjectileType projectileType, Vector2 position, Vector2 direction, int damage)
         {
-            Projectiles.Add(new Projectile(projectileType, position, damage));
+            Projectiles.Add(new Projectile(projectileType, position, direction, damage));
         }
 
         public void DrawProjectiles(SpriteBatch spriteBatch)
@@ -26,7 +26,7 @@ namespace SpaceJoeDotNet.Tests
             throw new NotImplementedException();
         }
 
-        public void UpdateProjectiles(GameTime gameTime)
+        public void UpdateProjectiles(GameTime gameTime, int windowWidth, int windowHeight)
         {
             throw new NotImplementedException();
         }

@@ -28,10 +28,11 @@ namespace SpaceJoeDotNet
 
             _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
 
-            _projectileManager.UpdateProjectiles(gameTime);
+            _projectileManager.UpdateProjectiles(gameTime, Width, Height);
             _asteroidManager.UpdateAsteroids(gameTime, Height);
 
             _player.Update(gameTime, Width, Height);
+            alien!.Update(gameTime, Width, Height);
 
             if (_player.HitPoints <= 0)
             {
