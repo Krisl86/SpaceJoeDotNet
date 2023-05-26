@@ -17,7 +17,7 @@ static class HudDrawer
     {
         DrawWeaponHeatInfo(spriteBatch, font, player, windowWidth);
         DrawScoreHpShield(spriteBatch, font, player, windowWidth);
-        //DrawShieldAndHullInfo(spriteBatch, font, player, windowWidth);
+        DrawShieldAndHullInfo(spriteBatch, font, player, windowWidth);
         DrawLowShieldInfo(spriteBatch, font, player, windowWidth);
     }
 
@@ -29,9 +29,9 @@ static class HudDrawer
         for (int i = 0; i < player.Weapon.CurrentHeat; i++)
         {
             spriteBatch.DrawString(font, "*",
-                new Vector2(windowWidth / 2 + i * 15, 95), DefaultHudColor);
+                new Vector2(windowWidth / 2 + i * 5, 95), DefaultHudColor);
             spriteBatch.DrawString(font, "*",
-                new Vector2(windowWidth / 2 - i * 15, 95), DefaultHudColor);
+                new Vector2(windowWidth / 2 - i * 5, 95), DefaultHudColor);
         }
 
         if (player.Weapon.CurrentHeat == player.Weapon.HeatLimit)
@@ -66,8 +66,6 @@ static class HudDrawer
         if (player.HitPoints < 30)
             spriteBatch.DrawStringCentered(false, font, "[ SEVERE DAMAGE ]",
                 new Vector2(windowWidth / 2, 250), AlertHudColor);
-
-
     }
 
     static void DrawLowShieldInfo(SpriteBatch spriteBatch, SpriteFont font, Player player, int windowWidth)

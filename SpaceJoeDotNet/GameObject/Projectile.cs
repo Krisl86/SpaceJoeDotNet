@@ -27,7 +27,7 @@ class Projectile : GameObjectBase
 
     public override void Update(GameTime gameTime)
     {
-        float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        float dt = gameTime.DeltaTime();
         Y -= Speed * dt;
     }
 

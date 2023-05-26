@@ -36,7 +36,7 @@ class Player : GameObjectBase
     public void Update(GameTime gameTime, int windowWidth, int windowHeight)
     {
         var kstate = Keyboard.GetState();
-        float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        float dt = gameTime.DeltaTime();
 
         if (kstate.IsKeyDown(Keys.Left) && X > Width / 2)
             X -= Speed * dt;

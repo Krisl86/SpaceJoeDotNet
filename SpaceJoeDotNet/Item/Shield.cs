@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using MonogameCustomLibrary;
 using System;
 
 namespace SpaceJoeDotNet.Item
@@ -25,7 +26,7 @@ namespace SpaceJoeDotNet.Item
         {
             if (HitPoints < MaxHitPoints)
             {
-                float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                float dt = gameTime.DeltaTime();
                 DelayCounter += dt;
                 if (DelayCounter >= RecoveryDelay)
                 {

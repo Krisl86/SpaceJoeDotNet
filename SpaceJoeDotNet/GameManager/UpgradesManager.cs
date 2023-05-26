@@ -7,7 +7,7 @@ namespace SpaceJoeDotNet.GameManager
 {
     class UpgradesManager
     {
-        Player _player;
+        readonly Player _player;
 
         public UpgradesManager(Player player)
         {

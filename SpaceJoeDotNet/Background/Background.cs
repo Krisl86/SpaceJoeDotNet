@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonogameCustomLibrary;
 
 namespace SpaceJoeDotNet.Bg;
 
@@ -29,7 +30,7 @@ class Background
 
     public void Update(GameTime gameTime)
     {
-        float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        float dt = gameTime.DeltaTime();
         _backY += BackSpeed * dt;
         _frontY += FrontSpeed * dt;
 
