@@ -22,7 +22,7 @@ namespace SpaceJoeDotNet.GameManager
             if (Upgrades.ElementAtOrDefault(upgradeIndex) is Upgrade upgrade)
             {
                 if (_player.TotalScore >= upgrade.Price
-                    && upgrade.UpgradeAction.Invoke(_player))
+                    && upgrade.UpgradeAction.Invoke())
                 {
                     _player.TotalScore -= upgrade.Price;
                     return true;
@@ -36,65 +36,65 @@ namespace SpaceJoeDotNet.GameManager
             Upgrades = new()
             {
                 new Upgrade("Weapon Damage", 450,
-                (player) =>
+                () =>
                 {
-                    if (player.Weapon.Damage < 280)
+                    if (_player.Weapon.Damage < 280)
                     {
-                        player.Weapon.Damage += 35;
+                        _player.Weapon.Damage += 35;
                         return true;
                     }
                     return false;
-                }),
+                }, () => _player.Weapon.Damage.ToString()),
                 new Upgrade("Weapon Cooldown Time", 500,
-                (player) =>
+                () =>
                 {
-                    if (player.Weapon.CooldownTime > 0.5f)
+                    if (_player.Weapon.CooldownTime > 0.5f)
                     {
-                        player.Weapon.CooldownTime -= 0.2f;
+                        _player.Weapon.CooldownTime -= 0.2f;
                         return true;
                     }
                     return false;
-                }),
+                }, () => _player.Weapon.CooldownTime.ToString("0.00")),
                 new Upgrade("Weapon Heat Limit", 600,
-                (player) =>
+                () =>
                 {
-                    if (player.Weapon.HeatLimit < 25)
+                    if (_player.Weapon.HeatLimit < 25)
                     {
-                        player.Weapon.HeatLimit += 1;
+                        _player.Weapon.HeatLimit += 1;
                         return true;
                     }
                     return false;
-                }),
+                }, () => _player.Weapon.HeatLimit.ToString()),
                 new Upgrade("Shield Capacity", 350,
-                (player) =>
+                () =>
                 {
-                    if (player.Shield.MaxHitPoints < 300)
+                    if (_player.Shield.MaxHitPoints < 300)
                     {
-                        player.Shield.MaxHitPoints += 20;
+                        _player.Shield.MaxHitPoints += 20;
                         return true;
                     }
                     return false;
-                }),
+                }, () => _player.Shield.MaxHitPoints.ToString()),
                 new Upgrade("Shield Recovery Delay", 450,
-                (player) =>
+                () =>
                 {
-                    if (player.Shield.RecoveryDelay > 1.2f)
+                    if (_player.Shield.RecoveryDelay > 1.2f)
                     {
-                        player.Shield.RecoveryDelay -= 0.4f;
+                        _player.Shield.RecoveryDelay -= 0.4f;
                         return true;
                     }
                     return false;
-                }),
+                }, () => _player.Shield.RecoveryDelay.ToString("0.00")),
                 new Upgrade("Shield Recovery Time", 250,
-                (player) =>
+                () =>
                 {
-                    if (player.Shield.RecoveryTime > 0.02f)
+                    if (_player.Shield.RecoveryTime > 0.02f)
                     {
-                        player.Shield.RecoveryTime -= 0.01f;
+                        _player.Shield.RecoveryTime -= 0.01f;
                         return true;
                     }
                     return false;
-                }),
+                }, () => _player.Shield.RecoveryTime.ToString("0.00")),
             };
         }
     }

@@ -77,6 +77,7 @@ namespace SpaceJoeDotNet.Utils
             {
                 var upgrade = upgradesManager.Upgrades[i];
                 spriteBatch.DrawStringCentered(false, font, $"[{i + 1}] [{upgrade.Price}CRD] {upgrade.Name}", new Vector2(windowWidth / 2, baseY1 * (i + 1)), defaultColor);
+                spriteBatch.DrawStringCentered(false, font, $"[Value]: {upgrade.Value.Invoke()}", new Vector2(windowWidth / 2, baseY1 * (i + 1) + 30), defaultColor);
             }
 
             spriteBatch.DrawStringCentered(false, font, "[B]ack to menu",
