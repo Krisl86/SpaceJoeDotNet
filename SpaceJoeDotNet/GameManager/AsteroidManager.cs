@@ -25,7 +25,7 @@ namespace SpaceJoeDotNet.GameManager
         const int DefaultRndLimit = 990;
 
         int _rndLimit = DefaultRndLimit;
-        Random _rnd = new();
+        Random __rand = new();
 
         public List<Asteroid> Asteroids { get; } = new();
 
@@ -33,11 +33,11 @@ namespace SpaceJoeDotNet.GameManager
 
         public void RandomlyGenerateAsteroid(int windowWidth)
         {
-            int x = _rnd.Next(0, windowWidth);
+            int x = __rand.Next(0, windowWidth);
             int y = -100;
-            var asteroidType = (AsteroidType)_rnd.Next(0, 3);
+            var asteroidType = (AsteroidType)__rand.Next(0, 3);
 
-            if (_rnd.Next(0, MaxRnd) > _rndLimit)
+            if (__rand.Next(0, MaxRnd) > _rndLimit)
             {
                 AddAsteroid(asteroidType, new Vector2(x, y));
                 if (_rndLimit > MinRndLimit)
