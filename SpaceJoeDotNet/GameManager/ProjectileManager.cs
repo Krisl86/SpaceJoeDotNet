@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +12,7 @@ namespace SpaceJoeDotNet.GameManager
         List<Projectile> Projectiles { get; }
         Dictionary<string, Texture2D> Textures { get; }
 
-        void AddProjectile(ProjectileType projectileType, Vector2 position, Vector2 direction, int damage);
+        void AddProjectile(GameObjectBase owner, ProjectileType projectileType, Vector2 position, Vector2 direction, int damage);
         void DrawProjectiles(SpriteBatch spriteBatch);
         void Reset();
         void UpdateProjectiles(GameTime gameTime, int windowWidth, int windowHeight);
@@ -22,7 +23,7 @@ namespace SpaceJoeDotNet.GameManager
         public List<Projectile> Projectiles { get; } = new();
         public Dictionary<string, Texture2D> Textures { get; } = new();
 
-        public void AddProjectile(ProjectileType projectileType, Vector2 position, Vector2 direction, int damage)
+        public void AddProjectile(GameObjectBase owner, ProjectileType projectileType, Vector2 position, Vector2 direction, int damage)
         {
             Texture2D texture = projectileType switch
             {
@@ -33,7 +34,7 @@ namespace SpaceJoeDotNet.GameManager
                 _ => throw new ArgumentOutOfRangeException(nameof(projectileType), projectileType, null),
             };
 
-            Projectiles.Add(new Projectile(projectileType, position, direction, damage) { Texture = texture });
+            Projectiles.Add(new Projectile(owner, projectileType, position, direction, damage) { Texture = texture });
         }
 
         public void DrawProjectiles(SpriteBatch spriteBatch)

@@ -16,8 +16,9 @@ enum ProjectileType
 
 class Projectile : GameObjectBase
 {
-    public Projectile(ProjectileType projectileType, Vector2 position, Vector2 direction, int damage) : base(position)
+    public Projectile(GameObjectBase owner, ProjectileType projectileType, Vector2 position, Vector2 direction, int damage) : base(position)
     {
+        Owner = owner;
         ProjectileType = projectileType;
         HitPoints = 1;
         Damage = damage;
@@ -26,6 +27,7 @@ class Projectile : GameObjectBase
         Direction = direction;
     }
 
+    public GameObjectBase Owner { get; }
     public ProjectileType ProjectileType { get; }
     public Vector2 Direction { get; }
 

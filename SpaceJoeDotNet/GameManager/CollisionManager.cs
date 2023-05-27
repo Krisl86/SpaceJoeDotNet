@@ -51,7 +51,7 @@ namespace SpaceJoeDotNet.GameManager
 
                 foreach (var alien in aliens)
                 {
-                    if (CheckCollisions(projectile, alien))
+                    if (projectile.Owner != alien && CheckCollisions(projectile, alien))
                     {
                         alien.TakeDamage(projectile.Damage);
                         projectile.TakeDamage(alien.Damage);
@@ -67,7 +67,7 @@ namespace SpaceJoeDotNet.GameManager
                 if (projectileCollided)
                     continue;
 
-                if (CheckCollisions(player, projectile))
+                if (projectile.Owner != player && CheckCollisions(player, projectile))
                 {
                     player.TakeDamage(projectile.Damage);
                     projectile.TakeDamage(player.Damage);

@@ -68,7 +68,7 @@ namespace SpaceJoeDotNet.GameObject
             Y += Speed * dt;
         }
 
-        public void Shoot(Vector2 direction) =>  Weapon.Shoot(new Vector2(X, Y + Height / 2), direction);
+        public void Shoot(Vector2 direction) =>  Weapon.Shoot(this, new Vector2(X, Y + Height / 2), direction);
 
         public override void Update(GameTime gameTime) => throw new NotImplementedException();
     }

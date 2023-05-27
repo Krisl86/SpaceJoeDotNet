@@ -2,6 +2,8 @@
 using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
 using Xunit;
+using static System.Net.WebRequestMethods;
+
 namespace SpaceJoeDotNet.Tests
 {
     public class CollisionManagerTests
@@ -24,6 +26,29 @@ namespace SpaceJoeDotNet.Tests
             var a2 = new Asteroid(AsteroidType.Medium, new Vector2(30, 40)) { Width = 100, Height = 100 };
             var act = cm.CheckCollisions(a1, a2);
             Assert.False(act);
+        }
+
+        [Fact]
+        public void Collide_ShouldNotCollideProjectileWithOwner()
+        {
+            var cm = new CollisionManager();
+            var pm = new DummyProjectileManager();
+            var player = new Player(pm, new Vector2(0, 0))
+                { HitPoints = 100, Width = 100, Height = 100 };
+
+            var projectile = new Projectile(player, ProjectileType.Default, new Vector2(0, 0), new Vector2(0, 0), 100) 
+                { HitPoints = 100, Width = 100, Height = 100 };
+
+            cm.Collide(
+                player,
+                new List<Asteroid>(), 
+                new List<Projectile>()
+                {
+                    projectile
+                }, 
+                new List<Alien>());
+
+            Assert.True(player.HitPoints == 100 && projectile.HitPoints == 100);
         }
     }
 }

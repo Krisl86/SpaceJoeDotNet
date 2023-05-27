@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 
 namespace SpaceJoeDotNet.Tests
 {
@@ -11,9 +12,9 @@ namespace SpaceJoeDotNet.Tests
 
         public Dictionary<string, Texture2D> Textures => throw new NotImplementedException();
 
-        public void AddProjectile(ProjectileType projectileType, Vector2 position, Vector2 direction, int damage)
+        public void AddProjectile(GameObjectBase owner, ProjectileType projectileType, Vector2 position, Vector2 direction, int damage)
         {
-            Projectiles.Add(new Projectile(projectileType, position, direction, damage));
+            Projectiles.Add(new Projectile(owner, projectileType, position, direction, damage));
         }
 
         public void DrawProjectiles(SpriteBatch spriteBatch)

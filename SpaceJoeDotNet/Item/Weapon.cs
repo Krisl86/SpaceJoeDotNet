@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.Item;
@@ -27,11 +28,11 @@ class Weapon
     public int Damage { get; set; }
     internal ProjectileType ProjectileType { get; set; }
 
-    public void Shoot(Vector2 startPosition, Vector2 direction)
+    public void Shoot(GameObjectBase projectileOwner, Vector2 startPosition, Vector2 direction)
     {
         if (CurrentHeat < HeatLimit)
         {
-            _manager.AddProjectile(ProjectileType, startPosition, direction, Damage);
+            _manager.AddProjectile(projectileOwner, ProjectileType, startPosition, direction, Damage);
             CurrentHeat++;
         }
     }
