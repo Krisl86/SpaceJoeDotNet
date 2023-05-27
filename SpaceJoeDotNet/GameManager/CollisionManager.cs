@@ -33,7 +33,7 @@ namespace SpaceJoeDotNet.GameManager
                 bool projectileCollided = false;
                 foreach (var asteroid in asteroids)
                 {
-                    if (CheckCollisions(projectile, asteroid))
+                    if (projectile.Owner is not Alien && CheckCollisions(projectile, asteroid))
                     {
                         asteroid.TakeDamage(projectile.Damage);
                         projectile.TakeDamage(asteroid.Damage);
@@ -51,7 +51,7 @@ namespace SpaceJoeDotNet.GameManager
 
                 foreach (var alien in aliens)
                 {
-                    if (projectile.Owner != alien && CheckCollisions(projectile, alien))
+                    if (projectile.Owner is not Alien && CheckCollisions(projectile, alien))
                     {
                         alien.TakeDamage(projectile.Damage);
                         projectile.TakeDamage(alien.Damage);

@@ -50,5 +50,28 @@ namespace SpaceJoeDotNet.Tests
 
             Assert.True(player.HitPoints == 100 && projectile.HitPoints == 100);
         }
+
+        [Fact]
+        public void Collide_AlienProjectilesShouldNotCollideWithAsteroids()
+        {
+            var cm = new CollisionManager();
+            var pm = new DummyProjectileManager();
+            var player = new Player(pm, new Vector2(-2000, -2000));
+            var alien = new Alien(pm, new Vector2(-5000, -5000));
+
+            var projectile = new Projectile(alien, ProjectileType.Default, new Vector2(0, 0), new Vector2(0, 0), 100)
+            { HitPoints = 100, Width = 100, Height = 100 };
+
+            var asteroid = new Asteroid(AsteroidType.Medium, new Vector2(0, 0))
+            { HitPoints = 100, Width = 100, Height = 100 };
+
+            cm.Collide(
+                player,
+                new List<Asteroid>() { asteroid },
+                new List<Projectile>() { projectile },
+                new List<Alien>());
+
+            Assert.True(projectile.HitPoints == 100 && asteroid.HitPoints == 100);
+        }
     }
 }
