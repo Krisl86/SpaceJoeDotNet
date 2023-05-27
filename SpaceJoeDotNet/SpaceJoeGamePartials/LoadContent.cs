@@ -17,7 +17,8 @@ namespace SpaceJoeDotNet
         _asteroidMediumSprite,
         _asteroidLargeSprite,
         _mainMenuSprite,
-        _gameOverSprite;
+        _gameOverSprite,
+        _alienSprite;
 
         protected override void LoadContent()
         {
@@ -40,6 +41,8 @@ namespace SpaceJoeDotNet
             _mainMenuSprite = Content.Load<Texture2D>("shop");
             _gameOverSprite = Content.Load<Texture2D>("game-over");
 
+            _alienSprite = Content.Load<Texture2D>("alien");
+
             InitTexturesForManagers();
 
             _player.Texture = _playerSprite;
@@ -57,7 +60,7 @@ namespace SpaceJoeDotNet
             _asteroidManager.Textures.Add("asteroidMedium", _asteroidMediumSprite);
             _asteroidManager.Textures.Add("asteroidLarge", _asteroidLargeSprite);
 
-            _alienManager.Textures.Add("alien", _playerSprite);
+            _alienManager.Textures.Add("alien", _alienSprite);
 
             MenuDrawer.DefaultMenuBackground = _mainMenuSprite;
             MenuDrawer.GameOverMenuBackground = _gameOverSprite;
