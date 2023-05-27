@@ -9,6 +9,7 @@ namespace SpaceJoeDotNet
         Texture2D _projectileDefaultSprite,
         _projectileSlowSprite,
         _projectileFastSprite,
+        _projectileBallSprite,
         _playerSprite,
         _bgFrontSprite,
         _bgBackSprite,
@@ -28,6 +29,8 @@ namespace SpaceJoeDotNet
             _projectileDefaultSprite = Content.Load<Texture2D>("projectile-default");
             _projectileSlowSprite = Content.Load<Texture2D>("projectile-slow");
             _projectileFastSprite = Content.Load<Texture2D>("projectile-fast");
+            _projectileBallSprite = Content.Load<Texture2D>("projectile-ball");
+
             _playerSprite = Content.Load<Texture2D>("ship");
             _bgFrontSprite = Content.Load<Texture2D>("bg-front");
             _bgBackSprite = Content.Load<Texture2D>("bg-back");
@@ -48,6 +51,7 @@ namespace SpaceJoeDotNet
             _projectileManager.Textures.Add("projectileDefault", _projectileDefaultSprite);
             _projectileManager.Textures.Add("projectileSlow", _projectileSlowSprite);
             _projectileManager.Textures.Add("projectileFast", _projectileFastSprite);
+            _projectileManager.Textures.Add("projectileBall", _projectileBallSprite);
 
             _asteroidManager.Textures.Add("asteroidSmall", _asteroidSmallSprite);
             _asteroidManager.Textures.Add("asteroidMedium", _asteroidMediumSprite);

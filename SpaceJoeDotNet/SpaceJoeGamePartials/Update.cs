@@ -25,10 +25,11 @@ namespace SpaceJoeDotNet
         {
             _asteroidManager.RandomlyGenerateAsteroid(Width);
             _alienManager.RandomlyGenerateAlien(Width, _projectileManager);
+            _alienManager.RandomlyShoot(_player, Height);
             _background.Update(gameTime);
 
-            _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles
-                , _alienManager.Aliens);
+            _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles, 
+                _alienManager.Aliens);
 
             _projectileManager.UpdateProjectiles(gameTime, Width, Height);
             _asteroidManager.UpdateAsteroids(gameTime, Height);

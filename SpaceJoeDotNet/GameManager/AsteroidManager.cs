@@ -21,7 +21,7 @@ namespace SpaceJoeDotNet.GameManager
     class AsteroidManager : IAsteroidManager
     {
         const int MaxRnd = 1000;
-        const int MinRndLimit = 900;
+        const int MinRndLimit = 930;
         const int DefaultRndLimit = 990;
 
         int _rndLimit = DefaultRndLimit;

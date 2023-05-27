@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace SpaceJoeDotNet.GameManager
         Dictionary<string, Texture2D> Textures { get; }
 
         void RandomlyGenerateAlien(int windowWidth, IProjectileManager projectileManager);
+        void RandomlyShoot(GameObjectBase target, int windowHeight);
         void AddAlien(Vector2 position, IProjectileManager projectileManager);
         void DrawAliens(SpriteBatch spriteBatch);
         void Reset();
@@ -23,8 +25,11 @@ namespace SpaceJoeDotNet.GameManager
 
     class AlienManager : IAlienManager
     {
-        const int MaxRnd = 1000;
-        const int RndLimit = 997;
+        const int SpawnMaxRand = 1000;
+        const int SpawnRandLimit = 997;
+        const int ShootMaxRand = 1000;
+        const int ShootRandLimit = 970;
+
         Random __rand = new();
 
         public List<Alien> Aliens { get; } = new();
@@ -36,8 +41,17 @@ namespace SpaceJoeDotNet.GameManager
             int x = __rand.Next(0, windowWidth);
             int y = -100;
 
-            if (__rand.Next(0, MaxRnd) > RndLimit)
+            if (__rand.Next(0, SpawnMaxRand) > SpawnRandLimit)
                 AddAlien(new Vector2(x, y), projectileManager);
+        }
+
+        public void RandomlyShoot(GameObjectBase target, int windowHeight)
+        {
+            foreach (var alien in Aliens.Where(a => a.Y > 0 && a.Y < windowHeight))
+            {
+                if (__rand.Next(0, ShootMaxRand) > ShootRandLimit)
+                    alien.Shoot(target.Position - alien.Position);
+            }
         }
 
         public void AddAlien(Vector2 position, IProjectileManager projectileManager)

@@ -29,6 +29,7 @@ namespace SpaceJoeDotNet.GameManager
                 ProjectileType.Default => Textures["projectileDefault"],
                 ProjectileType.Slow => Textures["projectileSlow"],
                 ProjectileType.Fast => Textures["projectileFast"],
+                ProjectileType.Ball => Textures["projectileBall"],
                 _ => throw new ArgumentOutOfRangeException(nameof(projectileType), projectileType, null),
             };
 

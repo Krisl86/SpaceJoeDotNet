@@ -31,7 +31,7 @@ namespace SpaceJoeDotNet.GameObject
             Speed = 360;
             HitPoints = 125;
             Damage = 50;
-            Weapon = new(projectileManager, ProjectileType.Slow, 50, 1, 5);
+            Weapon = new(projectileManager, ProjectileType.Ball, 50, 1, 5);
             _directionChangeTime = _rand.Next(1, 3);
         }
 

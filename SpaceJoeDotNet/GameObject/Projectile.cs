@@ -10,7 +10,8 @@ enum ProjectileType
 {
     Default,
     Slow,
-    Fast
+    Fast,
+    Ball
 }
 
 class Projectile : GameObjectBase
@@ -53,6 +54,9 @@ class Projectile : GameObjectBase
                 break;
             case ProjectileType.Fast:
                 Speed = 750;
+                break;
+            case ProjectileType.Ball:
+                Speed = 400;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
