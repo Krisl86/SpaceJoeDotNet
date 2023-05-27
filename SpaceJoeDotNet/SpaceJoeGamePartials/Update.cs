@@ -24,15 +24,17 @@ namespace SpaceJoeDotNet
         void InGame(GameTime gameTime)
         {
             _asteroidManager.RandomlyGenerateAsteroid(Width);
+            _alienManager.RandomlyGenerateAlien(Width, _projectileManager);
             _background.Update(gameTime);
 
-            _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles);
+            _collisionManager.Collide(_player, _asteroidManager.Asteroids, _projectileManager.Projectiles
+                , _alienManager.Aliens);
 
             _projectileManager.UpdateProjectiles(gameTime, Width, Height);
             _asteroidManager.UpdateAsteroids(gameTime, Height);
+            _alienManager.UpdateAliens(gameTime, Width, Height);
 
             _player.Update(gameTime, Width, Height);
-            alien!.Update(gameTime, Width, Height);
 
             if (_player.HitPoints <= 0)
             {

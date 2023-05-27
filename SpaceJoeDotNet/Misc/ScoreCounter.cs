@@ -13,5 +13,7 @@ namespace SpaceJoeDotNet.Utils
                 case AsteroidType.Large: player.Score += 150; break;
             }
         }
+
+        public static void CountScoreFor(Player player, Alien alien) => player.Score += 250;
     }
 }

@@ -5,6 +5,7 @@ using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.Item;
+using System;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.GameObject;
@@ -86,5 +87,5 @@ class Player : GameObjectBase
         HitPoints -= remainingDamage;
     }
 
-    public override void Update(GameTime gameTime) => Update(gameTime, 0, 0);
+    public override void Update(GameTime gameTime) => throw new NotImplementedException();
 }

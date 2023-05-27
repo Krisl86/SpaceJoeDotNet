@@ -8,13 +8,13 @@ namespace SpaceJoeDotNet.GameManager
 {
     interface ICollisionManager
     {
-        void Collide(Player player, List<Asteroid> asteroids, List<Projectile> projectiles);
+        void Collide(Player player, List<Asteroid> asteroids, List<Projectile> projectiles, List<Alien> aliens);
         bool CheckCollisions(GameObjectBase obj1, GameObjectBase obj2);
     }
 
     class CollisionManager : ICollisionManager
     {
-        public void Collide(Player player, List<Asteroid> asteroids, List<Projectile> projectiles)
+        public void Collide(Player player, List<Asteroid> asteroids, List<Projectile> projectiles, List<Alien> aliens)
         {
             foreach (var asteroid in asteroids)
             {
@@ -30,6 +30,7 @@ namespace SpaceJoeDotNet.GameManager
 
             foreach (var projectile in projectiles)
             {
+                bool projectileCollided = false;
                 foreach (var asteroid in asteroids)
                 {
                     if (CheckCollisions(projectile, asteroid))
@@ -39,7 +40,37 @@ namespace SpaceJoeDotNet.GameManager
 
                         if (asteroid.HitPoints <= 0)
                             ScoreCounter.CountScoreFor(player, asteroid);
+
+                        projectileCollided = true;
+                        break;
                     }
+                }
+
+                if (projectileCollided)
+                    continue;
+
+                foreach (var alien in aliens)
+                {
+                    if (CheckCollisions(projectile, alien))
+                    {
+                        alien.TakeDamage(projectile.Damage);
+                        projectile.TakeDamage(alien.Damage);
+
+                        if (alien.HitPoints <= 0)
+                            ScoreCounter.CountScoreFor(player, alien);
+
+                        projectileCollided = true;
+                        break;
+                    }
+                }
+
+                if (projectileCollided)
+                    continue;
+
+                if (CheckCollisions(player, projectile))
+                {
+                    player.TakeDamage(projectile.Damage);
+                    projectile.TakeDamage(player.Damage);
                 }
             }
         }

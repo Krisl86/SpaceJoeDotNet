@@ -18,13 +18,13 @@ namespace SpaceJoeDotNet.GameManager
         void AddAlien(Vector2 position, IProjectileManager projectileManager);
         void DrawAliens(SpriteBatch spriteBatch);
         void Reset();
-        void UpdateAliens(GameTime gameTime, int windowHeight);
+        void UpdateAliens(GameTime gameTime, int windowWidth, int windowHeight);
     }
 
     class AlienManager : IAlienManager
     {
         const int MaxRnd = 1000;
-        const int RndLimit = 990;
+        const int RndLimit = 997;
         Random __rand = new();
 
         public List<Alien> Aliens { get; } = new();
@@ -46,7 +46,7 @@ namespace SpaceJoeDotNet.GameManager
         public void DrawAliens(SpriteBatch spriteBatch)
             => Aliens.ForEach(a => a.Draw(spriteBatch));
 
-        public void UpdateAliens(GameTime gameTime, int windowHeight)
+        public void UpdateAliens(GameTime gameTime, int windowWidth, int windowHeight)
         {
             if (Aliens.Count > 15)
                 Aliens.RemoveAll(a => a.Y > windowHeight + 100);
@@ -54,7 +54,7 @@ namespace SpaceJoeDotNet.GameManager
             Aliens.RemoveAll(a => a.HitPoints <= 0);
 
             foreach (var alien in Aliens)
-                alien.Update(gameTime);
+                alien.Update(gameTime, windowWidth, windowHeight);
         }
 
         public void Reset()

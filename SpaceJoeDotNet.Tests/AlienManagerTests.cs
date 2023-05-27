@@ -20,7 +20,7 @@ namespace SpaceJoeDotNet.Tests
             am.Aliens.Add(new Alien(new DummyProjectileManager(), new Vector2(0, 0)) { HitPoints = -4 });
             am.Aliens.Add(new Alien(new DummyProjectileManager(), new Vector2(0, 0)) { HitPoints = 0 });
             am.Aliens.Add(new Alien(new DummyProjectileManager(), new Vector2(0, 0)) { HitPoints = 1 });
-            am.UpdateAliens(new GameTime(), 100);
+            am.UpdateAliens(new GameTime(), 100, 100);
 
             Assert.Equal(2, am.Aliens.Count);
         }
@@ -37,7 +37,7 @@ namespace SpaceJoeDotNet.Tests
             am.Aliens.Add(new Alien(new DummyProjectileManager(), new Vector2(0, 101)) { HitPoints = 10 });
             am.Aliens.Add(new Alien(new DummyProjectileManager(), new Vector2(0, 201)) { HitPoints = 10 });
             am.Aliens.Add(new Alien(new DummyProjectileManager(), new Vector2(0, -30)) { HitPoints = 10 });
-            am.UpdateAliens(new GameTime(), 100);
+            am.UpdateAliens(new GameTime(), 100, 100);
 
             Assert.Equal(18, am.Aliens.Count);
         }

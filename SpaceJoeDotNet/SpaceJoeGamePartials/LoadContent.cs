@@ -41,7 +41,6 @@ namespace SpaceJoeDotNet
 
             _player.Texture = _playerSprite;
             _background = new(_bgBackSprite, _bgFrontSprite, Height);
-            alien!.Texture = _playerSprite;
         }
 
         void InitTexturesForManagers()
@@ -53,6 +52,8 @@ namespace SpaceJoeDotNet
             _asteroidManager.Textures.Add("asteroidSmall", _asteroidSmallSprite);
             _asteroidManager.Textures.Add("asteroidMedium", _asteroidMediumSprite);
             _asteroidManager.Textures.Add("asteroidLarge", _asteroidLargeSprite);
+
+            _alienManager.Textures.Add("alien", _playerSprite);
 
             MenuDrawer.DefaultMenuBackground = _mainMenuSprite;
             MenuDrawer.GameOverMenuBackground = _gameOverSprite;

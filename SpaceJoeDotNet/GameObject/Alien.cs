@@ -23,12 +23,16 @@ namespace SpaceJoeDotNet.GameObject
     {
         Random _rand = new();
         float _directionChangeCounter;
-        float _directionChangeTime = 1;
+        float _directionChangeTime;
         Direction _direction = Direction.Forward;
 
         public Alien(IProjectileManager projectileManager, Vector2 position) : base(position)
         {
+            Speed = 360;
+            HitPoints = 125;
+            Damage = 50;
             Weapon = new(projectileManager, ProjectileType.Slow, 50, 1, 5);
+            _directionChangeTime = _rand.Next(1, 3);
         }
 
         public Weapon Weapon { get; }
@@ -52,7 +56,7 @@ namespace SpaceJoeDotNet.GameObject
             if (_directionChangeCounter >= _directionChangeTime)
             {
                 _direction = (Direction)_rand.Next(0, 3);
-                _directionChangeTime = _rand.Next(1, 4);
+                _directionChangeTime = (float)_rand.Next(100, 240) / 100;
                 _directionChangeCounter = 0;
             }
 
@@ -64,11 +68,8 @@ namespace SpaceJoeDotNet.GameObject
             Y += Speed * dt;
         }
 
-        public void Shoot(Vector2 direction)
-        {
-            Weapon.Shoot(new Vector2(X, Y + Height / 2), direction);
-        }
+        public void Shoot(Vector2 direction) =>  Weapon.Shoot(new Vector2(X, Y + Height / 2), direction);
 
-        public override void Update(GameTime gameTime) => Update(gameTime, 0, 0);
+        public override void Update(GameTime gameTime) => throw new NotImplementedException();
     }
 }

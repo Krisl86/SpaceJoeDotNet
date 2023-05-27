@@ -6,9 +6,6 @@ namespace SpaceJoeDotNet
 {
     public partial class SpaceJoeGame : Game
     {
-        Alien? alien;
-
-
         protected override void Initialize()
         {
             Graphics.PreferredBackBufferWidth = 480;
@@ -18,11 +15,11 @@ namespace SpaceJoeDotNet
             _asteroidManager = new AsteroidManager();
             _projectileManager = new ProjectileManager();
             _collisionManager = new CollisionManager();
+            _alienManager = new AlienManager();
             _saveLoadManager = new();
 
             _player = new(_projectileManager, new Vector2(Width / 2, Height - 60));
             _upgradesManager = new(_player);
-            alien = new(_projectileManager, new Vector2(200, 0)) { Speed = 100 };
 
             base.Initialize();
         }

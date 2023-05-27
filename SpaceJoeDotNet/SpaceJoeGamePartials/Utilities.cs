@@ -18,6 +18,7 @@ namespace SpaceJoeDotNet
             _player.Reset();
             _asteroidManager.Reset();
             _projectileManager.Reset();
+            _alienManager.Reset();
         }
     }
 }
