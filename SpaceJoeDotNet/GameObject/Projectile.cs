@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using System;

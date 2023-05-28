@@ -2,7 +2,6 @@
 using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
 using Xunit;
-using static System.Net.WebRequestMethods;
 
 namespace SpaceJoeDotNet.Tests
 {

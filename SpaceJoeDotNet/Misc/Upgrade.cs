@@ -1,5 +1,4 @@
-﻿using SpaceJoeDotNet.GameObject;
-using System;
+﻿using System;
 
 namespace SpaceJoeDotNet.Misc
 {

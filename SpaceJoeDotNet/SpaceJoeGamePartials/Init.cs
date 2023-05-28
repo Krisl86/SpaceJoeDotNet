@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using SpaceJoeDotNet.GameManager;
-using SpaceJoeDotNet.GameObject;
 
 namespace SpaceJoeDotNet
 {
