@@ -68,7 +68,7 @@ namespace SpaceJoeDotNet.GameManager
             Aliens.RemoveAll(a => a.HitPoints <= 0);
 
             foreach (var alien in Aliens)
-                alien.Update(gameTime, windowWidth, windowHeight);
+                alien.Update(gameTime, windowWidth);
         }
 
         public void Reset()

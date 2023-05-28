@@ -30,20 +30,14 @@ namespace SpaceJoeDotNet.GameObject
         {
             Speed = 360;
             HitPoints = 125;
-            Damage = 50;
+            Damage = 100;
             Weapon = new(projectileManager, ProjectileType.Ball, 50, 1, 5);
             _directionChangeTime = _rand.Next(1, 3);
         }
 
         public Weapon Weapon { get; }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (Texture is not null)
-                spriteBatch.DrawCentered(Texture, Position);
-        }
-
-        public void Update(GameTime gameTime, int windowWidth, int windowHeight)
+        public void Update(GameTime gameTime, int windowWidth)
         {
             float dt = gameTime.DeltaTime();
 

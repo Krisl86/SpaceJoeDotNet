@@ -38,30 +38,15 @@ class Projectile : GameObjectBase
         Y += Speed * Direction.Y * dt;
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        if (Texture is not null)
-            spriteBatch.DrawCentered(Texture, Position);
-    }
-
     void InitPropertiesByType(ProjectileType type)
     {
-        switch (type)
+        Speed = type switch
         {
-            case ProjectileType.Default:
-                Speed = 500;
-                break;
-            case ProjectileType.Slow:
-                Speed = 350;
-                break;
-            case ProjectileType.Fast:
-                Speed = 750;
-                break;
-            case ProjectileType.Ball:
-                Speed = 400;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type), type, null);
-        }
+            ProjectileType.Default => 500,
+            ProjectileType.Slow => 350,
+            ProjectileType.Fast => 750,
+            ProjectileType.Ball => 400,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
+        };
     }
 }

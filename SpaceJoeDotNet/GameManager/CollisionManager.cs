@@ -28,6 +28,18 @@ namespace SpaceJoeDotNet.GameManager
                 }
             }
 
+            foreach (var alien in aliens)
+            {
+                if (CheckCollisions(player, alien))
+                {
+                    player.TakeDamage(alien.Damage);
+                    alien.TakeDamage(player.Damage);
+
+                    if (alien.HitPoints <= 0)
+                        ScoreCounter.CountScoreFor(player, alien);
+                }
+            }
+
             foreach (var projectile in projectiles)
             {
                 bool projectileCollided = false;

@@ -2,6 +2,7 @@
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using MonogameCustomLibrary;
 
     namespace SpaceJoeDotNet.GameObject
     {
@@ -12,17 +13,17 @@
                 _position = position;
             }
 
-            Texture2D? texture;
+            public Texture2D? _texture;
             public Texture2D? Texture
             {
-                get => texture;
+                get => _texture;
                 set
                 {
                     if (value is not null)
                     {
-                        texture = value;
-                        Width = texture.Width;
-                        Height = texture.Height;
+                        _texture = value;
+                        Width = value.Width;
+                        Height = value.Height;
                     }
                 }
             }
@@ -46,8 +47,13 @@
 
             public virtual void TakeDamage(int damage) => HitPoints -= damage;
 
+            public virtual void Draw(SpriteBatch spriteBatch)
+            {
+                if (Texture is not null)
+                    spriteBatch.DrawCentered(Texture, Position);
+            }
+
             public abstract void Update(GameTime gameTime);
-            public abstract void Draw(SpriteBatch spriteBatch);
         }
     }
 

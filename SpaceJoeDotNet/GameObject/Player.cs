@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameManager;
@@ -57,18 +56,12 @@ class Player : GameObjectBase
         _scoreCounter += 0.01f;
         if (_scoreCounter >= 1)
         {
-            Score += 1;
+            Score += 4;
             _scoreCounter = 0;
         }
 
         Weapon.Update(gameTime);
         Shield.Update(gameTime);
-    }
-
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        if (Texture is not null)
-            spriteBatch.DrawCentered(Texture, Position);
     }
 
     public void Reset()

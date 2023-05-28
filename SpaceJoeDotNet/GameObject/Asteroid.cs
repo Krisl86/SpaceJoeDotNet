@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 using System;
@@ -22,12 +21,6 @@ namespace SpaceJoeDotNet.GameObject
         }
 
         public AsteroidType AsteroidType { get; }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (Texture is not null)
-                spriteBatch.DrawCentered(Texture, Position);
-        }
 
         public override void Update(GameTime gameTime)
         {
