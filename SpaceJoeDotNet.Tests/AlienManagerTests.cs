@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.Tests.Dummy;
 using Xunit;
 
 namespace SpaceJoeDotNet.Tests

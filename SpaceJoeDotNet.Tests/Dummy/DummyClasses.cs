@@ -4,7 +4,7 @@ using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
 using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
 
-namespace SpaceJoeDotNet.Tests
+namespace SpaceJoeDotNet.Tests.Dummy
 {
     class DummyProjectileManager : IProjectileManager
     {

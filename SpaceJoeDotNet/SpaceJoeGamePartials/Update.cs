@@ -51,9 +51,14 @@ namespace SpaceJoeDotNet
             else if (Keyboard.GetState().IsKeyDown(Keys.L) && _saveLoadManager.SaveFileExists)
             {
                 if (_saveLoadManager.Load(ref _player))
+                {
+                    ResetGame();
                     _gameState = GameState.InGame;
+                }
                 else
+                {
                     _loadError = true;
+                }
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
