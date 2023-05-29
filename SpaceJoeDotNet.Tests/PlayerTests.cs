@@ -13,10 +13,9 @@ namespace SpaceJoeDotNet.Tests
             var player = new Player(new DummyProjectileManager(), new Vector2(0, 0))
             {
                 HitPoints = 100,
-                Shield = new(100, 500, 500)
             };
 
-            player.TakeDamage(101);
+            player.TakeDamage(151);
             Assert.Equal(99, player.HitPoints);
             Assert.Equal(0, player.Shield.HitPoints);
         }

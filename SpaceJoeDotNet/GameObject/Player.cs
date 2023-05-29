@@ -29,7 +29,7 @@ class Player : GameObjectBase
 
     public Vector2 DefaultPosition { get; set; }
     public Weapon Weapon { get; }
-    public Shield Shield { get; set; }
+    public Shield Shield { get; }
     public int Score { get; set; }
     public int TotalScore { get; set; }
 
