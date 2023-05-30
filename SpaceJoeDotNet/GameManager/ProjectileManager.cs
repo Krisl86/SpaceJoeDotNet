@@ -43,12 +43,7 @@ namespace SpaceJoeDotNet.GameManager
         public void UpdateProjectiles(GameTime gameTime, int windowWidth, int windowHeight)
         {
             if (Projectiles.Count > 30)
-            {
-                Projectiles.RemoveAll(p => p.Y < 0);
-                Projectiles.RemoveAll(p => p.Y > windowHeight);
-                Projectiles.RemoveAll(p => p.X < 0);
-                Projectiles.RemoveAll(p => p.X > windowWidth);
-            }
+                Projectiles.RemoveAll(p => p.Y < 0 || p.Y > windowHeight || p.X < 0 || p.X > windowWidth);
 
             Projectiles.RemoveAll(p => p.HitPoints <= 0);
 

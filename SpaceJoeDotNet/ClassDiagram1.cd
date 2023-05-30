@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject.GameObjectBase">
-    <Position X="2.75" Y="5" Width="1.5" />
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject.GameObjectBase" Collapsed="true">
+    <Position X="2.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAACABQAAAgAgAAAABEABAAAAAAAAAAIAgAAAYAA=</HashCode>
       <FileName>GameObject\GameObjectBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.GameObject.Alien">
-    <Position X="0.75" Y="5.25" Width="1.5" />
+  <Class Name="SpaceJoeDotNet.GameObject.Alien" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAABACAAAABAAAACAAAAAgAAAAIAAAAAAA=</HashCode>
       <FileName>GameObject\Alien.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.GameObject.Asteroid">
-    <Position X="4.75" Y="8" Width="1.75" />
+  <Class Name="SpaceJoeDotNet.GameObject.Asteroid" Collapsed="true">
+    <Position X="2.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAABAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameObject\Asteroid.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.GameObject.Player">
-    <Position X="4.75" Y="4" Width="1.5" />
+  <Class Name="SpaceJoeDotNet.GameObject.Player" Collapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAIAAAAAEABAgAAIAAAAgAgAAgAAgAAAAAgAAAAAA=</HashCode>
       <FileName>GameObject\Player.cs</FileName>
@@ -61,63 +61,63 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SpaceJoeDotNet.GameManager.SaveLoadManager" Collapsed="true">
-    <Position X="2.75" Y="0.5" Width="1.75" />
+    <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAgIAAgAgAAAAAAAAIAAAAAAAAAIAgAABAAAAAAAA=</HashCode>
       <FileName>GameManager\SaveLoadManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpaceJoeDotNet.GameManager.UpgradesManager" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.75" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAQAAAAAAAAAAACAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>GameManager\UpgradesManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.Utils.HudDrawer">
+  <Class Name="SpaceJoeDotNet.Utils.HudDrawer" Collapsed="true">
     <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABgAAgAAAAAAAAABAAAAAAAAAAAAAAACAAAAAACgEIA=</HashCode>
       <FileName>Misc\HudDrawer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.Utils.MenuDrawer">
+  <Class Name="SpaceJoeDotNet.Utils.MenuDrawer" Collapsed="true">
     <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAEAAAACAAAAAAAAAAAAAAQAAAAAgAIAAA=</HashCode>
       <FileName>Misc\MenuDrawer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.Utils.ScoreCounter">
-    <Position X="12.25" Y="3.25" Width="2.25" />
+  <Class Name="SpaceJoeDotNet.Utils.ScoreCounter" Collapsed="true">
+    <Position X="12.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Misc\ScoreCounter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.Misc.Upgrade">
+  <Class Name="SpaceJoeDotNet.Misc.Upgrade" Collapsed="true">
     <Position X="14" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAAAAAAAAAQAAAAAAIAAAAAgAAAAAAA=</HashCode>
       <FileName>Misc\Upgrade.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.Item.Shield">
-    <Position X="10.5" Y="6" Width="1.75" />
+  <Class Name="SpaceJoeDotNet.Item.Shield" Collapsed="true">
+    <Position X="6.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAABAAAAAAABAABAAEAIAAAABAAgCAAAAA=</HashCode>
       <FileName>Item\Shield.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.Item.Weapon">
-    <Position X="8.5" Y="6" Width="1.75" />
+  <Class Name="SpaceJoeDotNet.Item.Weapon" Collapsed="true">
+    <Position X="6.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAACAIAAAJAEAAAAAAQBAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Item\Weapon.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceJoeDotNet.Bg.Background">
-    <Position X="14.5" Y="7" Width="1.5" />
+  <Class Name="SpaceJoeDotNet.Bg.Background" Collapsed="true">
+    <Position X="12.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAwAIBAIAAAAAgAAAAAAABAAAAAAAAAACACAAAAACAA=</HashCode>
       <FileName>Background\Background.cs</FileName>
@@ -152,14 +152,14 @@
     </TypeIdentifier>
   </Interface>
   <Enum Name="SpaceJoeDotNet.GameObject.Direction">
-    <Position X="7.5" Y="11.5" Width="1.5" />
+    <Position X="10.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
       <FileName>GameObject\Alien.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="SpaceJoeDotNet.GameObject.AsteroidType">
-    <Position X="9.25" Y="11.5" Width="1.5" />
+    <Position X="12.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>GameObject\Asteroid.cs</FileName>
