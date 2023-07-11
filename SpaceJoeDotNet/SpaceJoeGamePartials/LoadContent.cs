@@ -43,24 +43,8 @@ namespace SpaceJoeDotNet
 
             _alienSprite = Content.Load<Texture2D>("alien");
 
-            InitTexturesForManagers();
-
             _player.Texture = _playerSprite;
             _background = new(_bgBackSprite, _bgFrontSprite, Height);
-        }
-
-        void InitTexturesForManagers()
-        {
-            _projectileManager.Textures.Add("projectileDefault", _projectileDefaultSprite);
-            _projectileManager.Textures.Add("projectileSlow", _projectileSlowSprite);
-            _projectileManager.Textures.Add("projectileFast", _projectileFastSprite);
-            _projectileManager.Textures.Add("projectileBall", _projectileBallSprite);
-
-            _asteroidManager.Textures.Add("asteroidSmall", _asteroidSmallSprite);
-            _asteroidManager.Textures.Add("asteroidMedium", _asteroidMediumSprite);
-            _asteroidManager.Textures.Add("asteroidLarge", _asteroidLargeSprite);
-
-            _alienManager.Textures.Add("alien", _alienSprite);
 
             MenuDrawer.DefaultMenuBackground = _mainMenuSprite;
             MenuDrawer.GameOverMenuBackground = _gameOverSprite;

@@ -1,19 +1,13 @@
-﻿using SpaceJoeDotNet.GameObject;
+﻿using SpaceJoeDotNet.Enums;
+using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
+using SpaceJoeDotNet.Misc.Interfaces.Score;
 
 namespace SpaceJoeDotNet.Utils
 {
     static class ScoreCounter
     {
-        public static void CountScoreFor(Player player, Asteroid asteroid)
-        {
-            switch (asteroid.AsteroidType)
-            {
-                case AsteroidType.Small: player.Score += 50; break;
-                case AsteroidType.Medium: player.Score += 100; break;
-                case AsteroidType.Large: player.Score += 150; break;
-            }
-        }
-
-        public static void CountScoreFor(Player player, Alien alien) => player.Score += 250;
+        public static void CountScoreFor(IPlayer player, IHasScoreReward obj)
+            => player.Score += obj.ScoreReward;
     }
 }

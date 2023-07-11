@@ -1,4 +1,5 @@
 ﻿using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +16,7 @@ namespace SpaceJoeDotNet.GameManager
         public bool SaveFileExists => File.Exists(SaveFilePath);
         public bool HighScoreFileExists => File.Exists(HighScoreFilePath);
 
-        public void Save(Player player)
+        public void Save(IPlayer player)
         {
             if (!Directory.Exists(SpaceJoeDir))
                 Directory.CreateDirectory(SpaceJoeDir);
@@ -31,7 +32,7 @@ namespace SpaceJoeDotNet.GameManager
             sw.WriteLine(player.Shield.RecoveryDelay);
         }
 
-        public bool Load(ref Player player)
+        public bool Load(ref IPlayer player)
         {
             if (!SaveFileExists)
                 return false;

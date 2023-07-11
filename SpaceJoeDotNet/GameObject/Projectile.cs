@@ -1,51 +1,33 @@
 using Microsoft.Xna.Framework;
-using MonogameCustomLibrary;
-using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using Microsoft.Xna.Framework.Graphics;
+using SpaceJoeDotNet.Enums;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
+using SpaceJoeDotNet.Misc.Interfaces;
 using System;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.GameObject;
 
-enum ProjectileType
+class Projectile : BaseSpaceJoeGameObject, IProjectile
 {
-    Default,
-    Slow,
-    Fast,
-    Ball
-}
-
-class Projectile : GameObjectBase
-{
-    public Projectile(GameObjectBase owner, ProjectileType projectileType, Vector2 position, Vector2 direction, int damage) : base(position)
+    public Projectile(ICanShoot owner, ProjectileType projectileType,
+            Vector2 position, Vector2 direction, int damage)
     {
-        Owner = owner;
-        ProjectileType = projectileType;
-        HitPoints = 1;
-        Damage = damage;
-        InitPropertiesByType(projectileType);
-        direction.Normalize();
-        Direction = direction;
+        (Owner, ProjectileType, Position, Direction, Damage) = (owner, projectileType, position, direction, damage);
     }
 
-    public GameObjectBase Owner { get; }
-    public ProjectileType ProjectileType { get; }
-    public Vector2 Direction { get; }
+    public ICanShoot Owner { get; set; }
+    public ProjectileType ProjectileType { get; set; }
+    public int Damage { get; set; }
+    public int HitPoints { get; set; }
+
+    public void TakeDamage(int damage)
+    {
+        throw new NotImplementedException();
+    }
 
     public override void Update(GameTime gameTime)
     {
-        float dt = gameTime.DeltaTime();
-        X += Speed * Direction.X * dt;
-        Y += Speed * Direction.Y * dt;
-    }
-
-    void InitPropertiesByType(ProjectileType type)
-    {
-        Speed = type switch
-        {
-            ProjectileType.Default => 500,
-            ProjectileType.Slow => 350,
-            ProjectileType.Fast => 750,
-            ProjectileType.Ball => 400,
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
-        };
+        throw new NotImplementedException();
     }
 }

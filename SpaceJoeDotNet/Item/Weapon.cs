@@ -1,16 +1,17 @@
 using Microsoft.Xna.Framework;
 using MonogameCustomLibrary;
-using SpaceJoeDotNet.GameManager;
+using SpaceJoeDotNet.Enums;
+using SpaceJoeDotNet.GameManager.Interfaces;
 using SpaceJoeDotNet.GameObject;
-using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
+using SpaceJoeDotNet.Item.Interfaces;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.Item;
 
-class Weapon
+class Weapon : IWeapon
 {
     float _timeSinceCooldown;
-    IProjectileManager _manager;
 
     public Weapon(IProjectileManager projectileManager, ProjectileType projectileType,
         int damage, float cooldownTime, int heatLimit)
@@ -19,7 +20,7 @@ class Weapon
         Damage = damage;
         CooldownTime = cooldownTime;
         HeatLimit = heatLimit;
-        _manager = projectileManager;
+        ProjectileManager = projectileManager;
     }
 
     public int CurrentHeat { get; set; }
@@ -27,12 +28,14 @@ class Weapon
     public float CooldownTime { get; set; }
     public int Damage { get; set; }
     internal ProjectileType ProjectileType { get; set; }
+    public IProjectileManager ProjectileManager { get; set; }
+    public Vector2 Position { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    public void Shoot(GameObjectBase projectileOwner, Vector2 startPosition, Vector2 direction)
+    public void Shoot(Vector2 direction)
     {
         if (CurrentHeat < HeatLimit)
         {
-            _manager.AddProjectile(projectileOwner, ProjectileType, startPosition, direction, Damage);
+            ProjectileManager.AddProjectile(this, ProjectileType, Position, direction, Damage);
             CurrentHeat++;
         }
     }

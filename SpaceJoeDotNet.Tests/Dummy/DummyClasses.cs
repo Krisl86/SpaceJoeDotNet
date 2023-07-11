@@ -1,18 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceJoeDotNet.GameManager;
+using SpaceJoeDotNet.Enums;
+using SpaceJoeDotNet.GameManager.Interfaces;
 using SpaceJoeDotNet.GameObject;
-using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
+using SpaceJoeDotNet.Misc.Interfaces;
 
 namespace SpaceJoeDotNet.Tests.Dummy
 {
     class DummyProjectileManager : IProjectileManager
     {
-        public List<Projectile> Projectiles { get; } = new();
+        public List<IProjectile> Projectiles { get; } = new();
 
         public Dictionary<string, Texture2D> Textures => throw new NotImplementedException();
 
-        public void AddProjectile(GameObjectBase owner, ProjectileType projectileType, Vector2 position, Vector2 direction, int damage)
+        public void AddProjectile(ICanShoot owner, ProjectileType projectileType, Vector2 position, Vector2 direction, int damage)
         {
             Projectiles.Add(new Projectile(owner, projectileType, position, direction, damage));
         }

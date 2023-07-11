@@ -1,55 +1,33 @@
 ﻿using Microsoft.Xna.Framework;
 using MonogameCustomLibrary;
-using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.Enums;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 using System;
 
 namespace SpaceJoeDotNet.GameObject
 {
 
-    enum AsteroidType
-    {
-        Small, Medium, Large
-    }
 
-
-    internal class Asteroid : GameObjectBase
+    class Asteroid : BaseSpaceJoeGameObject, IAsteroid
     {
-        public Asteroid(AsteroidType asteroidType, Vector2 position) : base(position)
+        public Asteroid(AsteroidType asteroidType, Vector2 position)
         {
-            AsteroidType = asteroidType;
-            InitPropertiesByType(AsteroidType);
+            (AsteroidType, Position) = (asteroidType, position);
         }
 
-        public AsteroidType AsteroidType { get; }
+        public AsteroidType AsteroidType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Damage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int HitPoints { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int ScoreReward { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void TakeDamage(int damage)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void Update(GameTime gameTime)
         {
-            float dt = gameTime.DeltaTime();
-            Y += Speed * dt;
-        }
-
-        void InitPropertiesByType(AsteroidType type)
-        {
-            switch (type)
-            {
-                case AsteroidType.Small:
-                    Speed = 600;
-                    Damage = 100;
-                    HitPoints = 100;
-                    break;
-                case AsteroidType.Medium:
-                    Speed = 450;
-                    Damage = 175;
-                    HitPoints = 150;
-                    break;
-                case AsteroidType.Large:
-                    Speed = 350;
-                    Damage = 260;
-                    HitPoints = 200;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
+            throw new NotImplementedException();
         }
     }
 }

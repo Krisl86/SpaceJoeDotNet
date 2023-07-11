@@ -1,20 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
+using SpaceJoeDotNet.GameManager.Interfaces;
 using SpaceJoeDotNet.GameObject;
-using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 using SpaceJoeDotNet.Utils;
 using System.Collections.Generic;
 
 namespace SpaceJoeDotNet.GameManager
 {
-    interface ICollisionManager
-    {
-        void Collide(Player player, List<Asteroid> asteroids, List<Projectile> projectiles, List<Alien> aliens);
-        bool CheckCollisions(GameObjectBase obj1, GameObjectBase obj2);
-    }
 
     class CollisionManager : ICollisionManager
     {
-        public void Collide(Player player, List<Asteroid> asteroids, List<Projectile> projectiles, List<Alien> aliens)
+        public void Collide(IPlayer player, IEnumerable<IAsteroid> asteroids, IEnumerable<IProjectile> projectiles, IEnumerable<IAlien> aliens)
         {
             foreach (var asteroid in asteroids)
             {
@@ -87,9 +83,9 @@ namespace SpaceJoeDotNet.GameManager
             }
         }
 
-        public bool CheckCollisions(GameObjectBase obj1, GameObjectBase obj2)
+        public bool CheckCollisions(ICollidableGameObject obj1, ICollidableGameObject obj2)
         {
-            int radius = obj1.Width / 2 + obj2.Width / 2;
+            int radius = obj1.Texture.Width / 2 + obj2.Texture.Width / 2;
             return Vector2.Distance(obj1.Position, obj2.Position) < radius;
         }
     }

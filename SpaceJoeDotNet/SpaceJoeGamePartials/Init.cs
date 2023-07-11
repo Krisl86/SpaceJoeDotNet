@@ -17,8 +17,8 @@ namespace SpaceJoeDotNet
             _alienManager = new AlienManager();
             _saveLoadManager = new();
 
-            _player = new(_projectileManager, new Vector2(Width / 2, Height - 60));
-            _upgradesManager = new(_player);
+            _player = Factory.SingleInstancePlayer();
+            // _upgradesManager = new(_player);
 
             base.Initialize();
         }

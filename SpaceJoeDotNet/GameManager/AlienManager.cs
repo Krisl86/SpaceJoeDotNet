@@ -1,25 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceJoeDotNet.GameManager.Interfaces;
 using SpaceJoeDotNet.GameObject;
-using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.GameManager
 {
-    interface IAlienManager
-    {
-        List<Alien> Aliens { get; }
-        Dictionary<string, Texture2D> Textures { get; }
-
-        void RandomlyGenerateAlien(int windowWidth, IProjectileManager projectileManager);
-        void RandomlyShoot(GameObjectBase target, int windowHeight);
-        void AddAlien(Vector2 position, IProjectileManager projectileManager);
-        void DrawAliens(SpriteBatch spriteBatch);
-        void Reset();
-        void UpdateAliens(GameTime gameTime, int windowWidth, int windowHeight);
-    }
 
     class AlienManager : IAlienManager
     {
@@ -30,9 +20,7 @@ namespace SpaceJoeDotNet.GameManager
 
         Random __rand = new();
 
-        public List<Alien> Aliens { get; } = new();
-
-        public Dictionary<string, Texture2D> Textures { get; } = new();
+        public List<IAlien> Aliens { get; } = new();
 
         public void RandomlyGenerateAlien(int windowWidth, IProjectileManager projectileManager)
         {
@@ -43,9 +31,9 @@ namespace SpaceJoeDotNet.GameManager
                 AddAlien(new Vector2(x, y), projectileManager);
         }
 
-        public void RandomlyShoot(GameObjectBase target, int windowHeight)
+        public void RandomlyShoot(IBaseSpaceJoeGameObject target, int windowHeight)
         {
-            foreach (var alien in Aliens.Where(a => a.Y > 0 && a.Y < windowHeight))
+            foreach (var alien in Aliens.Where(a => a.Position.Y > 0 && a.Position.Y < windowHeight))
             {
                 if (__rand.Next(0, ShootMaxRand) > ShootRandLimit)
                     alien.Shoot(target.Position - alien.Position);
@@ -53,7 +41,7 @@ namespace SpaceJoeDotNet.GameManager
         }
 
         public void AddAlien(Vector2 position, IProjectileManager projectileManager)
-            => Aliens.Add(new Alien(projectileManager, position) { Texture = Textures["alien"] });
+            => Aliens.Add(Factory.NewAlien(position, projectileManager));
 
         public void DrawAliens(SpriteBatch spriteBatch)
             => Aliens.ForEach(a => a.Draw(spriteBatch));
@@ -61,12 +49,12 @@ namespace SpaceJoeDotNet.GameManager
         public void UpdateAliens(GameTime gameTime, int windowWidth, int windowHeight)
         {
             if (Aliens.Count > 15)
-                Aliens.RemoveAll(a => a.Y > windowHeight + 100);
+                Aliens.RemoveAll(a => a.Position.Y > windowHeight + 100);
 
             Aliens.RemoveAll(a => a.HitPoints <= 0);
 
             foreach (var alien in Aliens)
-                alien.Update(gameTime, windowWidth);
+                alien.Update(gameTime);
         }
 
         public void Reset()

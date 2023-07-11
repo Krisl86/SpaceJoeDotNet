@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using MonogameCustomLibrary;
+using SpaceJoeDotNet.Item.Interfaces;
+using SpaceJoeDotNet.Misc.Interfaces.Damage;
 using System;
 
 namespace SpaceJoeDotNet.Item
 {
-    class Shield
+    class Shield : IShield
     {
         float _recoveryCounter;
 
@@ -17,10 +19,10 @@ namespace SpaceJoeDotNet.Item
         }
 
         public int MaxHitPoints { get; set; }
-        public int HitPoints { get; private set; }
         public float RecoveryDelay { get; set; }
         public float RecoveryTime { get; set; }
         public float DelayCounter { get; private set; }
+        public int HitPoints { get; set; }
 
         public void Update(GameTime gameTime)
         {
@@ -42,19 +44,13 @@ namespace SpaceJoeDotNet.Item
             }
         }
 
-        public int TakeDamage(int damage)
+        public void TakeDamage(int damage)
         {
-            int remainingDamage = 0;
             HitPoints -= damage;
             DelayCounter = 0;
 
             if (HitPoints < 0)
-            {
-                remainingDamage = Math.Abs(HitPoints);
                 HitPoints = 0;
-            }
-
-            return remainingDamage;
         }
 
         public void Reset()

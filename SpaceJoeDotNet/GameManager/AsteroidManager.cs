@@ -1,22 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceJoeDotNet.Enums;
+using SpaceJoeDotNet.GameManager.Interfaces;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 using System;
 using System.Collections.Generic;
 
 namespace SpaceJoeDotNet.GameManager
 {
-    interface IAsteroidManager
-    {
-        List<Asteroid> Asteroids { get; }
-        Dictionary<string, Texture2D> Textures { get; }
-
-        void AddAsteroid(AsteroidType asteroidType, Vector2 position);
-        void DrawAsteroids(SpriteBatch spriteBatch);
-        void RandomlyGenerateAsteroid(int windowWidth);
-        void Reset();
-        void UpdateAsteroids(GameTime gameTime, int windowHeight);
-    }
 
     class AsteroidManager : IAsteroidManager
     {
@@ -27,9 +19,7 @@ namespace SpaceJoeDotNet.GameManager
         int _rndLimit = DefaultRndLimit;
         Random __rand = new();
 
-        public List<Asteroid> Asteroids { get; } = new();
-
-        public Dictionary<string, Texture2D> Textures { get; } = new();
+        public List<IAsteroid> Asteroids { get; } = new();
 
         public void RandomlyGenerateAsteroid(int windowWidth)
         {
@@ -46,17 +36,7 @@ namespace SpaceJoeDotNet.GameManager
         }
 
         public void AddAsteroid(AsteroidType asteroidType, Vector2 position)
-        {
-            Texture2D texture = asteroidType switch
-            {
-                AsteroidType.Small => Textures["asteroidSmall"],
-                AsteroidType.Medium => Textures["asteroidMedium"],
-                AsteroidType.Large => Textures["asteroidLarge"],
-                _ => throw new ArgumentOutOfRangeException(nameof(asteroidType), asteroidType, null),
-            };
-
-            Asteroids.Add(new Asteroid(asteroidType, position) { Texture = texture });
-        }
+            => Asteroids.Add(Factory.NewAsteroid(asteroidType, position));
 
         public void DrawAsteroids(SpriteBatch spriteBatch)
             => Asteroids.ForEach(a => a.Draw(spriteBatch));
@@ -64,7 +44,7 @@ namespace SpaceJoeDotNet.GameManager
         public void UpdateAsteroids(GameTime gameTime, int windowHeight)
         {
             if (Asteroids.Count > 30)
-                Asteroids.RemoveAll(a => a.Y > windowHeight + 100);
+                Asteroids.RemoveAll(a => a.Position.Y > windowHeight + 100);
 
             Asteroids.RemoveAll(a => a.HitPoints <= 0);
 

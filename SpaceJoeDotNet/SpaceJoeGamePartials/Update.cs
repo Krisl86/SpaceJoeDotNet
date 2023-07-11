@@ -35,7 +35,7 @@ namespace SpaceJoeDotNet
             _asteroidManager.UpdateAsteroids(gameTime, Height);
             _alienManager.UpdateAliens(gameTime, Width, Height);
 
-            _player.Update(gameTime, Width, Height);
+            _player.Update(gameTime);
 
             if (_player.HitPoints <= 0)
             {

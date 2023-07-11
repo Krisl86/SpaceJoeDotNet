@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonogameCustomLibrary;
 using SpaceJoeDotNet.GameManager;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 
 namespace SpaceJoeDotNet.Utils
 {
@@ -62,7 +63,7 @@ namespace SpaceJoeDotNet.Utils
                 new Vector2(windowWidth / 2, windowHeight / 2 + 180), defaultColor);
         }
 
-        public static void DrawShopMenu(SpriteBatch spriteBatch, SpriteFont font, Player player,
+        public static void DrawShopMenu(SpriteBatch spriteBatch, SpriteFont font, IPlayer player,
             int windowWidth, int windowHeight, UpgradesManager upgradesManager)
         {
             if (DefaultMenuBackground != null)

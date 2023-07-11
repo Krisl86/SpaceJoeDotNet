@@ -1,64 +1,40 @@
 ﻿using Microsoft.Xna.Framework;
 using MonogameCustomLibrary;
+using SpaceJoeDotNet.Enums;
 using SpaceJoeDotNet.GameManager;
-using SpaceJoeDotNet.GameObject.SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameManager.Interfaces;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 using SpaceJoeDotNet.Item;
 using System;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace SpaceJoeDotNet.GameObject
 {
-    enum Direction
+    class Alien : BaseSpaceJoeGameObject, IAlien
     {
-        Forward,
-        Left,
-        Right
-    }
-
-    class Alien : GameObjectBase
-    {
-        Random _rand = new();
-        float _directionChangeCounter;
-        float _directionChangeTime;
-        Direction _direction = Direction.Forward;
-
-        public Alien(IProjectileManager projectileManager, Vector2 position) : base(position)
+        public Alien(Vector2 position, IProjectileManager projectileManager)
         {
-            Speed = 360;
-            HitPoints = 125;
-            Damage = 100;
-            Weapon = new(projectileManager, ProjectileType.Ball, 50, 1, 5);
-            _directionChangeTime = _rand.Next(1, 3);
+            (Position, ProjectileManager) = (position, projectileManager);
         }
 
-        public Weapon Weapon { get; }
+        public int HitPoints { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Damage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int ScoreReward { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IProjectileManager ProjectileManager { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public void Update(GameTime gameTime, int windowWidth)
+        public void Shoot(Vector2 direction)
         {
-            float dt = gameTime.DeltaTime();
-
-            if (_direction == Direction.Left)
-                X -= Speed * dt;
-            else if (_direction == Direction.Right)
-                X += Speed * dt;
-
-            _directionChangeCounter += dt;
-            if (_directionChangeCounter >= _directionChangeTime)
-            {
-                _direction = (Direction)_rand.Next(0, 3);
-                _directionChangeTime = (float)_rand.Next(100, 240) / 100;
-                _directionChangeCounter = 0;
-            }
-
-            if (X < Width / 2 && _direction == Direction.Left)
-                _direction = Direction.Right;
-            if (X > windowWidth - Width / 2 && _direction == Direction.Right)
-                _direction = Direction.Left;
-
-            Y += Speed * dt;
+            throw new NotImplementedException();
         }
 
-        public void Shoot(Vector2 direction) =>  Weapon.Shoot(this, new Vector2(X, Y + Height / 2), direction);
+        public void TakeDamage(int damage)
+        {
+            throw new NotImplementedException();
+        }
 
-        public override void Update(GameTime gameTime) => throw new NotImplementedException();
+        public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

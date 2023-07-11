@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceJoeDotNet.Bg;
 using SpaceJoeDotNet.GameManager;
+using SpaceJoeDotNet.GameManager.Interfaces;
 using SpaceJoeDotNet.GameObject;
+using SpaceJoeDotNet.GameObject.Interfaces.GameObject;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("SpaceJoeDotNet.Tests")]
@@ -24,7 +26,7 @@ public partial class SpaceJoeGame : Game
     SpriteBatch _spriteBatch;
     SpriteFont _gameFont;
 
-    Player _player;
+    IPlayer _player;
     Background _background;
     IAsteroidManager _asteroidManager;
     IProjectileManager _projectileManager;
