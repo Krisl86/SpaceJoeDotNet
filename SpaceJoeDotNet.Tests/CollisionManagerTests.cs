@@ -36,7 +36,8 @@ namespace SpaceJoeDotNet.Tests
             var player = new Player(pm, new Vector2(0, 0))
                 { HitPoints = 100, Width = 100, Height = 100 };
 
-            var projectile = new Projectile(player, ProjectileType.Default, new Vector2(0, 0), new Vector2(0, 0), 100) 
+            var projectile = new Projectile(player, ProjectileType.Default, 
+                new Vector2(0, 0), new Vector2(0, 0), 100) 
                 { HitPoints = 100, Width = 100, Height = 100 };
 
             cm.Collide(
@@ -49,6 +50,29 @@ namespace SpaceJoeDotNet.Tests
                 new List<Alien>());
 
             Assert.True(player.HitPoints == 100 && projectile.HitPoints == 100);
+
+            // for aliens - any alien projectile shouldn't collide with any alien
+            var alien1 = new Alien(pm, new Vector2(1000, 1000));
+            var alien2 = new Alien(pm, new Vector2(2000, 2000))
+            { HitPoints = 100, Width = 100, Height = 100 };
+
+            var projectileAlien1 = new Projectile(alien1, ProjectileType.Ball,
+                new Vector2(2000, 2000), new Vector2(2000, 2000), 100)
+                { HitPoints = 100, Width = 100, Height = 100 };
+
+            cm.Collide(player,
+                new List<Asteroid>(),
+                new List<Projectile>()
+                {
+                    projectileAlien1
+                },
+                new List<Alien>()
+                {
+                    alien1,
+                    alien2
+                });
+
+            Assert.True(alien2.HitPoints == 100 && projectileAlien1.HitPoints == 100);
         }
 
         [Fact]
