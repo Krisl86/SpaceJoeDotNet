@@ -24,7 +24,7 @@ class Player : GameObjectBase
         Damage = 9999;
         HitPoints = DefaultHitPoints;
         DefaultPosition = defaultPosition;
-        TotalScore = 99999;
+        TotalScore = 100;
     }
 
     public Vector2 DefaultPosition { get; set; }

@@ -29,7 +29,7 @@ namespace SpaceJoeDotNet.Utils
                 new Vector2(windowWidth / 2, windowHeight / 2 + 60), defaultColor);
 
             if (loadError)
-                spriteBatch.DrawStringCentered(false, font, "Error with loading save file...",
+                spriteBatch.DrawStringCentered(false, font, "Error loading save file...",
                 new Vector2(windowWidth / 2, 680), defaultColor);
         }
 
